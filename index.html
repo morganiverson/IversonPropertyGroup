@@ -30,9 +30,19 @@
             }
             #INPUTS{
                 width: 50%;
+                
+                box-sizing: border-box;
                 margin:0 25%;
-                padding: 20px 10px;
-
+                padding: 20px;
+                
+                text-align: center; 
+                
+/*
+                padding-left: 15%;
+                text-align: left;
+*/
+                
+                
                 background-color: white;
                 border:1px solid lightgrey;
                 border-radius: 10px;
@@ -41,12 +51,18 @@
                 font-size: 15px;
                 font-weight: 200;
                 line-height: 30px;
+                
             }
 
             
             .button{
-                margin-top: 10px;
-                margin: 10px 40%                     
+                margin-top: 20px;
+                
+/*                LEFT ALIGN*/
+/*                margin-left: 20%; */
+                
+/*                CENTER ALIGN*/
+                margin-left: 0; /*center*/
             }
             
             #button{
@@ -66,6 +82,12 @@
                 outline:none;
             }
             
+            .ABBV{
+                display: block;
+                font-size: 10px;
+                margin-top: 5px;
+                letter-spacing: .5px;
+            }
             .divTable{
                 display: table;
                 width: 80%;
@@ -94,6 +116,7 @@
 
                 text-align: center;
                 padding: 15px;
+                padding-bottom: 7px;
             }
 
             .divTableRow {
@@ -155,21 +178,29 @@
         </div>
         <div id = "CALCULATOR">
             <div id= "INPUTS">
-                <span class = "DOLLAR_IN"> 
-                    AFTER REPAIR VALUE (ARV):  $
-                    <input id = "ARV" class = "VAL_IN" type = "number" min = 0 step = "50" value = 15000> 
-                </span>
+                <!--RC INPUT-->
                 <span class = "DOLLAR_IN"> 
                     REPAIR COST(RC):  $
-                    <input id = "RC" class = "VAL_IN" type = "number" min = 0 step = "50" value = 0> 
+                    <input id = "RC" class = "VAL_IN" type = "number" min = 0 step = "50" value = 20000> 
                 </span>
+                <!--ARV INPUT-->
+                <span class = "DOLLAR_IN"> 
+                    AFTER REPAIR VALUE (ARV):  $
+                    <input id = "ARV" class = "VAL_IN" type = "number" min = 0 step = "50" value = 100000> 
+                </span>
+                <!--DP INPUT-->
                 <span class = "DOLLAR_IN"> 
                     DESIRED PROFIT (DP):  $
                     <input id = "DP" class = "VAL_IN" type = "number" min = 0 step = "50" value = 20000> 
                 </span>
-
+                <!--STEP-->
+                <span class = "DOLLAR_IN"> 
+                    STEP:  $
+                    <input id = "step" class = "VAL_IN" type = "number" min = 0 step = "100" value = 500> 
+                </span>
+                <!--GO-->
                <div class = "button"> <button id = "button" type = button onclick = "fillTable();">GO</button>
-                   </div>
+                </div>
             </div>
 
         </div>
@@ -180,11 +211,19 @@
                 <div class="divTableBody">
                     <!--            HEADERS-->
                     <div class="divTableHeadingRow">
-                        <div class="divTableHeadCell">Desired Profit</div>
-                        <div class="divTableHeadCell">ARV</div>
-                        <div class="divTableHeadCell">RC</div>
-                        <div class="divTableHeadCell">IP</div>
-                        <div class="divTableHeadCell">MAO</div>
+                        <div class="divTableHeadCell">DP
+                        <span class = "ABBV">Desired Profit</span></div>
+                        <div class="divTableHeadCell">ARV
+                        <span class = "ABBV">Desired Profit</span>
+                        </div>
+                        <div class="divTableHeadCell">RC<span class = "ABBV">Desired Profit</span>
+                        </div>
+                        <div class="divTableHeadCell">IP
+                            <span class = "ABBV">Desired Profit</span>
+                        </div>
+                        <div class="divTableHeadCell">MAO
+                        <span class = "ABBV">Desired Profit</span>
+                        </div>
                     </div>
 
 

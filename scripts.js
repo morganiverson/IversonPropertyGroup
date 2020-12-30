@@ -3,10 +3,13 @@ function calcMAO(DP, ARV, RC){
 
     var MAO = IP - DP; //MAXIMUM ALLOWABLE OFFER
     
-//    IP = IP + DP;
     return {IP, MAO};
 }
+
+
+
 function fillTable(){
+    var step = document.getElementById("step").value;
     
      var CELLKEYS = ["MIN2", "MIN15", "MIN1", "MIN5", "GIV", "PLU5", "PLU1", "PLU15", "PLU2"];
     
@@ -20,10 +23,10 @@ function fillTable(){
         var offset = 0;
         //SET OFFSET FROM GIVEN DP
         switch(true) {
-            case item.indexOf("2") >= 0: offset = 2000; break;
-                case item.indexOf("15") >= 0: offset = 1500; break;
-                case item.indexOf("1") >= 0: offset = 1000; break;
-                case item.indexOf("5") >= 0: offset = 500; break;
+            case item.indexOf("2") >= 0: offset = 4 * step; break;
+                case item.indexOf("15") >= 0: offset = 3 * step; break;
+                case item.indexOf("1") >= 0: offset = 2 * step; break;
+                case item.indexOf("5") >= 0: offset = 1 * step; break;
         }
                 
         //MIN NEGATIVE PLUS POSITIVE
