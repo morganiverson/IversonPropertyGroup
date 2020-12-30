@@ -1,0 +1,271 @@
+<html>
+    <head>
+        <script src = "scripts.js">
+        </script> 
+        <style>
+            #TITLE{
+                text-align: center;
+                font-family: sans-serif;
+                font-weight: 200;
+                font-size: 30;
+                padding-top: 15px;
+                
+            }
+            #CALCULATOR{
+                margin-top: 20px;
+                text-align: center;
+            }
+            .VAL_IN{
+                width: 100px;
+                border:.5px solid lightgrey;  
+                font-weight: bold;
+
+            }
+            .VAL_IN:focus{
+                outline:none;
+            }
+
+            .DOLLAR_IN{
+                display:inline-block;
+            }
+            #INPUTS{
+                width: 50%;
+                margin:0 25%;
+                padding: 20px 10px;
+
+                background-color: white;
+                border:1px solid lightgrey;
+                border-radius: 10px;
+
+                font-family: sans-serif;
+                font-size: 15px;
+                font-weight: 200;
+                line-height: 30px;
+            }
+
+            
+            .button{
+                margin-top: 10px;
+                margin: 10px 40%                     
+            }
+            
+            #button{
+                color: black;
+                
+                width:50px;
+                height:40px;
+                font-size: 20px;
+                font-weight: 100 !important;
+                
+                border: 1px solid lightgray;
+                border-radius: 10px;
+            }
+            
+            
+            #button:focus{
+                outline:none;
+            }
+            
+            .divTable{
+                display: table;
+                width: 80%;
+                padding: 5px 0;
+                margin: 5% 10%;
+
+                border: 1px solid lightgray;
+
+                border-radius: 10px;
+                background-color: lightgray;
+            }
+
+            .divTableHeadingRow{
+                display:table-row;
+                text-align: center;
+                font-family: sans-serif;
+                font-size: 13px;
+                font-weight: 200;
+
+            }            
+            .divTableHeadCell{
+                border: none;
+                width: 20%;
+                display: table-cell;
+
+
+                text-align: center;
+                padding: 15px;
+            }
+
+            .divTableRow {
+                display: table-row;
+                border:none;
+            }
+            
+            .divTableRow:nth-child(even) {
+                background-color: white;
+            }
+            .divTableRow:nth-child(even):hover{
+                background-color: silver;
+            }
+            .divTableRow:nth-child(odd) {
+                background-color: lightgray;
+            }
+            .divTableRow:nth-child(odd):hover{
+                background-color: silver;
+            }
+            .divTableRow:nth-child(6){
+                background-color: #B5E2AF;
+            }
+
+            .divTableRow:nth-child(6):hover{
+                background-color: silver
+/*                    #AAD1A5;*/
+            }
+            .divTableCell{
+
+                font-family: sans-serif;
+                font-size: 15px;
+                font-weight: 300;
+
+                border: none;
+                border-collapse: collapse;
+                width: 20%;
+
+                display: table-cell;
+                text-align: center;
+                padding: 3px 10px;
+            }
+
+            .divTableFoot {
+                background-color: #EEE;
+                display: table-footer-group;
+                font-weight: bold;
+            }
+            .divTableBody {
+
+                display: table-row-group;
+            }
+
+            
+        </style></head>
+    <body>
+        
+        <div id = "TITLE"> 
+        PROPERTY OFFER CALCULATOR
+        </div>
+        <div id = "CALCULATOR">
+            <div id= "INPUTS">
+                <span class = "DOLLAR_IN"> 
+                    AFTER REPAIR VALUE (ARV):  $
+                    <input id = "ARV" class = "VAL_IN" type = "number" min = 0 step = "50" value = 15000> 
+                </span>
+                <span class = "DOLLAR_IN"> 
+                    REPAIR COST(RC):  $
+                    <input id = "RC" class = "VAL_IN" type = "number" min = 0 step = "50" value = 0> 
+                </span>
+                <span class = "DOLLAR_IN"> 
+                    DESIRED PROFIT (DP):  $
+                    <input id = "DP" class = "VAL_IN" type = "number" min = 0 step = "50" value = 20000> 
+                </span>
+
+               <div class = "button"> <button id = "button" type = button onclick = "fillTable();">GO</button>
+                   </div>
+            </div>
+
+        </div>
+
+        <div id = "OUT_TBL">
+            <div class="divTable">
+
+                <div class="divTableBody">
+                    <!--            HEADERS-->
+                    <div class="divTableHeadingRow">
+                        <div class="divTableHeadCell">Desired Profit</div>
+                        <div class="divTableHeadCell">ARV</div>
+                        <div class="divTableHeadCell">RC</div>
+                        <div class="divTableHeadCell">IP</div>
+                        <div class="divTableHeadCell">MAO</div>
+                    </div>
+
+
+
+                    <!--            MINUS $2000-->
+                    <div class="divTableRow">
+                        <div class="divTableCell" id = "MIN2DP">&nbsp;</div>
+                        <div class="divTableCell GIVARV">&nbsp;</div>
+                        <div class="divTableCell GIVRC">&nbsp;</div>
+                        <div class="divTableCell" id = "MIN2IP">&nbsp;</div>
+                        <div class="divTableCell" id = "MIN2MAO">&nbsp;</div>
+                    </div>
+                    <!--        MINUS 1500-->
+                    <div class="divTableRow">
+                        <div class="divTableCell" id = "MIN15DP">&nbsp;</div>
+                        <div class="divTableCell GIVARV">&nbsp;</div>
+                        <div class="divTableCell GIVRC">&nbsp;</div>
+                        <div class="divTableCell" id = "MIN15IP">&nbsp;</div>
+                        <div class="divTableCell" id = "MIN15MAO">&nbsp;</div>
+                    </div>
+                    <!--            MINUS 1000-->
+                    <div class="divTableRow">
+                        <div class="divTableCell" id = "MIN1DP">&nbsp;</div>
+                        <div class="divTableCell GIVARV">&nbsp;</div>
+                        <div class="divTableCell GIVRC">&nbsp;</div>
+                        <div class="divTableCell" id = "MIN1IP">&nbsp;</div>
+                        <div class="divTableCell" id = "MIN1MAO">&nbsp;</div>
+                    </div>
+                    <!--      MINUS 500-->
+                    <div class="divTableRow">
+                        <div class="divTableCell" id = "MIN5DP">&nbsp;</div>
+                        <div class="divTableCell GIVARV">&nbsp;</div>
+                        <div class="divTableCell GIVRC">&nbsp;</div>
+                        <div class="divTableCell" id = "MIN5IP">&nbsp;</div>
+                        <div class="divTableCell" id = "MIN5MAO">&nbsp;</div>
+                    </div>
+                    <!--            GIVEN VAL-->
+                    <div class="divTableRow EXPECTED_ROW">
+                        <div class="divTableCell" id = "GIVDP">&nbsp;</div>
+                        <div class="divTableCell GIVARV">&nbsp;</div>
+                        <div class="divTableCell GIVRC">&nbsp;</div>
+                        <div class="divTableCell" id = "GIVIP">&nbsp;</div>
+                        <div class="divTableCell" id = "GIVMAO">&nbsp;</div>
+                    </div>
+                    <!--PLUS 500-->
+                    <div class="divTableRow">
+                        <div class="divTableCell" id = "PLU5DP">&nbsp;</div>
+                        <div class="divTableCell GIVARV">&nbsp;</div>
+                        <div class="divTableCell GIVRC">&nbsp;</div>
+                        <div class="divTableCell" id = "PLU5IP">&nbsp;</div>
+                        <div class="divTableCell" id = "PLU5MAO">&nbsp;</div>
+                    </div>
+                    <!--PLUS 1000-->
+                    <div class="divTableRow">
+                        <div class="divTableCell" id = "PLU1DP">&nbsp;</div>
+                        <div class="divTableCell GIVARV">&nbsp;</div>
+                        <div class="divTableCell GIVRC">&nbsp;</div>
+                        <div class="divTableCell" id = "PLU1IP">&nbsp;</div>
+                        <div class="divTableCell" id = "PLU1MAO">&nbsp;</div>
+                    </div>
+                    <!--PLUS 1500-->
+                    <div class="divTableRow">
+                        <div class="divTableCell" id = "PLU15DP">&nbsp;</div>
+                        <div class="divTableCell GIVARV">&nbsp;</div>
+                        <div class="divTableCell GIVRC">&nbsp;</div>
+                        <div class="divTableCell" id = "PLU15IP">&nbsp;</div>
+                        <div class="divTableCell" id = "PLU15MAO">&nbsp;</div>
+                    </div>    
+                    <!--PLUS 2000-->
+                    <div class="divTableRow">
+                        <div class="divTableCell" id = "PLU2DP">&nbsp;</div>
+                        <div class="divTableCell GIVARV">&nbsp;</div>
+                        <div class="divTableCell GIVRC">&nbsp;</div>
+                        <div class="divTableCell" id = "PLU2IP">&nbsp;</div>
+                        <div class="divTableCell" id = "PLU2MAO">&nbsp;</div>
+                    </div>
+
+
+                </div>
+                <!-- DivTable.com -->
+            </div>
+        </div>
+    </body>
+</html>
