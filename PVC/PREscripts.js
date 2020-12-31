@@ -133,5 +133,6 @@ function calcTotal(key){
 //REMOVE ALL REPAIRS FROM
 function clearEval(){
     document.getElementById("add-repair-here").innerHTML = header_row_string;
+    addRepair("", "Repair", 0);
     //MAKE TOTAL 0
 }
