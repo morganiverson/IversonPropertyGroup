@@ -13,8 +13,9 @@ var default_keys = [new Repair("land", "Landscape", 5000),
                    ];
 
 
-window.onload = function(){ 
-    addRepair("", "Repair", 0);
+document.body.onload = function(){ 
+    baseEval();
+    console.log("onload");
 } 
 
 //GENERATE EVALUTAION WITH DEF REAPIRS
@@ -34,13 +35,6 @@ function loadDefaultEval(){
         var key = item.key;
         checkListeners(key);
     });
-}
-
-//REPAIR OBJECT
-function Repair(key, repair, cost){
-    this.key = key;
-    this.repair = repair;
-    this.cost = cost;
 }
 
 //ADD LISTNERS FOR CHECK BOXES
@@ -131,8 +125,13 @@ function calcTotal(key){
 }
 
 //REMOVE ALL REPAIRS FROM
-function clearEval(){
+function baseEval(){
     document.getElementById("add-repair-here").innerHTML = header_row_string;
     addRepair("", "Repair", 0);
     //MAKE TOTAL 0
+}
+
+function clearEval(){
+        document.getElementById("add-repair-here").innerHTML = header_row_string;
+
 }
