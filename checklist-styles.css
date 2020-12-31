@@ -151,10 +151,10 @@ input:focus{
 }
 
 .view-details{
-    width:30%;
+    width:40%;
     display: inline-block;
 
-    padding-left:20%;
+    padding-left:10%;
     border: none;
     float:left;
 }
@@ -179,7 +179,6 @@ input:focus{
 
 
 .home-details{
-    width:30%;
     margin 0 20%;
     display: inline-block;
     border: none;
@@ -191,7 +190,7 @@ input:focus{
     margin-top:15px;
     border: none;
     float: left;
-    padding-left:35%;
+    padding-left:10%;
 }
 
 /*BUTTON PANE STYLES*/
