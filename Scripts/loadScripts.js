@@ -1,11 +1,13 @@
 window.onload = function(){
     addScripts();
 }
-var scripts = ["/IversonPropertyGroup/Scripts/Repair.js", "/IversonPropertyGroup/Scripts/PREscripts.js"];
 
+var scripts = ["/Scripts/Repair.js", "/Scripts/PREscripts.js"];
+var path = "/IversonPropertyGroup";
 function loadScript(URL, loadEvent){
     var script = document.createElement("script"); 
-    script.src = URL; 
+    script = path + URL;
+//    script.src = URL; 
     
     document.head.appendChild(script);
     script.onload = loadEvent;
@@ -19,13 +21,13 @@ function addScripts(){
 //        console.log("onload");
     }};
 
-    scripts.forEach(function(item, index) {
-        if(index == PREloadEvent.index){
-            loadScript(item, PREloadEvent.event)
+    for(var i = 0; i < scripts.length; i++) {
+        if(i == PREloadEvent.index){
+            loadScript(scripts[i], PREloadEvent.event)
         }
         else {
-            loadScript(item, null);
+            loadScript(scripts[i], null);
         }
 
-    });
+    }
 }
