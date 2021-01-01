@@ -5,9 +5,12 @@
         <script src = "../Scripts/GENevents.js"></script>
 
         <style>
-            .Specific{
-                display: none;
+            #other-input{
+                width:100%;
+                float:right;
+                
             }
+            
             .table-cont{
                 width: 60%;
                 padding: 5px 0;
@@ -58,41 +61,59 @@
                 border-top: 1px solid gray;
                 border-bottom: 1px solid gray;
             }
-
             .divTableRow {
                 display: table-row;
                 border:none;
                 text-align: center;
             }
-
-            .divTableRow:nth-child(odd) {
+            
+            .divTableRow-SHOW {
                 background-color: white;
+                
+                display: table-row;
+                border:none;
+                text-align: center;
             }
-            .divTableRow:nth-child(even):hover{
-                background-color: silver;
+            .divTableRow-HIDE {
+                background-color: white;
+                
+                display: none;
+                border:none;
+                text-align: center;
             }
-            .divTableRow:nth-child(even) {
-                background-color: lightgray;
+
+            
+            .divTableCell-LEFT{
+                display: table-cell;
+
+                width:70%;
+
+                font-family: sans-serif;
+                font-size: 15px;
+                font-weight: 300;
+
+                border-top: .5px solid grey;
+
+                text-align: center;
+                padding: 3px 10px;
+                vertical-align: middle;
             }
-            .divTableRow:nth-child(odd):hover{
-                background-color: silver;
-            }
-            .divTableCell{
+            .divTableCell-RIGHT{
                 /*                width:50%;*/
 
                 font-family: sans-serif;
                 font-size: 15px;
                 font-weight: 300;
 
-                border: none;
+                border-top: .5px solid grey;
                 /*                1px solid black;*/
                 /*                border-collapse: collapse;*/
 
                 display: table-cell;
                 text-align: center;
                 padding: 3px 10px;
+                vertical-align: middle;
             }
-
             .divTableBody {
                 display: table-row-group;
             }
@@ -120,16 +141,16 @@
 
                     <!-- FRONT YARD CHECK-->
                     <div class="divTableRow">
-                        <div class="divTableCell">Front Yard</div>
-                        <div class="divTableCell">
+                        <div class="divTableCell-LEFT">Front Yard</div>
+                        <div class="divTableCell-RIGHT">
                             <input type = "checkbox" id = "frontyard-box">
                         </div>
                     </div>
 
                     <!-- BACK YARD CHECK-->
                     <div class="divTableRow">
-                        <div class="divTableCell">Backyard</div>
-                        <div class="divTableCell ">
+                        <div class="divTableCell-LEFT">Backyard</div>
+                        <div class="divTableCell-RIGHT ">
                             <input type = "checkbox" id = "backyard-box">
                         </div>
                     </div>
@@ -143,93 +164,102 @@
 
                     </div>
 
+
                     <!-- KITCHEN CHECK-->
                     <div class="divTableRow">
-                        <div class="divTableCell">Kitchen Specifics</div>
-                        <div class="divTableCell ">
-                            <input type = "checkbox" class = "interior-spec" id = "kitch-spec-box">
+                        <div class="divTableCell-LEFT">Kitchen Specifics</div>
+                        <div class="divTableCell-RIGHT">
+                            <input type = "checkbox" class = "interior-area" id = "kitch-spec-box">
                         </div>
                     </div>
 
                     <!--BATHROOM COUNT-->
                     <div class="divTableRow">
-                        <div class="divTableCell">Bathroom(s)</div>
-                        <div class="divTableCell GIVARV">
+                        <div class="divTableCell-LEFT">Bathroom(s)</div>
+                        <div class="divTableCell-RIGHT">
                             <input type = "number" class = "interior-area" min = 0 max = 10 id = "bath-box">
                         </div>
 
                     </div>
-
+                    
                     <!-- BATH SPECIFICS CHECK-->
-                    <div class="divTableRow Specific" id = "bath-spec-row" >
-                        <div class="divTableCell">Bathroom Specifics</div>
-                        <div class="divTableCell GIVARV">
+                    <div class="divTableRow-HIDE" id = "bath-spec-row" >
+                        <div class="divTableCell-LEFT">Bathroom Specifics</div>
+                        <div class="divTableCell-RIGHT ">
                             <input type = "checkbox" class = "interior-spec" id = "bath-spec-box">
                         </div>
                     </div>
 
-                    <!--                    BEDROOM COUNT-->
+                    
+                    <!--BEDROOM COUNT-->
                     <div class="divTableRow">
-                        <div class="divTableCell">Bedroom(s)</div>
-                        <div class="divTableCell">
+                        <div class="divTableCell-LEFT">Bedroom(s)</div>
+                        <div class="divTableCell-RIGHT">
                             <input type = "number" class = "interior-area" min = 0 max = 10 id = "bed-check">
                         </div>
                     </div>
+                    
+                    
                     <!-- BED SPECIFICS CHECK-->
-                    <div class="Specific divTableRow ">
-                        <div class="divTableCell">Bedroom Specifics</div>
-                        <div class="divTableCell">
-                            <input type = "checkbox" class = "interior-spec" id = "kitch-box">
+                    <div class="divTableRow-HIDE" id = "bed-spec-row">
+                        <div class="divTableCell-LEFT">Bedroom Specifics</div>
+                        <div class="divTableCell-RIGHT">
+                            <input type = "checkbox" class = "interior-spec" id = "bed-spec-box">
                         </div>
                     </div>
                     
-                    <!-- BED SPECIFICS CHECK // SHOW IF -->
+                    
+                    <!-- BASEMENT AREA CHECK -->
                     <div class="divTableRow">
-                        <div class="divTableCell">Basement</div>
-                        <div class="divTableCell">
+                        <div class="divTableCell-LEFT">Basement</div>
+                        <div class="divTableCell-RIGHT">
                             <input type = "checkbox" class = "interior-area" id = "basement-box">
                         </div>
                     </div>
+                    
                     <!-- BASEMENT SPECIFICS CHECK // SHOW IF BASEMENT TRUE-->
-                    <div class="divTableRow Specific">
-                        <div class="divTableCell">Basement Specifics</div>
-                        <div class="divTableCell">
+                    <div class="divTableRow-HIDE" id = "basement-spec-row">
+                        <div class="divTableCell-LEFT">Basement Specifics</div>
+                        <div class="divTableCell-RIGHT">
                             <input type = "checkbox" class = "interior-spec" class = "interior-area" id = "basement-spec-box">
                         </div>
                     </div>
                     
                     
-                    <!-- ATTIC SPECIFICS CHECK-->
+                    <!-- ATTIC AREA CHECK-->
                     <div class="divTableRow">
-                        <div class="divTableCell">Attic</div>
-                        <div class="divTableCell">
-                            <input type = "checkbox" id = "attic-box">
+                        <div class="divTableCell-LEFT">Attic</div>
+                        <div class="divTableCell-RIGHT">
+                            <input type = "checkbox" class = "interior-area" id = "attic-box">
                         </div>
                     </div>
                     
                     <!-- ATTIC SPECIFICS CHECK // SHOW IF ATTIC = TRUE-->
-                    <div class="divTableRow Specific">
-                        <div class="divTableCell">Attic Specifics</div>
-                        <div class="divTableCell">
+                    <div class="divTableRow-HIDE" id = "attic-spec-row">
+                        <div class="divTableCell-LEFT">Attic Specifics</div>
+                        <div class="divTableCell-RIGHT">
                             <input type = "checkbox" class = "interior-spec" id = "attic-spec-box">
                         </div>
                     </div>
                     
+                    <!--OTHER AREA CHECK -->
                     <div class="divTableHeadRow">
                         <div class = "divTableHeadCell">Other Areas</div>
-                        <div class = "divTableHeadCell">                            <input type = "checkbox" id = "frontyard-box"> 
+                        <div class = "divTableHeadCell">                            <input type = "checkbox" id = "other-box"> 
                         </div>
 
                     </div>
-                    <!-- OTHER AREAS CHECK // ONLY SHOW IF OTHER IS TRUE-->
-                    <div class="divTableRow">
-                        <div class="divTableCell">Other Area(s) (comma separated list)</div>
-                        <div class="divTableCell">
-                            <input type = "text" id = "other-input">
+                    
+                    <!-- OTHER AREAS LIST // ONLY SHOW IF OTHER IS TRUE-->
+                    <div class="divTableRow-HIDE" id = "other-spec-row">
+                        <div class="divTableCell-LEFT">Other Area(s) </div>
+                        <div class="divTableCell-RIGHT">
+                            <textarea id = "other-input"></textarea>
                         </div>
                     </div>
 
                 </div>
+                
             </div>
         </div>
     </body></html>
