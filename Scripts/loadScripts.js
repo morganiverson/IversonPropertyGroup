@@ -1,7 +1,7 @@
 window.onload = function(){
     addScripts();
 }
-var scripts = ["/Scripts/Repair.js", "/Scripts/PREscripts.js"];
+var scripts = ["/IversonPropertyGroup/Scripts/Repair.js", "/IversonPropertyGroup/Scripts/PREscripts.js"];
 
 function loadScript(URL, loadEvent){
     var script = document.createElement("script"); 
