@@ -2,9 +2,12 @@
 <!--POPUP PROMPTING DETAILS FOR CHECKLIST -> CREATES ARRAY OF REPAIR OBJECTS AND FILLS CHECKLIST-->
 <html>
     <head>
+        <script src = "../Scripts/GENevents.js"></script>
 
         <style>
-
+            .Specific{
+                display: none;
+            }
             .table-cont{
                 width: 60%;
                 padding: 5px 0;
@@ -95,7 +98,6 @@
             }
 
         </style>
-
     </head>
 
     <body>
@@ -110,7 +112,7 @@
                     <div class="divTableHeadRow">
                         <div class = "divTableHeadCell">All Exterior</div>
                         <div class = "divTableHeadCell">
-                            <input type = "checkbox" id = "frontyard-box">
+                            <input type = "checkbox" id = "all-ext-box">
                         </div>
 
                     </div>
@@ -127,7 +129,7 @@
                     <!-- BACK YARD CHECK-->
                     <div class="divTableRow">
                         <div class="divTableCell">Backyard</div>
-                        <div class="divTableCell GIVARV">
+                        <div class="divTableCell ">
                             <input type = "checkbox" id = "backyard-box">
                         </div>
                     </div>
@@ -135,7 +137,7 @@
                     <!--                    INTERIOR-->
                     <div class="divTableHeadRow">
                         <div class = "divTableHeadCell">All Interior Specifics</div>
-                        <div class = "divTableHeadCell">                            <input type = "checkbox" id = "frontyard-box"> 
+                        <div class = "divTableHeadCell">                            <input type = "checkbox" id = "all-int-spec-box"> 
 <!--                            IF TRUE -> TURN ON ALL SPECIFICS AND ROOMS-->
                         </div>
 
@@ -144,8 +146,8 @@
                     <!-- KITCHEN CHECK-->
                     <div class="divTableRow">
                         <div class="divTableCell">Kitchen Specifics</div>
-                        <div class="divTableCell GIVARV">
-                            <input type = "checkbox" id = "kitch-spec-box">
+                        <div class="divTableCell ">
+                            <input type = "checkbox" class = "interior-spec" id = "kitch-spec-box">
                         </div>
                     </div>
 
@@ -153,59 +155,63 @@
                     <div class="divTableRow">
                         <div class="divTableCell">Bathroom(s)</div>
                         <div class="divTableCell GIVARV">
-                            <input type = "number" min = 0 max = 10 id = "bath-check">
+                            <input type = "number" class = "interior-area" min = 0 max = 10 id = "bath-box">
                         </div>
 
                     </div>
 
                     <!-- BATH SPECIFICS CHECK-->
-                    <div class="divTableRow">
+                    <div class="divTableRow Specific" id = "bath-spec-row" >
                         <div class="divTableCell">Bathroom Specifics</div>
                         <div class="divTableCell GIVARV">
-                            <input type = "checkbox" id = "kitch-box">
+                            <input type = "checkbox" class = "interior-spec" id = "bath-spec-box">
                         </div>
                     </div>
 
                     <!--                    BEDROOM COUNT-->
                     <div class="divTableRow">
                         <div class="divTableCell">Bedroom(s)</div>
-                        <div class="divTableCell GIVARV">
-                            <input type = "number" min = 0 max = 10 id = "bed-check">
+                        <div class="divTableCell">
+                            <input type = "number" class = "interior-area" min = 0 max = 10 id = "bed-check">
                         </div>
                     </div>
                     <!-- BED SPECIFICS CHECK-->
-                    <div class="divTableRow Specific">
+                    <div class="Specific divTableRow ">
                         <div class="divTableCell">Bedroom Specifics</div>
                         <div class="divTableCell">
-                            <input type = "checkbox" id = "kitch-box">
+                            <input type = "checkbox" class = "interior-spec" id = "kitch-box">
                         </div>
                     </div>
+                    
                     <!-- BED SPECIFICS CHECK // SHOW IF -->
                     <div class="divTableRow">
                         <div class="divTableCell">Basement</div>
                         <div class="divTableCell">
-                            <input type = "checkbox" id = "basement-box">
+                            <input type = "checkbox" class = "interior-area" id = "basement-box">
                         </div>
                     </div>
                     <!-- BASEMENT SPECIFICS CHECK // SHOW IF BASEMENT TRUE-->
                     <div class="divTableRow Specific">
                         <div class="divTableCell">Basement Specifics</div>
                         <div class="divTableCell">
-                            <input type = "checkbox" id = "basement-spec-box">
+                            <input type = "checkbox" class = "interior-spec" class = "interior-area" id = "basement-spec-box">
                         </div>
                     </div>
-                    <!-- BED SPECIFICS CHECK-->
+                    
+                    
+                    <!-- ATTIC SPECIFICS CHECK-->
                     <div class="divTableRow">
                         <div class="divTableCell">Attic</div>
                         <div class="divTableCell">
                             <input type = "checkbox" id = "attic-box">
                         </div>
                     </div>
+                    
                     <!-- ATTIC SPECIFICS CHECK // SHOW IF ATTIC = TRUE-->
                     <div class="divTableRow Specific">
                         <div class="divTableCell">Attic Specifics</div>
                         <div class="divTableCell">
-                            <input type = "checkbox" id = "attic-box">
+                            <input type = "checkbox" class = "interior-spec" id = "attic-spec-box">
                         </div>
                     </div>
                     
