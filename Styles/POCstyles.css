@@ -59,7 +59,6 @@
     /*                CENTER ALIGN*/
     margin-left: 0; /*center*/
 }
-
 #button{
     color: black;
 
@@ -71,7 +70,6 @@
     border: 1px solid lightgray;
     border-radius: 10px;
 }
-
 #button:focus{
     outline:none;
 }
@@ -163,4 +161,20 @@
 
     display: table-row-group;
 }
-
+@media screen and (max-device-width: 480px) {
+    #TITLE{
+        font-size: 20px;
+        margin:20px;
+    }
+    #INPUTS{
+        width: 80%;
+        margin:auto;
+    }
+    .divTable{
+        width: 80%;
+        margin: 5% auto;
+    }
+    .divTableCell{
+        font-size:10px;
+    }
+}
