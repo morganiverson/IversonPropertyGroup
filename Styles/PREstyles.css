@@ -1,7 +1,7 @@
 :root{
     --eval-width:60%;
     --eval-margins: auto;
-    
+
 }
 
 body{
@@ -89,7 +89,7 @@ input:focus{
     text-align: left;
     height:auto;
     color: dimgrey;
-    
+
     resize:none;
 }
 
@@ -221,7 +221,7 @@ input:focus{
 .button:hover{
     background-color:lightgrey;
     color: whitesmoke;
-    
+
 }
 .button-pane div{
     width:25%;
@@ -281,11 +281,15 @@ input:focus{
         width:100%;
         text-align: center;
     }
-    
-/*    BUTTON STYLES*/
+
+    /*    BUTTON STYLES*/
     .button{
         font-weight: bold;
     }
+    .button-pane div{
+    width:50%;
+    float:left;
+}
 
 }
 

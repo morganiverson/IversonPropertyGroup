@@ -173,7 +173,7 @@ function onMobile(){
 function printEvents(){
     var printButton = document.getElementById("print-button");
     var tooltipID = "print-tooltip";
-    
+
     if(!onMobile()){
         printButton.onmouseover = function(e) {
             if(!evalComplete()){
@@ -184,16 +184,19 @@ function printEvents(){
             if(!evalComplete()){
                 showToolTip(e, tooltipID, false);
             }
+        }
     }
-    }
+
     
     printButton.onclick = function(e) {
         console.log("click");
         if(evalComplete()){
+            getFileName();
+            console.log(document.title);
             window.print();
         }
         else {
-                showToolTip(e, tooltipID, true);
+            showToolTip(e, tooltipID, true);
         }
 
     }
@@ -209,9 +212,9 @@ function showToolTip(e, tipID, show) {
         var top = (e.clientY + scrollY) + "px";
         tooltip.style.left = left;
         tooltip.style.top = top;
-        
+
         tooltip.style.visibility = "visible";
-        
+
         if (onMobile()){
             setTimeout(function () {tooltip.style.visibility = "hidden";}, 3000);
         }
@@ -221,3 +224,19 @@ function showToolTip(e, tipID, show) {
         tooltip.style.visibility = "hidden";
     }
 }
+
+//function convertDate(input){
+//    var d = new Date(input);
+//    return "".concat((d.getMonth() + 1),d.getDate(),d.getFullYear());
+//    
+//}
+
+//function getFileName(){
+//    var date = convertDate(document.getElementById("view-date").value);
+//    console.log(date);
+//    var viewer = document.getElementById("viewer").value.replace(/\s/g, "");
+//    var address = document.getElementById("address").value.replace(/\s/g, "");
+//    console.log(date + "-" + viewer + "-" + address);
+//    
+//    
+//}
