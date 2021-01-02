@@ -37,11 +37,11 @@ body{
     display: block;
     width:50%;
     height:50;
-    
+
     border:2px solid grey;
     border-radius: 10px;
     margin:10px auto;
-    
+
     font-size: 20px;
     color:dimgray;
 }
@@ -53,36 +53,23 @@ body{
 }
 
 @media screen and (max-device-width: 480px) {
-    
+
     .title{
         width:100%;
-    text-align: center;
-    font-weight: bold;
-    letter-spacing: 2px;
-    color: dimgray;
-    margin:20px auto;
+        text-align: center;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: dimgray;
+        margin:20px auto;
         font-size: 15;
-
-
-}
+    }
     .cont{
-    border: 2px solid dimgrey;
-    width:80%;
-    height:50%;
-    margin:20px auto;
-    padding: 10px;
-
-    border-radius: 10px;
-    background-color:lightgrey
-}
+        width:80%;
+        height:50%;
+    }
     .PC{
-        display: block;
         width:80%;
         height:60;
-        border:2px solid grey;
-        border-radius: 10px;
         margin:30px auto;
-        color:dimgray;
     }
-
 }
