@@ -7,149 +7,150 @@
     </head>
 
     <body>
+        <div class = "bkgd">
+            <div class = "table-cont">
 
-        <div class = "table-cont">
+                <div class="headingRow">Include </div>
 
-            <div class="headingRow">Include </div>
+                <div class="divTable">
+                    <div class="divTableBody"> 
+                        <!--                    EXTERIOR-->
+                        <div class="divTableHeadRow">
+                            <div class = "divTableHeadCell">All Exterior</div>
+                            <div class = "divTableHeadCell">
+                                <input type = "checkbox" id = "all-ext-box">
+                            </div>
 
-            <div class="divTable">
-                <div class="divTableBody"> 
-                    <!--                    EXTERIOR-->
-                    <div class="divTableHeadRow">
-                        <div class = "divTableHeadCell">All Exterior</div>
-                        <div class = "divTableHeadCell">
-                            <input type = "checkbox" id = "all-ext-box">
                         </div>
 
-                    </div>
 
-
-                    <!-- FRONT YARD CHECK-->
-                    <div class="divTableRow">
-                        <div class="divTableCell-LEFT">Front Yard</div>
-                        <div class="divTableCell-RIGHT">
-                            <input type = "checkbox" class = "repair-area exterior-area" id = "frontyard-box">
-                        </div>
-                    </div>
-
-                    <!-- BACK YARD CHECK-->
-                    <div class="divTableRow">
-                        <div class="divTableCell-LEFT">Backyard</div>
-                        <div class="divTableCell-RIGHT ">
-                            <input type = "checkbox" class = "repair-area exterior-area" id = "backyard-box">
-                        </div>
-                    </div>
-
-                    <!--                    INTERIOR-->
-                    <div class="divTableHeadRow">
-                        <div class = "divTableHeadCell">All Interior Specifics</div>
-                        <div class = "divTableHeadCell">                            <input type = "checkbox" id = "all-int-spec-box"> 
-<!--                            IF TRUE -> TURN ON ALL SPECIFICS AND ROOMS-->
+                        <!-- FRONT YARD CHECK-->
+                        <div class="divTableRow">
+                            <div class="divTableCell-LEFT">Front Yard</div>
+                            <div class="divTableCell-RIGHT">
+                                <input type = "checkbox" class = "repair-area exterior-area" id = "frontyard-box">
+                            </div>
                         </div>
 
-                    </div>
-
-
-                    <!-- KITCHEN CHECK-->
-                    <div class="divTableRow">
-                        <div class="divTableCell-LEFT">Kitchen Specifics</div>
-                        <div class="divTableCell-RIGHT">
-                            <input type = "checkbox" class = "repair-area interior-area" id = "kitchen-box">
-                        </div>
-                    </div>
-
-                    <!--BATHROOM COUNT-->
-                    <div class="divTableRow">
-                        <div class="divTableCell-LEFT">Bathroom(s)</div>
-                        <div class="divTableCell-RIGHT">
-                            <input type = "number" class = "repair-area interior-area count-input" min = 0 max = 9 id = "bathroom-box" value = 0>
+                        <!-- BACK YARD CHECK-->
+                        <div class="divTableRow">
+                            <div class="divTableCell-LEFT">Backyard</div>
+                            <div class="divTableCell-RIGHT ">
+                                <input type = "checkbox" class = "repair-area exterior-area" id = "backyard-box">
+                            </div>
                         </div>
 
-                    </div>
-                    
-                    <!-- BATH SPECIFICS CHECK-->
-                    <div class="divTableRow-HIDE" id = "bathroom-spec-row" >
-                        <div class="divTableCell-LEFT">Bathroom Specifics</div>
-                        <div class="divTableCell-RIGHT ">
-                            <input type = "checkbox" class = "repair-area interior-spec" id = "bathroom-spec-box">
-                        </div>
-                    </div>
+                        <!--                    INTERIOR-->
+                        <div class="divTableHeadRow">
+                            <div class = "divTableHeadCell">All Interior Specifics</div>
+                            <div class = "divTableHeadCell">                            <input type = "checkbox" id = "all-int-spec-box"> 
+                                <!--                            IF TRUE -> TURN ON ALL SPECIFICS AND ROOMS-->
+                            </div>
 
-                    
-                    <!--BEDROOM COUNT-->
-                    <div class="divTableRow">
-                        <div class="divTableCell-LEFT">Bedroom(s)</div>
-                        <div class="divTableCell-RIGHT">
-                            <input type = "number" class = "repair-area interior-area count-input" min = 0 max = 9 id = "bedroom-box" value = 0 >
-                        </div>
-                    </div>
-                    
-                    
-                    <!-- BED SPECIFICS CHECK-->
-                    <div class="divTableRow-HIDE" id = "bedroom-spec-row">
-                        <div class="divTableCell-LEFT">Bedroom Specifics</div>
-                        <div class="divTableCell-RIGHT">
-                            <input type = "checkbox" class = "repair-area interior-spec" id = "bedroom-spec-box" >
-                        </div>
-                    </div>
-                    
-                    
-                    <!-- BASEMENT AREA CHECK -->
-                    <div class="divTableRow">
-                        <div class="divTableCell-LEFT">Basement</div>
-                        <div class="divTableCell-RIGHT">
-                            <input type = "checkbox" class = "repair-area interior-area" id = "basement-box">
-                        </div>
-                    </div>
-                    
-                    <!-- BASEMENT SPECIFICS CHECK // SHOW IF BASEMENT TRUE-->
-                    <div class="divTableRow-HIDE" id = "basement-spec-row">
-                        <div class="divTableCell-LEFT">Basement Specifics</div>
-                        <div class="divTableCell-RIGHT">
-                            <input type = "checkbox" class = "repair-area interior-area" id = "basement-spec-box">
-                        </div>
-                    </div>
-                    
-                    
-                    <!-- ATTIC AREA CHECK-->
-                    <div class="divTableRow">
-                        <div class="divTableCell-LEFT">Attic</div>
-                        <div class="divTableCell-RIGHT">
-                            <input type = "checkbox" class = "repair-area interior-area" id = "attic-box">
-                        </div>
-                    </div>
-                    
-                    <!-- ATTIC SPECIFICS CHECK // SHOW IF ATTIC = TRUE-->
-                    <div class="divTableRow-HIDE" id = "attic-spec-row">
-                        <div class="divTableCell-LEFT">Attic Specifics</div>
-                        <div class="divTableCell-RIGHT">
-                            <input type = "checkbox" class = "repair-area interior-spec" id = "attic-spec-box">
-                        </div>
-                    </div>
-                    
-                    <!--OTHER AREA CHECK -->
-                    <div class="divTableHeadRow">
-                        <div class = "divTableHeadCell">Other Areas</div>
-                        <div class = "divTableHeadCell">                            <input type = "checkbox" id = "other-box"> 
                         </div>
 
-                    </div>
-                    
-                    <!-- OTHER AREAS LIST // ONLY SHOW IF OTHER IS TRUE-->
-                    <div class="divTableRow-HIDE" id = "other-spec-row">
-                        <div class="divTableCell-LEFT">Other Area(s) </div>
-                        <div class="divTableCell-RIGHT">
-                            <textarea id = "other-input" placeholder = "List By Line&#10Area 1&#10Area 2"></textarea>
+
+                        <!-- KITCHEN CHECK-->
+                        <div class="divTableRow">
+                            <div class="divTableCell-LEFT">Kitchen Specifics</div>
+                            <div class="divTableCell-RIGHT">
+                                <input type = "checkbox" class = "repair-area interior-area" id = "kitchen-box">
+                            </div>
                         </div>
-                    </div>
+
+                        <!--BATHROOM COUNT-->
+                        <div class="divTableRow">
+                            <div class="divTableCell-LEFT">Bathroom(s)</div>
+                            <div class="divTableCell-RIGHT">
+                                <input type = "number" class = "repair-area interior-area count-input" min = 0 max = 9 id = "bathroom-box" value = 0>
+                            </div>
+
+                        </div>
+
+                        <!-- BATH SPECIFICS CHECK-->
+                        <div class="divTableRow-HIDE" id = "bathroom-spec-row" >
+                            <div class="divTableCell-LEFT">Bathroom Specifics</div>
+                            <div class="divTableCell-RIGHT ">
+                                <input type = "checkbox" class = "repair-area interior-spec" id = "bathroom-spec-box">
+                            </div>
+                        </div>
+
+
+                        <!--BEDROOM COUNT-->
+                        <div class="divTableRow">
+                            <div class="divTableCell-LEFT">Bedroom(s)</div>
+                            <div class="divTableCell-RIGHT">
+                                <input type = "number" class = "repair-area interior-area count-input" min = 0 max = 9 id = "bedroom-box" value = 0 >
+                            </div>
+                        </div>
+
+
+                        <!-- BED SPECIFICS CHECK-->
+                        <div class="divTableRow-HIDE" id = "bedroom-spec-row">
+                            <div class="divTableCell-LEFT">Bedroom Specifics</div>
+                            <div class="divTableCell-RIGHT">
+                                <input type = "checkbox" class = "repair-area interior-spec" id = "bedroom-spec-box" >
+                            </div>
+                        </div>
+
+
+                        <!-- BASEMENT AREA CHECK -->
+                        <div class="divTableRow">
+                            <div class="divTableCell-LEFT">Basement</div>
+                            <div class="divTableCell-RIGHT">
+                                <input type = "checkbox" class = "repair-area interior-area" id = "basement-box">
+                            </div>
+                        </div>
+
+                        <!-- BASEMENT SPECIFICS CHECK // SHOW IF BASEMENT TRUE-->
+                        <div class="divTableRow-HIDE" id = "basement-spec-row">
+                            <div class="divTableCell-LEFT">Basement Specifics</div>
+                            <div class="divTableCell-RIGHT">
+                                <input type = "checkbox" class = "repair-area interior-area" id = "basement-spec-box">
+                            </div>
+                        </div>
+
+
+                        <!-- ATTIC AREA CHECK-->
+                        <div class="divTableRow">
+                            <div class="divTableCell-LEFT">Attic</div>
+                            <div class="divTableCell-RIGHT">
+                                <input type = "checkbox" class = "repair-area interior-area" id = "attic-box">
+                            </div>
+                        </div>
+
+                        <!-- ATTIC SPECIFICS CHECK // SHOW IF ATTIC = TRUE-->
+                        <div class="divTableRow-HIDE" id = "attic-spec-row">
+                            <div class="divTableCell-LEFT">Attic Specifics</div>
+                            <div class="divTableCell-RIGHT">
+                                <input type = "checkbox" class = "repair-area interior-spec" id = "attic-spec-box">
+                            </div>
+                        </div>
+
+                        <!--OTHER AREA CHECK -->
+                        <div class="divTableHeadRow">
+                            <div class = "divTableHeadCell">Other Areas</div>
+                            <div class = "divTableHeadCell">                            <input type = "checkbox" id = "other-box"> 
+                            </div>
+
+                        </div>
+
+                        <!-- OTHER AREAS LIST // ONLY SHOW IF OTHER IS TRUE-->
+                        <div class="divTableRow-HIDE" id = "other-spec-row">
+                            <div class="divTableCell-LEFT">Other Area(s) </div>
+                            <div class="divTableCell-RIGHT">
+                                <textarea id = "other-input" placeholder = "List By Line&#10Area 1, Cost&#10Area 2,Cost" ></textarea>
+                            </div>
+                        </div>
+
+                    </div>  
 
                 </div>
-                
-                
+
             </div>
-            
+
+            <div class = "button-cont">
+                <!--            getRepairArray();-->
+                <button onclick = "getRepairArray();">Submit</button></div>
         </div>
-        
-        <div class = "button-cont">
-        <button onclick = "getRepairArray()">Submit</button></div>
     </body></html>

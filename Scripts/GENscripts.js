@@ -9,9 +9,10 @@ function getRepairArray() {
 
         var itemKey = getKey(item.id);
 
+        //GEYT CHECKS
         if(item.type == "checkbox" && item.id.indexOf("spec") < 0) {
-//            console.log(item.type);
-//            console.log(item.id);
+            //            console.log(item.type);
+            //            console.log(item.id);
             //ADD BASE REPAIR -- TURN ON IF CHECKED
             if(item.checked) {
                 var repairObj;
@@ -22,7 +23,7 @@ function getRepairArray() {
 
                 //ADD SPECIFIC REPAIRS
                 var spec = document.getElementById(areaToSpec(item.id));
-//                console.log(areaToSpec(item.id));
+                //                console.log(areaToSpec(item.id));
 
                 if(spec != null || item.id.indexOf("kitch") >= 0) {
                     if(spec == null) {
@@ -35,6 +36,7 @@ function getRepairArray() {
                 }
             }
         }
+        //GET ROOMS
         else if(item.type == "number" && item.id.indexOf("spec") < 0) {
             //            console.log(item.id);
 
@@ -46,8 +48,33 @@ function getRepairArray() {
         }
 
     });
+    allAreaRepairs.push.apply(allAreaRepairs, getOtherAreas());
     console.log(allAreaRepairs);
+}
 
+function getOtherAreas() {
+    var otherRepairs= [];
+    
+    var otherBox = document.getElementById("other-box");
+    var otherInput = document.getElementById("other-input");
+
+    if(otherBox.checked && otherInput.value != ""){
+        var otherAreas = otherInput.value.split("\n");
+        
+        //CREATE REPAIR FOR EACH LISTED AREA
+        otherAreas.forEach(function(item, index){
+            var itemList = item.split(",");
+
+            //GET DECRIPTION AND COST FROM LIST
+            var repairDesc = cap(itemList[0]);
+            var repairKey = createKey(repairDesc);
+            
+            var repairCost = parseFloat(strip(itemList[1]));
+            
+            otherRepairs.push(new Repair(repairKey, repairDesc, repairCost));
+        });
+    }
+    return otherRepairs;
 }
 
 //RETURN REPAIR OBJECT GIVEN KEY
@@ -133,6 +160,7 @@ function SpecificRepair(key, repair, cost) {
     this.cost = cost;
 }
 
+//HELPERS
 //CAPIOTALIZE STRING
 function cap(str) {
     var ret = str.replace(/(^\w|\s\w)(\S*)/g, (_,m1,m2) => m1.toUpperCase()+m2.toLowerCase());
@@ -141,4 +169,28 @@ function cap(str) {
     // "\s\w" - first char after space
     // g - global all occurrences
     return ret;
+}
+
+//CREATE KEY FROM STRING
+function createKey(area) {
+    var areaName = area.split(" ");
+    var areaKey = "";
+    for(var i = 0; i < areaName.length; i++){
+        //        console.log(areaName);
+        if(areaName[i].length > 4) {
+            areaKey+= areaName[i].substring(0, 3).toLowerCase();
+        }
+        else {
+            areaKey+= areaName[i].toLowerCase();
+        }
+    }
+    return areaKey;
+}
+
+function letterOnly(str) {
+    return str.match(/^[A-Za-z]+$/);
+}
+
+function strip(str) {
+    return str.replace(/\s/g, '');
 }
