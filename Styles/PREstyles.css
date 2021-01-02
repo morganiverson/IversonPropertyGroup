@@ -159,7 +159,7 @@ input:focus{
     padding:5px 10%;
 }
 .detail-input-line input{
-    width: 50%;
+    width: 70%;
     margin-left:5px;
 
     font-size:12px;
@@ -223,16 +223,16 @@ input:focus{
         padding:5% auto;
     }
     .detail-pane input{
-        width:60%
+        width:60%;
     }
     .detail-input-line{
         padding-left:0;
     }
-    
+
     .price-details input{
-    width:40%;
-}
-/*    TABLE STYLES*/
+        width:40%;
+    }
+    /*    TABLE STYLES*/
     .divTable{
         width:90%;
         margin:5% auto;
@@ -241,15 +241,15 @@ input:focus{
         font-size: 10px;
     }
 
-    
-/*    TOTAL PANE STYLES*/
+
+    /*    TOTAL PANE STYLES*/
     .total-pane{
         width:90%;
         height:auto;
-        margin:15px auto;
+        margin:15px;
     }
-        .total-label-cell{
+    .total-label-cell{
         width:100%;
-            text-align: center;
+        text-align: center;
     }
 }

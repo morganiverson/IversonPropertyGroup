@@ -66,9 +66,15 @@ function checkListeners(key){
                 //                console.log(getRepairValue(key, this.value));
 
                 total_output.innerHTML = "$" + getRepairValue(key, this.value);
+            
+                calcTotal(false);
+            
+            console.log("Complete? " + EvalComplete());
             }
-            calcTotal(false);
+            
         }
+                    
+
     }
 
 }
@@ -108,7 +114,7 @@ function getRepairValue(key, value){
 function calcTotal(clear){
     if(!clear) {
         var total_cells = document.getElementsByClassName("repair-cost");
-        console.log(total_cells);
+//        console.log(total_cells);
         var sum = 0;
 
         for(var i = 0; i < total_cells.length; i++) {
@@ -144,4 +150,12 @@ function clearEval(){
     calcTotal(true);
     document.getElementById("add-repair-here").innerHTML = header_row_string;
 
+}
+
+function EvalComplete(){
+    var totalCells = document.getElementsByClassName("repair-cost");
+    for(var i = 0; i < totalCells.length; i++) {
+        if(totalCells[i].innerHTML == "$") return false;
+    }
+    return true;
 }
