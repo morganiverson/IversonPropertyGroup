@@ -67,7 +67,7 @@ function checkListeners(key){
 
                 total_output.innerHTML = "$" + getRepairValue(key, this.value);
             }
-            calcTotal();
+            calcTotal(false);
         }
     }
 
@@ -105,33 +105,43 @@ function getRepairValue(key, value){
         default: return value;
     }
 }
-function calcTotal(key){
-    var total_cells = document.getElementsByClassName("repair-cost");
-    console.log(total_cells);
-    var sum = 0;
+function calcTotal(clear){
+    if(!clear) {
+        var total_cells = document.getElementsByClassName("repair-cost");
+        console.log(total_cells);
+        var sum = 0;
 
-    for(var i = 0; i < total_cells.length; i++) {
-        var content = total_cells[i].innerHTML.substring(1);
-        if(content != ""){
-            sum+= parseFloat(content);
+        for(var i = 0; i < total_cells.length; i++) {
+            var content = total_cells[i].innerHTML.substring(1);
+            if(content != ""){
+                sum+= parseFloat(content);
+            }
         }
-    }
-    var total_output = document.getElementById("total-here");
-    var detail_total_cost = document.getElementById("detail-pane-repair-cost");
-    
+        var total_output = document.getElementById("total-here");
+        var detail_total_cost = document.getElementById("detail-pane-repair-cost");
 
-    total_output.innerHTML = sum;
-    detail_total_cost.value = "$" + sum;
+
+        total_output.innerHTML = sum;
+        detail_total_cost.value = "$" + sum;
+    }
+    else {
+        var total_output = document.getElementById("total-here");
+        var detail_total_cost = document.getElementById("detail-pane-repair-cost");
+        total_output.innerHTML = "0";
+        detail_total_cost.value = "$0";
+    }
 }
 
 //REMOVE ALL REPAIRS FROM
 function baseEval(){
+    calcTotal(true);
     document.getElementById("add-repair-here").innerHTML = header_row_string;
     addRepair("", "Repair", 0);
     //MAKE TOTAL 0
 }
 
 function clearEval(){
-        document.getElementById("add-repair-here").innerHTML = header_row_string;
+    calcTotal(true);
+    document.getElementById("add-repair-here").innerHTML = header_row_string;
 
 }

@@ -6,8 +6,8 @@ var scripts = ["/Scripts/Repair.js", "/Scripts/PREscripts.js"];
 var path = "/IversonPropertyGroup";
 function loadScript(URL, loadEvent){
     var script = document.createElement("script"); 
-    script = path + URL;
-//    script.src = URL; 
+//    script.src = path + URL;
+    script.src = URL; 
     
     document.head.appendChild(script);
     script.onload = loadEvent;
