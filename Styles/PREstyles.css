@@ -278,9 +278,7 @@ input:focus{
     .button{
         font-weight: bold;
     }
-    #print-tooltip{
-        display:none;
-    }
+
 }
 
 

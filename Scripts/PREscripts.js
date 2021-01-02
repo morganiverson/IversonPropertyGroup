@@ -39,12 +39,12 @@ function checkListeners(key){
     //    console.log(inputs);
 
     for(var j = 0; j < inputs.length; j++) {
-                console.log(inputs[j]);
+        console.log(inputs[j]);
         var input = inputs[j];
 
         input.onchange = function(e) {
             //            console.log(this.value);
-                        console.log(this.type);
+            console.log(this.type);
             if((this.type == "checkbox" && this.checked) || (this.type == "tel" && this.value != null)) { //OIF THIS INPUT IS CHECKED OR HAS A VALUE
                 //REMOVE NON INTEGER NUMBERS
                 if(this.type == "tel") {
@@ -157,13 +157,13 @@ function evalComplete(){
     for(var i = 0; i < totalCells.length; i++) {
         if(totalCells[i].innerHTML == "$") return false;
     }
-    
+
     var propertyDetails = document.getElementsByClassName("property-details");
-    
+
     for(var i = 0; i < propertyDetails.length; i++) {
         if(propertyDetails[i].value == "") return false;
     }
-    
+
     return true;
 }
 
@@ -173,26 +173,33 @@ function onMobile(){
 function printEvents(){
     var printButton = document.getElementById("print-button");
     var tooltipID = "print-tooltip";
-    if(onMobile()){
+    
+    if(!onMobile()){
         printButton.onmouseover = function(e) {
             if(!evalComplete()){
                 showToolTip(e, tooltipID, true);
             }
         }
         printButton.onmouseout = function(e) {
-        if(!evalComplete()){
-            showToolTip(e, tooltipID, false);
-        }
+            if(!evalComplete()){
+                showToolTip(e, tooltipID, false);
+            }
     }
     }
+    
     printButton.onclick = function(e) {
+        console.log("click");
         if(evalComplete()){
             window.print();
         }
-        
+        else {
+                showToolTip(e, tooltipID, true);
+        }
+
     }
 
 }
+
 function showToolTip(e, tipID, show) {
     var tooltip = document.getElementById(tipID);
 
@@ -200,13 +207,17 @@ function showToolTip(e, tipID, show) {
         var left = e.clientX + "px";
         var scrollY = window.scrollY;
         var top = (e.clientY + scrollY) + "px";
-
         tooltip.style.left = left;
         tooltip.style.top = top;
+        
         tooltip.style.visibility = "visible";
+        
+        if (onMobile()){
+            setTimeout(function () {tooltip.style.visibility = "hidden";}, 3000);
+        }
+
     }
     else {
         tooltip.style.visibility = "hidden";
-
     }
 }
