@@ -1,3 +1,9 @@
+:root{
+    --eval-width:60%;
+    --eval-margins: auto;
+    
+}
+
 body{
     font-family:sans-serif;
 
@@ -12,8 +18,8 @@ input:focus{
     display:table;
     padding:5px 0;
 
-    width:80%;
-    margin: 15px 10%;
+    width:var(--eval-width);
+    margin: 15px auto;
     border-radius: 10px;
     border:2px solid lightgray;
     background-color:lightgray;
@@ -83,6 +89,8 @@ input:focus{
     text-align: left;
     height:auto;
     color: dimgrey;
+    
+    resize:none;
 }
 
 .partial-input{
@@ -100,8 +108,8 @@ input:focus{
 
 /*TOTAL ROW*/
 .total-pane{
-    width: 80%;
-    margin:0 10%;
+    width: var(--eval-width);
+    margin:0 auto;
     border: 2px solid lightgrey;
     border-radius: 10px;
 
@@ -131,8 +139,8 @@ input:focus{
     margin-bottom: 10px;
 }
 .detail-pane{
-    width: 80%;
-    margin: 0 10%;
+    width: var(--eval-width);
+    margin: 0 auto;
     padding:10px;
     box-sizing: border-box;
 
@@ -191,8 +199,8 @@ input:focus{
 /*BUTTON PANE STYLES*/
 .button-pane{
     text-align: center;
-    width:100%;
-    margin: 0 ;
+    width:var(--eval-width);
+    margin: auto ;
     background-color:yellow;
 }
 .button{    
@@ -216,7 +224,7 @@ input:focus{
     
 }
 .button-pane div{
-    width:50%;
+    width:25%;
     float:left;
 }
 
