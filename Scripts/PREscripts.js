@@ -1,4 +1,4 @@
-const default_html_string = "<!-- ELEMENTS--> <div class = 'divTableRow'> <div class = 'divTableCell'>Repair_Here <div class= 'notes-text-box' id = 'desc-NOTES'><textarea class = 'notes-text-input'>Notes</textarea></div> </div> <!-- INPUTS--> <div class = 'divTableCell-DEG'> <input type = 'checkbox' name = 'desc-repair-deg' value = 'none'> </div> <div class = 'divTableCell-DEG'> <input class = 'partial-input' type = 'text' pattern = '\d' name = 'desc-repair-deg'> </div> <div class = 'divTableCell-DEG'> <input type = 'checkbox' name = 'desc-repair-deg' value = 'full'> </div> <div class = 'divTableCell-DEG'> <span class = 'repair-cost' id = 'desc-repair-cost'>$</span> </div> </div>"
+const default_html_string = "<!-- ELEMENTS--> <div class = 'divTableRow'> <div class = 'divTableCell'>Repair_Here <div class= 'notes-text-box' id = 'desc-NOTES'><textarea class = 'notes-text-input'>Notes</textarea></div> </div> <!-- INPUTS--> <div class = 'divTableCell-DEG'> <input type = 'checkbox' name = 'desc-repair-deg' value = 'none'> </div> <div class = 'divTableCell-DEG'> <input class = 'partial-input' type = 'tel' pattern = '\d' name = 'desc-repair-deg'> </div> <div class = 'divTableCell-DEG'> <input type = 'checkbox' name = 'desc-repair-deg' value = 'full'> </div> <div class = 'divTableCell-DEG'> <span class = 'repair-cost' id = 'desc-repair-cost'>$</span> </div> </div>"
 var header_row_string = "<div class = 'divTableHeadingRow'> <div class = 'divTableHeadCell-DSC'>Repair</div> <div class = 'divTableHeadCell-DEG'>None</div> <div class = 'divTableHeadCell-DEG'>Partial</div> <div class = 'divTableHeadCell-DEG'>Full</div> <div class = 'divTableHeadCell-DEG'>Total</div> </div>";
 
 var keys = [];
@@ -12,11 +12,6 @@ var default_keys = [new Repair("land", "Landscape", 5000),
                     new Repair("bath", "Bathroom", 3500) 
                    ];
 
-
-document.body.onload = function(){ 
-    baseEval();
-    console.log("onload");
-} 
 
 //GENERATE EVALUTAION WITH DEF REAPIRS
 function loadDefaultEval(){
@@ -44,14 +39,17 @@ function checkListeners(key){
     //    console.log(inputs);
 
     for(var j = 0; j < inputs.length; j++) {
-        //        console.log(inputs[j]);
+                console.log(inputs[j]);
         var input = inputs[j];
 
         input.onchange = function(e) {
             //            console.log(this.value);
-            //            console.log(key);
-            if(this.checked || this.value != null) { //OIF THIS INPUT IS CHECKED OR HAS A VALUE
-
+                        console.log(this.type);
+            if((this.type == "checkbox" && this.checked) || (this.type == "tel" && this.value != null)) { //OIF THIS INPUT IS CHECKED OR HAS A VALUE
+                //REMOVE NON INTEGER NUMBERS
+                if(this.type == "tel") {
+                    this.value = this.value.replace(/\D/g,'');
+                }
                 //UNCHECK OR EMPTY OTHER INPUTS
                 for(var k = 0; k < inputs.length; k++) {
                     if(inputs[k].value != this.value){
@@ -63,17 +61,19 @@ function checkListeners(key){
                 //CHANGE VALUE IN TOTAL COLUMN
                 var total_output = document.getElementById(key + "-repair-cost");
 
-                //                console.log(getRepairValue(key, this.value));
-
                 total_output.innerHTML = "$" + getRepairValue(key, this.value);
-            
+
                 calcTotal(false);
-            
-            console.log("Complete? " + EvalComplete());
             }
-            
+            else {
+                console.log(key);
+                var total_output = document.getElementById(key + "-repair-cost");
+                total_output.innerHTML = "$";
+                calcTotal(false);
+            }
+
         }
-                    
+
 
     }
 
@@ -114,7 +114,7 @@ function getRepairValue(key, value){
 function calcTotal(clear){
     if(!clear) {
         var total_cells = document.getElementsByClassName("repair-cost");
-//        console.log(total_cells);
+        //        console.log(total_cells);
         var sum = 0;
 
         for(var i = 0; i < total_cells.length; i++) {
@@ -152,10 +152,56 @@ function clearEval(){
 
 }
 
-function EvalComplete(){
+function evalComplete(){
     var totalCells = document.getElementsByClassName("repair-cost");
     for(var i = 0; i < totalCells.length; i++) {
         if(totalCells[i].innerHTML == "$") return false;
     }
+    
+    var propertyDetails = document.getElementsByClassName("property-details");
+    
+    for(var i = 0; i < propertyDetails.length; i++) {
+        if(propertyDetails[i].value == "") return false;
+    }
+    
     return true;
+}
+
+function printEvents(){
+    var printButton = document.getElementById("print-button");
+    var tooltipID = "print-tooltip";
+    printButton.onmouseover = function(e) {
+        if(!evalComplete()){
+            showToolTip(e, tooltipID, true);
+        }
+    }
+    printButton.onmouseout = function(e) {
+        if(!evalComplete()){
+            showToolTip(e, tooltipID, false);
+        }
+    }
+    printButton.onclick = function(e) {
+        if(evalComplete()){
+            window.print();
+        }
+        
+    }
+
+}
+function showToolTip(e, tipID, show) {
+    var tooltip = document.getElementById(tipID);
+
+    if(show){
+        var left = e.clientX + "px";
+        var scrollY = window.scrollY;
+        var top = (e.clientY + scrollY) + "px";
+
+        tooltip.style.left = left;
+        tooltip.style.top = top;
+        tooltip.style.visibility = "visible";
+    }
+    else {
+        tooltip.style.visibility = "hidden";
+
+    }
 }

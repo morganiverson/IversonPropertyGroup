@@ -191,28 +191,29 @@ input:focus{
 /*BUTTON PANE STYLES*/
 .button-pane{
     text-align: center;
-    width:80%;
-    margin: 0 10%;
+    width:100%;
+    margin: 0 ;
+    background-color:yellow;
 }
-.button-pane div button{    
+.button{    
     color: dimgrey;
 
     width:80px;
     height:40px;
+    margin-bottom: 10px;
     font-size: 10px;
 
     border: 1px solid lightgray;
     border-radius: 10px;
 }
 
-.button-pane div button:focus{
+.button:focus{
     outline: none;
 }
 .button-pane div{
-    width:33%;
+    width:50%;
     float:left;
 }
-
 
 @media screen and (max-device-width: 480px) {
 
@@ -252,10 +253,33 @@ input:focus{
         width:100%;
         text-align: center;
     }
+    
+/*    BUTTON STYLES*/
+    .button{
+/*        font-size:15px;*/
+        font-weight: bold;
+    }
+}
+
+/*PRINT BUTTON TOOLTIP*/
+#print-tooltip{
+    visibility: hidden;
+    width:auto;
+    font-size: 10px;
+    font-weight: bold;
+    background-color: rgb(169, 169, 169);
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    padding: 5px;
+    position: absolute;    
 }
 
 @media print{
     .button-pane{
         display:none;
+    }
+    @page{
+        margin:20px;
     }
 }
