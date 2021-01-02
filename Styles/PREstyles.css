@@ -215,6 +215,21 @@ input:focus{
     float:left;
 }
 
+/*PRINT BUTTON TOOLTIP*/
+#print-tooltip{
+    visibility: hidden;
+    width:auto;
+    font-size: 10px;
+    font-weight: bold;
+    background-color: rgb(169, 169, 169);
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    padding: 5px;
+    position: absolute;    
+}
+
+
 @media screen and (max-device-width: 480px) {
 
     /*    DETAIL PANE */
@@ -259,21 +274,11 @@ input:focus{
 /*        font-size:15px;*/
         font-weight: bold;
     }
+    #print-tooltip{
+        display:none;
+    }
 }
 
-/*PRINT BUTTON TOOLTIP*/
-#print-tooltip{
-    visibility: hidden;
-    width:auto;
-    font-size: 10px;
-    font-weight: bold;
-    background-color: rgb(169, 169, 169);
-    color: white;
-    text-align: center;
-    border-radius: 10px;
-    padding: 5px;
-    position: absolute;    
-}
 
 @media print{
     .button-pane{

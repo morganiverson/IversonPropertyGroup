@@ -167,18 +167,23 @@ function evalComplete(){
     return true;
 }
 
+function onMobile(){
+    return screen.width <= 480;
+}
 function printEvents(){
     var printButton = document.getElementById("print-button");
     var tooltipID = "print-tooltip";
-    printButton.onmouseover = function(e) {
-        if(!evalComplete()){
-            showToolTip(e, tooltipID, true);
+    if(onMobile()){
+        printButton.onmouseover = function(e) {
+            if(!evalComplete()){
+                showToolTip(e, tooltipID, true);
+            }
         }
-    }
-    printButton.onmouseout = function(e) {
+        printButton.onmouseout = function(e) {
         if(!evalComplete()){
             showToolTip(e, tooltipID, false);
         }
+    }
     }
     printButton.onclick = function(e) {
         if(evalComplete()){
