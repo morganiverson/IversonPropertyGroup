@@ -125,6 +125,7 @@ function hideRow(specRow) {
      if(specRow!=null) 
          specRow.setAttribute("class", "divTableRow-HIDE");
 }
+
 //RETURN ID OF AREA CHECK BOX GIVEN SPECIFIC CHECKBOX ID
 function specToArea(specID){
     return specID.substring(0, specID.indexOf("-")) + "-box";

@@ -1,0 +1,91 @@
+body{
+    font-family: sans-serif;
+    background-color: rgb(255, 255, 255, .85);
+}
+
+
+.verif-table-cont{
+    width:30%;
+    padding: 5px 0;
+    margin: 90px auto;
+
+    border: 1px solid grey;
+
+    border-radius: 10px;
+    background-color: lightgray;
+
+}
+.subheadingRow{
+    background-color: white;
+    border-top: 1.5px solid dimgrey;
+    border-bottom: 1.5px solid dimgrey;
+    text-align: center;
+    padding:5px 0;
+    font-size:15px;
+    font-weight: 300;
+    height:20px;
+
+}
+
+.area-row{
+    display: inline-block;
+    width:100%;
+}
+.area-row span{
+    width:50%;
+    float:left;
+    text-align: center;
+    padding:5px 0;
+    font-weight:200;
+}
+#exterior-areas-here, #interior-areas-here{
+    display: inline-block;
+    width:100%;
+}
+#interior-areas-here div:nth-of-type(even){
+    background-color: white;
+}
+#interior-areas-here div:nth-of-type(odd){
+    background-color: lightgray;
+}
+
+#exterior-areas-here div:nth-of-type(even){
+    background-color: white;
+}
+#exterior-areas-here div:nth-of-type(odd){
+    background-color: lightgray;
+}
+
+.button-pane-verif{
+    width: 30%;
+    margin: 0 auto;
+}
+.button-pane-verif div{
+    display: inline-block;
+    width: 50%;
+    float: left;
+
+}
+.button-pane-verif div button{
+    width:50%;
+}
+button-pane-verif div button:hover{
+}
+@media screen and (max-device-width: 480px) {
+    .verif-table-cont{
+        width:90%;
+        margin: 25px auto;
+    }
+    .button-pane-verif{
+    width: 100%;
+
+}
+    .button-pane-verif div {
+        width:100%;
+        
+    }
+    .button-pane-verif div button{
+        width:200px;
+        margin:10px auto;
+    }
+}

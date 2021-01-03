@@ -2,11 +2,15 @@
 <!--POPUP PROMPTING DETAILS FOR CHECKLIST -> CREATES ARRAY OF REPAIR OBJECTS AND FILLS CHECKLIST-->
 <html>
     <head>
-        <script src = "../Scripts/loadScriptsGEN.js"></script>
-        <link rel = "stylesheet" type = "text/css" href = "/Styles/GENstyles.css">
+        <script src = "Scripts/loadScriptsGEN.js"></script>
+        <link rel = "stylesheet" type = "text/css" href = "Styles/GENstyles.css">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     </head>
 
     <body>
+                <iframe src = "VerificationPopUp.html"  allowtransparency="true" ></iframe>
+
         <div class = "bkgd">
             <div class = "table-cont">
 
@@ -20,7 +24,6 @@
                             <div class = "divTableHeadCell">
                                 <input type = "checkbox" id = "all-ext-box">
                             </div>
-
                         </div>
 
 
@@ -151,6 +154,6 @@
 
             <div class = "button-cont">
                 <!--            getRepairArray();-->
-                <button onclick = "getRepairArray();">Submit</button></div>
+                <button id = "submit-but">Submit<span id = "submit-tooltip">Please Add a Repair or Select Default</span></button></div>
         </div>
     </body></html>

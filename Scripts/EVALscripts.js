@@ -1,6 +1,13 @@
-const default_html_string = "<!-- ELEMENTS--> <div class = 'divTableRow'> <div class = 'divTableCell'>Repair_Here <div class= 'notes-text-box' id = 'desc-NOTES'><textarea class = 'notes-text-input'>Notes</textarea></div> </div> <!-- INPUTS--> <div class = 'divTableCell-DEG'> <input type = 'checkbox' name = 'desc-repair-deg' value = 'none'> </div> <div class = 'divTableCell-DEG'> <input class = 'partial-input' type = 'tel' pattern = '\d' name = 'desc-repair-deg'> </div> <div class = 'divTableCell-DEG'> <input type = 'checkbox' name = 'desc-repair-deg' value = 'full'> </div> <div class = 'divTableCell-DEG'> <span class = 'repair-cost' id = 'desc-repair-cost'>$</span> </div> </div>"
+const default_html_string = "<!-- ELEMENTS--> <div class = 'divTableRow'> <div class = 'divTableCell'>Repair_Here <div class= 'notes-text-box' id = 'desc-NOTES'><textarea class = 'notes-text-input' placeholder = 'Notes'></textarea></div> </div> <!-- INPUTS--> <div class = 'divTableCell-DEG'> <input type = 'checkbox' name = 'desc-repair-deg' value = 'none'> </div> <div class = 'divTableCell-DEG'> <input class = 'partial-input' type = 'tel' pattern = '\d' name = 'desc-repair-deg'> </div> <div class = 'divTableCell-DEG'> <input type = 'checkbox' name = 'desc-repair-deg' value = 'full'> </div> <div class = 'divTableCell-DEG'> <span class = 'repair-cost' id = 'desc-repair-cost'>$</span> </div> </div>";
+
+const child_html_string = "<!-- ELEMENTS--> <div class = 'divTableRow'> <div class = 'divTableCell'>Repair_Here <div class= 'notes-text-box' id = 'desc-NOTES'><textarea class = 'notes-text-input' placeholder = 'Notes'></textarea></div> </div> <!-- INPUTS--> <div class = 'divTableCell-DEG'> <input class = 'desc-child-input' type = 'checkbox' name = 'desc-repair-deg' value = 'none'> </div> <div class = 'divTableCell-DEG'> <input class = 'desc-child-input partial-input' type = 'tel' pattern = '\d' name = 'desc-repair-deg'> </div> <div class = 'divTableCell-DEG'> <input class = 'desc-child-input' type = 'checkbox' name = 'desc-repair-deg' value = 'full'> </div> <div class = 'divTableCell-DEG'> <span class = 'repair-cost' id = 'desc-repair-cost'>$</span> </div> </div>";
+
 var header_row_string = "<div class = 'divTableHeadingRow'> <div class = 'divTableHeadCell-DSC'>Repair</div> <div class = 'divTableHeadCell-DEG'>None</div> <div class = 'divTableHeadCell-DEG'>Partial</div> <div class = 'divTableHeadCell-DEG'>Full</div> <div class = 'divTableHeadCell-DEG'>Total</div> </div>";
 
+
+function removeEncoding() {
+    window.location.href = window.location.href.substring(0, window.location.href.indexOf("?"));
+}
 var keys = [];
 
 //ARRAY FO DEFAULT REPAIRS
@@ -32,20 +39,47 @@ function loadDefaultEval(){
     });
 }
 
+function loadEval(array) {
+    clearEval();
+    var parent;
+    for(var i = 0; i < array.length; i++) {
+        var key = array[i].key;
+        var repair = array[i].repair;
+        var cost = array[i].cost;
+
+        if(key.indexOf(parent) >= 0) {
+            addRepair(key, repair, cost, parent);
+        }
+        else {
+            parent = key;
+            addRepair(key, repair, cost, null);
+        }
+    }
+
+    //ADD CHECK LISTSNERS
+//    console.log(keys);
+    keys.forEach(function(item, index) {
+        checkListeners(item.Repair.key);
+    });
+    
+}
+
 //ADD LISTNERS FOR CHECK BOXES
 function checkListeners(key){
-    //    console.log(key);
+    //        console.log(key);
     var inputs = document.getElementsByName(key + "-repair-deg");
     //    console.log(inputs);
 
     for(var j = 0; j < inputs.length; j++) {
-        console.log(inputs[j]);
+        //        console.log(inputs[j]);
         var input = inputs[j];
 
         input.onchange = function(e) {
             //            console.log(this.value);
             console.log(this.type);
+            //HORIZANTAL
             if((this.type == "checkbox" && this.checked) || (this.type == "tel" && this.value != null)) { //OIF THIS INPUT IS CHECKED OR HAS A VALUE
+                console.log(key + " " + this.value);
                 //REMOVE NON INTEGER NUMBERS
                 if(this.type == "tel") {
                     this.value = this.value.replace(/\D/g,'');
@@ -53,7 +87,8 @@ function checkListeners(key){
                 //UNCHECK OR EMPTY OTHER INPUTS
                 for(var k = 0; k < inputs.length; k++) {
                     if(inputs[k].value != this.value){
-                        if(inputs[k].type == "checkbox")    inputs[k].checked = false;
+                        if(inputs[k].type == "checkbox")    
+                            inputs[k].checked = false;
                         else inputs[k].value = null;
                     }
                 }
@@ -72,34 +107,76 @@ function checkListeners(key){
                 calcTotal(false);
             }
 
+            //VERTICAL - CHILD
+
+            if(this.className == null || this.className.indexOf("-child-input") < 0) {
+                var child_class_name = this.name.substring(0, this.name.indexOf("-")) + "-child-input";
+                var child_inputs = document.getElementsByClassName(child_class_name);
+                //                console.log(this);
+                if(this.checked){
+                    //                    console.log("checked");
+
+                    Array.prototype.forEach.call(child_inputs, function(item, index) {
+
+                        item.checked = (item.type == "checkbox" && item.checked)? false:false;
+                        item.value = (item.type == "tel" && item.value != null) ? null:null;
+                        item.disabled = true;
+
+                        var total_output = document.getElementById(item.name.replaceAll("deg", "cost"));
+                        //                        console.log(total_output);
+                        total_output.innerHTML = "$";
+                    });
+                }
+                else {
+                    var checkbox_count = 0;
+                    Array.prototype.forEach.call(child_inputs, function(item, index) {
+                        //RESTORE CHECKBOX VALUE
+                        if(item.type == "checkbox") {
+                            item.value = (checkbox_count % 2 == 0)? "none": "full";
+                            checkbox_count++;
+                        }
+                        item.disabled = false;
+                    });
+                }
+            }
         }
 
+    }}
 
-    }
-
-}
 
 //REPLACE PLACEHOLDERS WITH ACTUAL REPAIR KEY
-function replaceAll(key, repair){
-    var newString = default_html_string.replaceAll("desc-", key + "-");
+function replaceAllHTML(key, repair, html_string, parent_key){
+    var newString = html_string;
+    if(parent_key != null) {
+        newString = html_string.replaceAll("desc-child-input", parent_key + "-child-input");
+    }
+    newString = newString.replaceAll("desc-", key + "-");
     newString = newString.replaceAll("Repair_Here", repair);
+
     return newString;
 }
 
 //ADD REPAIR TO CHECKLIST
-function addRepair(key, repair, full_cost){
+function addRepair(key, repair, full_cost, parent_key){
     var obj = {"key": key, "repair": repair, "cost": full_cost};
-    keys.push(obj); //ADD TO KEY ARRAY
-    document.getElementById("add-repair-here").innerHTML+=replaceAll(key, repair); //ADD ROW TO CHECK LIST TABLE
-    //    checkListeners(key);//ADD LISTENERS FOR CHECK BOXES
-    //    console.log(keys);
+    keys.push(new Key(obj, parent_key)); //ADD TO KEY ARRAY
+
+    if(parent_key != null) {
+        document.getElementById("add-repair-here").innerHTML+=replaceAllHTML(key, repair, child_html_string, parent_key); //ADD ROW TO CHECK LIST TABLE
+    }
+    else {
+        document.getElementById("add-repair-here").innerHTML+=replaceAllHTML(key, repair, default_html_string, null); //ADD ROW TO CHECK LIST TABLE
+        //    checkListeners(key);//ADD LISTENERS FOR CHECK BOXES
+        //    console.log(keys);
+    }
 }
+
 //HOW TO ADD ALL REPAIRS - dictionary key:desc
 
 //RETURN COST OF FULL REPAIR
 function getFullValue(key){
-    //    console.log(key);
-    var repair = keys.find(r => r.key === key);
+    //        console.log(key);
+    var repair = keys.find(r => r.Repair.key === key).Repair;
     return repair.cost;
 }
 
@@ -138,20 +215,27 @@ function calcTotal(clear){
     }
 }
 
-//REMOVE ALL REPAIRS FROM
+//CLEAR ALL REPAIRS FROM EVAL 
 function baseEval(){
+    
     calcTotal(true);
     document.getElementById("add-repair-here").innerHTML = header_row_string;
     addRepair("", "Repair", 0);
+    
+//    console.log(document.getElementById("add-repair-here").childElementCount);
+
     //MAKE TOTAL 0
+    //CLEAR URL
+    
 }
 
+//CLEAR ALL ENTRIES IN EVAL
 function clearEval(){
     calcTotal(true);
     document.getElementById("add-repair-here").innerHTML = header_row_string;
 
 }
-
+//TELL IF EVALUATION IS COMPLETE
 function evalComplete(){
     var totalCells = document.getElementsByClassName("repair-cost");
     for(var i = 0; i < totalCells.length; i++) {
@@ -167,9 +251,11 @@ function evalComplete(){
     return true;
 }
 
+//TELL IF WEBPAGE IS IPEN IN MOBILE DEVICE
 function onMobile(){
     return screen.width <= 480;
 }
+
 function printEvents(){
     var printButton = document.getElementById("print-button");
     var tooltipID = "print-tooltip";
@@ -187,7 +273,7 @@ function printEvents(){
         }
     }
 
-    
+
     printButton.onclick = function(e) {
         console.log("click");
         if(evalComplete()){
@@ -240,3 +326,29 @@ function showToolTip(e, tipID, show) {
 //    
 //    
 //}
+
+function checkDetailedEval() {
+    console.log(encodedEval());
+    if(encodedEval()) {
+        var encodedEvalURL = window.location.href.substring(window.location.href.indexOf("?DetailedEvaluation?") + "?DetailedEvaluation?".length);
+        //        console.log(encodedEvalURL);
+        //        console.log(decodeArray(encodedEvalURL));
+        //        
+        loadEval(decodeArray(encodedEvalURL));
+    }
+}
+//TELL IF EVALUTAION IS ENCODED IN URL
+function encodedEval(){
+    return window.location.href.indexOf("?DetailedEvaluation?") >= 0;
+}
+
+//DECODE DATA IN URL
+function decodeArray(URL) {
+    return JSON.parse(atob(URL));
+}
+
+//KEY OBJECT TO TRACK REAPIR AND PARENTAGE
+function Key(Repair, parent_key) {
+    this.Repair = Repair;
+    this.parent_key = parent_key;
+}

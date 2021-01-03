@@ -1,6 +1,32 @@
 var paintRoomRepair = new SpecificRepair("paint", "Paint", 500);
 var flooringRepair = new SpecificRepair("floor", "Flooring", 500);
+var verificationIframe = document.getElementsByTagName("iframe")[0];
 
+//VERIFY SELECTED REPAIRS
+function showVerificationPopup(){
+    if(getRepairArray().length > 0) {
+        sessionStorage.setItem("allAreaRepairs", JSON.stringify(getRepairArray())); //SEND ARRAY TO IFRAME
+        console.log(sessionStorage);
+
+        verificationIframe.contentWindow.postMessage("load"); //SEND MESSAGE TO IFRAME 
+
+        verificationIframe.style.display = "block"; //SHOW IFRAME
+        document.body.overflow = "hidden"; //LOCK SCROLLING
+
+        document.getElementById("submit-but").disabled = true; //DISABLE BUTTONS
+    }
+
+}
+function hideVerificationPopup(){
+    sessionStorage.setItem("allAreaRepairs", "");
+
+    document.getElementsByTagName("iframe")[0].style.display = "none";
+    document.getElementById("submit-but").disabled = false;
+    document.body.overflow = "scroll";
+
+}
+
+//RETURN ARRAY OF ALL SELECTED REPAIRS
 function getRepairArray() {
     var allAreaRepairs = [];
     //GET ALL CHECKBOXES FOR AREA
@@ -49,18 +75,19 @@ function getRepairArray() {
 
     });
     allAreaRepairs.push.apply(allAreaRepairs, getOtherAreas());
-    console.log(allAreaRepairs);
-}
 
+    return allAreaRepairs;
+}
+//GET ARRAY OF ENTRIES IN OTHER TEXT AREA
 function getOtherAreas() {
     var otherRepairs= [];
-    
+
     var otherBox = document.getElementById("other-box");
     var otherInput = document.getElementById("other-input");
 
     if(otherBox.checked && otherInput.value != ""){
         var otherAreas = otherInput.value.split("\n");
-        
+
         //CREATE REPAIR FOR EACH LISTED AREA
         otherAreas.forEach(function(item, index){
             var itemList = item.split(",");
@@ -68,9 +95,9 @@ function getOtherAreas() {
             //GET DECRIPTION AND COST FROM LIST
             var repairDesc = cap(itemList[0]);
             var repairKey = createKey(repairDesc);
-            
+
             var repairCost = parseFloat(strip(itemList[1]));
-            
+
             otherRepairs.push(new Repair(repairKey, repairDesc, repairCost));
         });
     }
@@ -187,10 +214,36 @@ function createKey(area) {
     return areaKey;
 }
 
-function letterOnly(str) {
-    return str.match(/^[A-Za-z]+$/);
-}
-
+//REMOVE SPACES
 function strip(str) {
     return str.replace(/\s/g, '');
+}
+
+function tooltipEvents(){
+    var button = document.getElementById("submit-but");
+    var tooltipID = "submit-tooltip";
+
+    if(!onMobile()){
+        button.onmouseover = function(e) {
+            if(getRepairArray().length <= 0){
+                showToolTip(e, tooltipID, true);
+            }
+        }
+        button.onmouseout = function(e) {
+            if(getRepairArray().length <= 0){
+                showToolTip(e, tooltipID, false);
+            }
+        }
+    }
+
+
+    button.onclick = function(e) {
+        console.log("click");
+        if(getRepairArray().length > 0){
+            showVerificationPopup();
+        }
+        else {
+            showToolTip(e, tooltipID, true);
+        }
+    }
 }

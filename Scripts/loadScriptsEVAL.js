@@ -3,9 +3,12 @@ window.onload = function(){
 }
 
 var scripts = [new Script("Scripts/Repair.js", null), 
-               new Script("Scripts/PREscripts.js", function() {
+               new Script("Scripts/EVALscripts.js", function() {
                    baseEval();
                    printEvents();
+                   checkDetailedEval();
+                   document.body.onload = function() {
+                   console.log(" count: " + document.getElementById('add_repair_here').childElementCount);}
                })];
 //ADD ALL SCRIPTS FROM ARRAY
 function addScripts() {
