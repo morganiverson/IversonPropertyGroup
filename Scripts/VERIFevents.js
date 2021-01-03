@@ -17,6 +17,10 @@ window.onmessage = function(e) {
     }
 }
 
+function clearTable() {
+    document.getElementById("exterior-areas-here").innerHTML = "";
+    document.getElementById("interior-areas-here").innerHTML = "";
+}
 function createRow(repairObject) {
     var rowString = area_row_html.replace("[description-here]", repairObject.repair);
     rowString = rowString.replace("[cost-here]", repairObject.cost);
@@ -43,6 +47,7 @@ function fillTable(repairArray){
 //CONTACT PARENT TO HIDE IFRAME
 function hideVerification(){
     console.log(parent);
+     clearTable();
     parent.postMessage("hide");
 }
 

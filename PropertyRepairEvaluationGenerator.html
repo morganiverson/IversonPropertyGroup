@@ -4,12 +4,12 @@
     <head>
         <script src = "Scripts/loadScriptsGEN.js"></script>
         <link rel = "stylesheet" type = "text/css" href = "Styles/GENstyles.css">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     </head>
 
     <body>
-                <iframe src = "VerificationPopUp.html"  allowtransparency="true" ></iframe>
+        <iframe src = "VerificationPopUp.html"  allowtransparency="true" ></iframe>
 
         <div class = "bkgd">
             <div class = "table-cont">
@@ -31,7 +31,7 @@
                         <div class="divTableRow">
                             <div class="divTableCell-LEFT">Front Yard</div>
                             <div class="divTableCell-RIGHT">
-                                <input type = "checkbox" class = "repair-area exterior-area" id = "frontyard-box">
+                                <input type = "checkbox" class = "repair-area exterior-area" id = "frontYard-box">
                             </div>
                         </div>
 
@@ -40,6 +40,14 @@
                             <div class="divTableCell-LEFT">Backyard</div>
                             <div class="divTableCell-RIGHT ">
                                 <input type = "checkbox" class = "repair-area exterior-area" id = "backyard-box">
+                            </div>
+                        </div>
+                        
+                        <!-- EXTERIOR PAINT CHECK-->
+                        <div class="divTableRow">
+                            <div class="divTableCell-LEFT">Exterior Paint</div>
+                            <div class="divTableCell-RIGHT ">
+                                <input type = "checkbox" class = "repair-area exterior-area" id = "exteriorPaint-box">
                             </div>
                         </div>
 
@@ -96,6 +104,22 @@
                             </div>
                         </div>
 
+                        <!--GENERAL ROOM COUNT-->
+                        <div class="divTableRow">
+                            <div class="divTableCell-LEFT">Room(s)</div>
+                            <div class="divTableCell-RIGHT">
+                                <input type = "number" class = "repair-area interior-area count-input" min = 0 max = 9 id = "room-box" value = 0 >
+                            </div>
+                        </div>
+
+
+                        <!-- ROOM SPECIFICS CHECK-->
+                        <div class="divTableRow-HIDE" id = "room-spec-row">
+                            <div class="divTableCell-LEFT">Room Specifics</div>
+                            <div class="divTableCell-RIGHT">
+                                <input type = "checkbox" class = "repair-area interior-spec" id = "room-spec-box" >
+                            </div>
+                        </div>
 
                         <!-- BASEMENT AREA CHECK -->
                         <div class="divTableRow">

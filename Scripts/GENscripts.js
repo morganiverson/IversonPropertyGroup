@@ -1,5 +1,5 @@
-var paintRoomRepair = new SpecificRepair("paint", "Paint", 500);
-var flooringRepair = new SpecificRepair("floor", "Flooring", 500);
+var paintRoomRepair = new SpecificRepair("paint", "Paint", 1000);
+var flooringRepair = new SpecificRepair("floor", "Flooring", 5000);
 var verificationIframe = document.getElementsByTagName("iframe")[0];
 
 //VERIFY SELECTED REPAIRS
@@ -18,8 +18,10 @@ function showVerificationPopup(){
 
 }
 function hideVerificationPopup(){
+    
     sessionStorage.setItem("allAreaRepairs", "");
-
+    console.log(sessionStorage);
+    
     document.getElementsByTagName("iframe")[0].style.display = "none";
     document.getElementById("submit-but").disabled = false;
     document.body.overflow = "scroll";
@@ -45,7 +47,6 @@ function getRepairArray() {
                 //ADD LATER 
                 repairObj = getRepair(itemKey);
                 allAreaRepairs.push(repairObj);
-
 
                 //ADD SPECIFIC REPAIRS
                 var spec = document.getElementById(areaToSpec(item.id));
@@ -108,13 +109,18 @@ function getOtherAreas() {
 function getRepair(key){
     var repairCost;
     var repair = cap(key);
+//    console.log(repair);
     var repairKey = (key.length < 5) ? key : key.substring(0, 4);
 
     //set repair cost
     switch (key) {
-        case "frontyard", "backyard": repairCost = 5000; break;
-        case "kitchen": repairCost = 10000; break;
-        default: repairCost = 1000;
+        case "frontyard":
+        case "backyard": repairCost = 5000; break;
+        case "kitchen": repairCost = 11000; break;
+        case "bathroom": repairCost = 4000; break;
+        case "attic": repairCost = 3500; break;
+        case "exteriorpaint": repairCost = 5000; break;
+        default: repairCost = 6000;
     }
 
     return new Repair(repairKey, repair, repairCost);
@@ -127,9 +133,14 @@ function getSpecificRepairs(key, repair){
     var specifics;
 
     switch(key) {
-        case "kitc": specifics = [paintRoomRepair, flooringRepair, 
-                                  new SpecificRepair("cab", "Cabinets", 500), 
-                                  new SpecificRepair("app", "Appliances", 1000)]; break;
+        case "kitc": specifics = [new SpecificRepair("cab", "Cabinets", 5000), 
+                                  new SpecificRepair("app", "Appliances", 2000), 
+                                 paintRoomRepair, flooringRepair]; break;
+        case "bath": specifics = [new Repair("fixt", "Fixtures", 2000),
+                                  new Repair("floor", "Flooring (Tile)", 1000),
+                                  paintRoomRepair]; break;
+        case "atti": specifics = [new Repair("floor", "Flooring", 2500),
+                                   paintRoomRepair]; break;
         default: specifics = [paintRoomRepair, flooringRepair];
     }
 
@@ -189,14 +200,19 @@ function SpecificRepair(key, repair, cost) {
 
 //HELPERS
 //CAPIOTALIZE STRING
-function cap(str) {
-    var ret = str.replace(/(^\w|\s\w)(\S*)/g, (_,m1,m2) => m1.toUpperCase()+m2.toLowerCase());
-    // "^\w" - first char in string
-    // "|" - or 
-    // "\s\w" - first char after space
-    // g - global all occurrences
-    return ret;
-}
+//function cap(str) {
+//    console.log("Before:" + str);
+//    var ret = str.replace(/(^\w|\s\w)(\S*)/g, (_,m1, m2) => m1.toUpperCase() + m2);
+//    
+//    
+//        
+//    // "^\w" - first char in string
+//    // "|" - or 
+//    // "\s\w" - first char after space
+//    // g - global all occurrences
+//    console.log("After:" + ret);
+//    return ret;
+//}
 
 //CREATE KEY FROM STRING
 function createKey(area) {
@@ -246,4 +262,20 @@ function tooltipEvents(){
             showToolTip(e, tooltipID, true);
         }
     }
+}
+
+function cap(str) {
+    var ret = "";
+    str.split("").forEach(function(item, index) {
+        if(index == 0) {
+            ret += item.toUpperCase();
+        }
+        else if(item == item.toUpperCase()){
+            ret += " " + item;
+        }
+        else {
+            ret += item;
+        }
+    });
+    return ret;
 }
