@@ -1,0 +1,225 @@
+<html>
+    <head>
+        <script src = "DETscripts.js"></script>
+        <style>
+            body{
+
+            }
+            .button-cont{
+                text-align: center;
+
+            }
+            .button-cont button{
+                width:100px;
+                height:30px;
+                background-color: whitesmoke;
+                border:2px solid dimgrey;
+                border-radius: 10px;
+                margin:10px auto;
+                color:dimgrey;
+                font-size: 12px;
+                font-family: sans-serif;
+                font-weight: 200;
+            }
+            .link{
+                font-size: 10px;
+                text-align: center;
+                margin-top: 15px;
+                margin-bottom: 0;
+                margin-left: auto;
+                font-weight: normal;
+            }
+            a{
+                font:inherit;
+                color:inherit;
+                font-weight: inherit;
+                text-decoration: none;
+                
+            }
+            a:hover{
+                font-weight: bolder;
+            }
+            .title{
+                font-size: 20px;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+            .detail-pane{
+                width: 90%;;
+                margin: 0 auto;
+                padding:10px;
+                box-sizing: border-box;
+
+                overflow:auto;
+                border: 1px solid lightgray;
+                border-radius: 10px;
+
+                background-color:lightgrey;
+
+                font-family: sans-serif;
+                font-weight: 200;
+
+                font-size: 15px;
+            }
+            .view-details{
+                width:80%;
+                margin:0 10%;
+                border: none;
+                float:left;
+            }
+            .detail-input-line{
+                display:block;
+                padding:5px 10%;
+            }
+            .detail-input-line input{
+                width: 70%;
+                margin-left:5px;
+
+                font-size:12px;
+                font-family: sans-serif;
+                font-weight: 200;
+                padding-left: 10px;
+
+                background-color: transparent;
+                border:none;
+                border-bottom: 1px solid dimgrey;
+                color: black;
+            }
+            .spacer{
+                margin:20px auto;
+                display:block;
+                border-top: 1px solid black;
+            }
+            .call-spacer{
+                margin:20px auto;
+                display:block;
+                border-top: .5px solid grey;
+            }
+            .subtitle{
+                margin: 10px auto;
+                text-align: center;
+            }
+            textarea{
+                width:70%;
+                resize:none;
+                vertical-align: middle;
+            }
+
+            @media screen and (max-device-width: 480px) {
+
+                /*    DETAIL PANE */
+                .detail-pane{
+                    width:90%;
+                    margin:auto;
+                    padding:5% auto;
+                }
+                .detail-pane input{
+                    width:60%;
+                }
+                .detail-input-line{
+                    padding-left:0;
+                }
+            }
+        </style>
+    </head>
+
+
+    <body>
+        <div class = "detail-pane">
+            <div class = "title">Property Details: <span id = "property-title">[Street Address Here]</span></div>
+            
+            <div class = "button-cont"> <button onclick = "encode();">Save</button></div>
+            
+            <div class = "subtitle"><a id = "encoded-edit-link" href = "#">Edit (link from pdf)</a></div>
+            <div class = "view-details">
+                <div class = "detail-input-line">Investor: <input class = "property-details" type= "text" id = "viewer" placeholder = "Your Name(s)">
+                </div>
+
+                <span class = "call-spacer"></span>
+
+                <div class = "detail-input-line">Address: <input class = "detail"  type= "text" ></div>
+                <div class = "detail-input-line">City: <input class = "detail" type= "text" ></div>
+                <div class = "detail-input-line">County: <input class = "detail" type= "text" ></div>
+                <div class = "detail-input-line">State: <input class = "detail" type= "text" ></div>
+                <div class = "detail-input-line">Zip Code: <input class = "detail" type= "text" ></div>
+
+                <span class = "spacer"></span>
+                <div class = "subtitle">Owner Information</div>
+
+                <div class = "link"><a href = "#">Get Owner Name</a> </div>
+
+                <div class = "detail-input-line">Name: <input class = "detail" type= "text" placeholder = "Phone/Email/etc."></div>
+
+                <div class = "link"><a href = "#">Get Owner Contact</a> </div>
+
+                <div class = "detail-input-line">Phone: <input class = "detail" type= "text" placeholder = "Phone/Email/etc."> <span><button class = "add" onclick = "addPhoneEntry();">+</button></span>
+                </div>
+                <span class = "spacer"></span>
+
+                <div class = "subtitle">Property Evaluation</div>
+
+                <div class = "detail-input-line">Description: <textarea class = "detail"></textarea></div>
+
+
+
+                <div class = "detail-input-line">Repair Cost: <input class = "detail" type= "text"  ></div>
+                <div class = "detail-input-line">Repair Eval Link: <input class = "detail" type= "text" ><span><button = "#">Go</button></span></div>
+
+                <span class = "spacer"></span>
+
+                <div class = "subtitle">Redfin Details</div>
+                <div class = "link"><a href = "#">redfin.com</a> </div>
+
+
+                <div class = "detail-input-line">Bed: <input cclass = "detail"  type= "tel"></div>
+                <div class = "detail-input-line">Bath: <input class = "detail"  type= "tel" ></div>
+                <div class = "detail-input-line">Square Feet: <input class = "detail"  type= "tel" ></div>
+                <div class = "detail-input-line">Year Built: <input class = "detail"  type= "tel" ></div>
+
+                <span class = "call-spacer"></span>
+
+
+                <div class = "detail-input-line">List Price: <input class = "detail" type= "tel" value = ""></div>
+                <div class = "detail-input-line">Redfin Estimate: <input class = "detail" type= "tel" ></div>
+
+                <span class = "call-spacer"></span>
+
+                <div class = "detail-input-line">Comp Address: <input class = "detail"  type= "text"></div>
+                <div class = "detail-input-line">Comp Link: <input class = "detail" type= "text" ></div>
+                <div class = "detail-input-line">Comp Sale Price: <input class = "detail"  type= "text" ></div>
+
+                <br>
+
+                <div class = "button-cont"> <button onclick = "addComp();">Add Comp</button></div>
+
+
+
+                <span class = "spacer"></span>
+
+
+                <div class = "subtitle">Calls</div>
+                <div id = "add-calls-here">
+
+                    <div class = "call">
+                        <div class = "detail-input-line">Date*: <input id = "call-date" type= "date" value = "2020-01-05"></div>
+
+                        <div class = "detail-input-line">Notes: <textarea id = "call-notes"></textarea></div>
+                        
+                        <div class = "detail-input-line">Offer: <input id = "call-offer"  type= "tel" ></div>
+
+                        <span class = "call-spacer"></span>
+                    </div>
+                </div>
+                <div class = "button-cont"> <button onclick = "addCall();">Add Call</button></div>
+                <span class = "spacer"></span>
+
+
+            </div>
+
+
+
+
+        </div>
+
+    </body>
+</html>
