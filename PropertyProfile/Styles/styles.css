@@ -1,0 +1,207 @@
+body{
+
+}
+.button-cont{
+    text-align: center;
+
+}
+.button-cont button{
+    width:100px;
+    height:auto;
+    background-color: whitesmoke;
+    border:2px solid dimgrey;
+    border-radius: 10px;
+    margin:10px auto;
+    color:dimgrey;
+    font-size: 12px;
+    font-family: sans-serif;
+    font-weight: 200;
+    padding: 5px;
+}
+.link{
+    font-size: 10px;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 0;
+    margin-left: auto;
+    font-weight: normal;
+}
+a{
+    font:inherit;
+    color:inherit;
+    font-weight: inherit;
+    text-decoration: none;
+
+}
+a:hover{
+    font-weight: bolder;
+}
+.title{
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.detail-pane{
+    width: 60%;;
+    margin: 0 auto;
+    padding:10px;
+    box-sizing: border-box;
+
+    overflow:auto;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+
+    background-color:lightgrey;
+
+    font-family: sans-serif;
+    font-weight: 200;
+
+    font-size: 15px;
+}
+.view-details{
+    width:80%;
+    margin:0 10%;
+    border: none;
+    float:left;
+}
+.detail-input-line{
+    display:block;
+    padding:5px 10%;
+}
+.detail-input-line input{
+    width: 70%;
+    margin-left:5px;
+
+    font-size:12px;
+    font-family: sans-serif;
+    font-weight: 200;
+    padding-left: 10px;
+
+    background-color: transparent;
+    border:none;
+    border-bottom: 1px solid dimgrey;
+    color: black;
+}
+.detail-input-line input:focus{
+    border-bottom: 2px solid black;
+}
+
+.detail-input-line select{
+    width:auto;
+    margin-left:5px;
+
+    font-size:12px;
+    font-family: sans-serif;
+    font-weight: 200;
+    padding-left: 10px;
+
+    background-color: transparent;
+    border:none;
+    border-bottom: 1px solid dimgrey;
+    color: black;
+}
+.spacer{
+    margin:20px auto;
+    display:block;
+    border-top: 1px solid black;
+}
+.call-spacer{
+    margin:20px auto;
+    display:block;
+    border-top: .5px solid grey;
+}
+.subtitle{
+    margin: 10px auto;
+    text-align: center;
+}
+textarea{
+    width:70%;
+    resize:none;
+    vertical-align: top;
+}
+
+.small-button-cont{
+    text-align: center;
+
+}
+.small-button-cont button{
+    width:70px;
+    height:auto;
+    background-color: whitesmoke;
+    border:2px solid dimgrey;
+    border-radius: 10px;
+    margin:10px auto;
+    padding:8px;
+    color:dimgrey;
+    font-size: 10px;
+    font-family: sans-serif;
+    font-weight: 200;
+    vertical-align: middle;
+}
+.remove-contact-button{
+    width:25;
+    height:25;
+    background-color: whitesmoke;
+    border:2px solid dimgrey;
+    border-radius: 50%;
+    margin:10px auto;
+    padding:5px;
+    color:dimgrey;
+    font-size: 10px;
+    font-family: sans-serif;
+    font-weight: 200;
+    vertical-align: middle;
+}
+.go-button{
+    width:30px;
+    height:30px;
+    background-color: whitesmoke;
+    border:2px solid dimgrey;
+    border-radius: 50%;
+    margin:10px 10px;
+    padding:0;
+    color:dimgrey;
+    font-size: 10px;
+    font-family: sans-serif;
+    font-weight: 200;
+    vertical-align: middle;
+}
+input:focus{
+    
+}
+button:focus, textarea:focus, input:focus, select:focus{
+    outline: none;
+}
+button:hover{
+    font-weight: bold;
+}
+@media screen and (max-device-width: 480px) {
+
+    /*    DETAIL PANE */
+    .detail-pane{
+        width:90%;
+        margin:auto;
+        padding:5% auto;
+    }
+    .detail-pane input{
+        width:60%;
+    }
+    .detail-input-line{
+        padding-left:0;
+    }
+}
+
+@media print{
+    @page{
+        margin:.5in;
+    }
+    body{
+        padding:.5in;
+            }
+    .detail-pane{
+        width: 100%;
+    }
+    .help-links{
+        display: none;
+    }
+}

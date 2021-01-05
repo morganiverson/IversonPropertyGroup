@@ -6,8 +6,6 @@ function calcMAO(DP, ARV, RC){
     return {IP, MAO};
 }
 
-
-
 function fillTable(){
     var step = document.getElementById("step").value;
     

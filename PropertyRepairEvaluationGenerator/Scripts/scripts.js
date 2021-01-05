@@ -1,3 +1,4 @@
+//*********************************************************GENERATOR SCRIPTS*******************************************************************************
 var paintRoomRepair = new SpecificRepair("paint", "Paint", 1000);
 var flooringRepair = new SpecificRepair("floor", "Flooring", 5000);
 var verificationIframe = document.getElementsByTagName("iframe")[0];

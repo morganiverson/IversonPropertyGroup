@@ -4,6 +4,13 @@ function Repair(key, repair, cost){
     this.repair = repair;
     this.cost = cost;
 }
+//SCRIPT OBJECT
+function Script(URL, onload){
+    this.URL = URL;
+    this.onload = onload;
+}
+
+
 function showToolTip(e, tipID, show) {
     var tooltip = document.getElementById(tipID);
 

@@ -2,8 +2,10 @@ window.onload = function(){
     addScripts();
 }
 
-var scripts = [new Script("Scripts/Repair.js", null), 
-               new Script("Scripts/EVALscripts.js", function() {
+var scripts = [new Script("../CommonScripts/Repair.js", null),
+               new Script("Scripts/generate.js", null),
+               new Script("Scripts/events.js", null),
+               new Script("Scripts/scripts.js", function() {
                    baseEval();
                    printEvents();
                    checkDetailedEval();

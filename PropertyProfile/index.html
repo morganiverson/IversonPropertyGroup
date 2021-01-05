@@ -1,0 +1,133 @@
+<html>
+    <head>
+        <script src = "Scripts/loadScripts.js"></script>
+        <link rel ="stylesheet" type = "text/css" href = "Styles/styles.css">
+    </head>
+
+
+    <body>
+        <div class = "detail-pane">
+            <div class = "title">Property Details: <span id = "property-title"></span></div>
+
+            <div class = "button-cont"> <button id = "save-button">Save</button></div>
+
+            <div class = "subtitle"><a id = "encoded-edit-link" href = "#">Edit (link from pdf)</a></div>
+
+            <div class = "view-details">
+                <span class = "spacer"></span>
+                <!--INVESTOR NAME-->
+                <div class = "detail-input-line">Investor: <input class = "detail" type= "text" id = "investor" placeholder = "Your Name(s)" value = "Morgan">
+                </div>
+                <!--PROPERTY STATE-->
+                <div class = "detail-input-line">State:<select id = "progress" class = "detail">
+                    <option value = "PRECONTACT">Pre-Contact</option>
+                    <option value = "PASS">Pass</option>
+                    <option value = "TALK">Talking</option>
+                    <option value = "NEGOTIATING">Negotiating</option>
+                    <option value = "SOLD">Sold</option>
+                    </select></div>
+                
+                <span class = "call-spacer"></span>
+                
+                <!--ADDRESS DETAILS-->
+                <div>
+                    <div class = "detail-input-line">Address: <input class = "detail"  type= "text" id = "address" value = "120 Main St"></div>
+                    <div class = "detail-input-line">City: <input class = "detail" type= "text" id = "city"></div>
+                    <div class = "detail-input-line">County: <input class = "detail" type= "text" id = "county"></div>
+                    <div class = "detail-input-line">State: <input class = "detail" type= "text" id = "state"></div>
+                    <div class = "detail-input-line">Zip Code: <input class = "detail" type= "tel" id = "zip"></div>
+                </div>
+                <span class = "spacer"></span>
+                
+                <!--                ONWER DETAILS-->
+                <div>
+                    <div class = "subtitle">Owner Information</div>
+
+                    <div class = "link"><a href = "https://www.truepeoplesearch.com/" target = "_blank" class = "help-links">Get Owner Name</a> </div>
+
+                    <div class = "detail-input-line">Name: <input class = "detail" type= "text" id = "owner-name"></div>
+
+                    <div class = "link"><a id = "get-owner-contact"  class = "help-links">Get Owner Contact</a> </div>
+                    <div id = "add-contact-here">
+                        <div class = "detail-input-line">Contact: <input type= "text" placeholder = "Phone/Email/etc.">
+                        </div>
+
+                        <div class = "detail-input-line">Contact: <input  type= "text" placeholder = "Phone/Email/etc."> <span><button class = "remove-contact-button">X</button></span>
+                        </div>
+
+                    </div>
+                    <div class = "small-button-cont"> <button id = "add-contact-button">Add Contact</button></div>
+                </div>
+                
+                <span class = "spacer"></span>
+                <!--                PROPERTY DETAILS-->
+                <div>
+                    <div class = "subtitle">Property Evaluation</div>
+
+                    <div class = "detail-input-line">Description: <textarea class = "detail" id = "property-description"></textarea></div>
+
+                    <div class = "detail-input-line">Repair Cost: <input class = "detail" id = "repair-cost"type= "text" ></div>
+                    <div class = "detail-input-line">Repair Eval Link: <input class = "detail" id = "repair-link" type= "text" ><span><button id = "repair-eval-go" class = "go-button">Go</button></span></div>
+                </div>
+                <span class = "spacer"></span>
+                
+                <!--REDFIN DETAILS-->
+                <div>
+                    <div class = "subtitle">Redfin</div>
+                    <div class = "link"><a href = "https://www.redfin.com/" target = "_blank" class = "help-links">redfin.com</a> </div>
+
+                    <div class = "detail-input-line">Redfin Link: <input class = "detail"  id = "redfin-link" type= "text"><span><button id = "redfin-go" class = "go-button">Go</button></span></div>
+                    <br>
+                    <div class = "detail-input-line">Bed: <input class = "detail"  id = "redfin-bed" type= "tel"></div>
+                    <div class = "detail-input-line">Bath: <input class = "detail" id = "redfin-bath" type= "tel" ></div>
+                    <div class = "detail-input-line">Square Feet: <input class = "detail" id = "redfin-size" type= "tel" ></div>
+                    <div class = "detail-input-line">Year Built: <input class = "detail" id = "redfin-year" type= "tel" ></div>
+
+                    <span class = "call-spacer"></span>
+                    <div class = "subtitle">Stats</div>
+
+                    <div class = "detail-input-line">List Price: <input class = "detail" id = "redfin-price" type= "tel"></div>
+                    <div class = "detail-input-line">Redfin Estimate: <input class = "detail" id = "redfin-est" type= "tel" ></div>
+
+
+                    <span class = "call-spacer"></span>
+                    <div class = "subtitle">Comparables</div>
+
+                    <div id = "add-comps-here">
+                        <div class = "comp">
+                            <div class = "detail-input-line">Address: <input name = "comp-address" type= "text" value = "123 Main St"></div>
+                            <div class = "detail-input-line">Link: <input name = "comp-link" type= "text"><span><button class = "go-button comp-go">Go</button></span></div>
+                            <div class = "detail-input-line">Sale Price: <input name = "comp-price" type= "text" ></div>
+                        </div>
+                    </div>
+                    <div class = "button-cont"><button id = "add-comp-button">Add Comp</button></div>
+
+                </div>
+                <span class = "spacer"></span>
+                
+                <!--CALLS-->
+                <div>
+                    <div class = "subtitle">Calls</div>
+                    <div id = "add-calls-here">
+
+                        <div class = "call">
+                            <div class = "detail-input-line">Date*: <input name = "call-date" type= "date" ></div>
+                            <div class = "detail-input-line">Notes: <textarea name = "call-notes"></textarea></div>
+                            <div class = "detail-input-line">Offer: <input name = "call-offer"  type= "tel" ></div>
+                        </div>
+                    </div>
+                    <span class = 'call-spacer'></span>
+
+                    <div class = "button-cont"> <button id = "add-call-button">Add Call</button></div>
+                    <span class = "spacer"></span>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+
+    </body>
+</html>
