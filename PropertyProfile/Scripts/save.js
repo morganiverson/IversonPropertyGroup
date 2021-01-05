@@ -103,14 +103,16 @@ function saveAll(){
             array.push({"id": item.id, "value": item.value});
         }
     });
-    console.log(array);
+//    console.log(array);
     return (!empty) ? array: null;
 }
 
 
 function save(){
-    var link = getEncodedLink(true);
+    var link = getEncodedLink();
+    //CREATE TEXT FROM ARRAYS
     console.log(link);
+    sessionStorage.setItem("edit-link", link);
     return link;
 }
 
@@ -124,32 +126,35 @@ function encode(elm){
 
         default: key = "?DP?"; arr = saveAll();
     }
+    sessionStorage.setItem(elm, JSON.stringify(arr));
+//    console.log(arr);
 
     if(key == "?DP?" && arr == null) {return null;}
     else {
         var encodedArr = encodeArray(arr);
-        console.log(arr);
+//        console.log(arr);
 
         return key + encodedArr;
     }
 }
 
 function getEncodedLink(dl){
-    var fullPathName = "mwiv.github.io/IversonPropertyGroup/PropertyProfile/index.html";
-    var link = (dl) ? fullPathName : "";//"index.html";
+    var link = "mwiv.github.io/IversonPropertyGroup/PropertyProfile/index.html";
+//    var link = "";//"index.html";
     var all = encode("all");
     var encodings = [encode("contacts"), encode("comps"), encode("calls")];
     if (all != null) {
         link+= all;
-        encodings.forEach(function(item) {link+= item});
-        document.getElementById("encoded-edit-link").style.textDecoration = "underline";
-        document.getElementById("encoded-edit-link").style.fontWeight = "bold";
-
-        document.getElementById("encoded-edit-link").href = link;   
-        document.getElementById("encoded-edit-link").target = "_blank";
+//        encodings.forEach(function(item) {link+= item});
+//        document.getElementById("encoded-edit-link").style.textDecoration = "underline";
+//        document.getElementById("encoded-edit-link").style.fontWeight = "bold";
+//
+//        document.getElementById("encoded-edit-link").href = link;   
+//        document.getElementById("encoded-edit-link").target = "_blank";
 
         return link;
     }
+    else return null;
 }
 
 function encodeArray(array) {

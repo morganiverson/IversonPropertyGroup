@@ -13,8 +13,7 @@ function allEvents(){
 
 function saveButton() {
     document.getElementById("save-button").onclick = function(){
-        save();
-        //        downloadpdf(save());
+        if(save() != null) downloadpdf();
     }
 }
 function contactEvents(){
@@ -86,7 +85,7 @@ function addressEvent(){
 
     address_input.onchange = function() {
         console.log(address_label.value);
-        address_label.innerHTML = address_label.value;
+        address_label.innerHTML = address_input.value;
     }
 }
 function peopleSearchEvent() {
