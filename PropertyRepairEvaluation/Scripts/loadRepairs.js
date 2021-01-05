@@ -45,7 +45,7 @@ function replaceAllHTML(key, repair, html_string, parent_key){
 function checkDetailedEval() {
     console.log(encodedEval());
     if(encodedEval()) {
-        var encodedEvalURL = window.location.href.substring(window.location.href.indexOf("?DetailedEvaluation?") + "?DetailedEvaluation?".length);
+        var encodedEvalURL = window.location.href.substring(window.location.href.indexOf("?de?") + "?de?".length);
         //        console.log(encodedEvalURL);
         //        console.log(decodeArray(encodedEvalURL));
         //        
@@ -55,7 +55,7 @@ function checkDetailedEval() {
 
 //TELL IF EVALUTAION IS ENCODED IN URL
 function encodedEval(){
-    return window.location.href.indexOf("?DetailedEvaluation?") >= 0;
+    return window.location.href.indexOf("?de?") >= 0;
 }
 
 //DECODE DATA IN URL

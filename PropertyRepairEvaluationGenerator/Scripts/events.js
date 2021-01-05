@@ -65,7 +65,6 @@ function interiorSpecs(){
         }
     }
 }
-
 //SHOW SPECIFIC CHECKBOX IF AREA BOX CHECKED
 function areaBoxEvents(){
     var areaBoxes = document.getElementsByClassName("interior-area");

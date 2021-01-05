@@ -12,12 +12,12 @@ var header_row_string = "<div class = 'divTableHeadingRow'> <div class = 'divTab
 
 
 var keys = [];
-var default_keys = [new Repair("land", "Landscape", 5000), 
-                    new Repair("roof", "Roof", 10000),
-                    new Repair("floor", "Flooring", 5000), 
-                    new Repair("paint", "Paint", 5000), 
-                    new Repair("kitch", "Kitchen",10000),
-                    new Repair("bath", "Bathroom", 3500) 
+var default_keys = [new Repair("land", "Landscape", 5000, null), 
+                    new Repair("roof", "Roof", 10000, null),
+                    new Repair("floor", "Flooring", 5000, null), 
+                    new Repair("paint", "Paint", 5000, null), 
+                    new Repair("kitch", "Kitchen",10000, null),
+                    new Repair("bath", "Bathroom", 3500, null) 
                    ];
 
 //GENERATE EVALUTAION WITH DEF REAPIRS
@@ -87,7 +87,7 @@ function baseEval(){
     
     calcTotal(true);
     document.getElementById("add-repair-here").innerHTML = header_row_string;
-    addRepair("", "Repair", 0);
+    addRepair("", "Repair", 0, null);
     
 //    console.log(document.getElementById("add-repair-here").childElementCount);
 

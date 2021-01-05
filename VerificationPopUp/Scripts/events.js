@@ -65,7 +65,7 @@ function generateChecklist(){
     console.log(encodedString);
     
     //ADD TO URL
-    var checklistURL = "PropertyRepairEvaluation.html?DetailedEvaluation?" + encodedString;
+    var checklistURL = "../PropertyRepairEvaluation/index.html?de?" + encodedString;
     
     console.log(checklistURL);
     parent.window.location.href = checklistURL; 

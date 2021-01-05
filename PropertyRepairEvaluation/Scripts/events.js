@@ -10,7 +10,7 @@ function checkListeners(key){
 
         input.onchange = function(e) {
             //            console.log(this.value);
-            console.log(this.type);
+//            console.log(this.type);
             //HORIZANTAL
             if((this.type == "checkbox" && this.checked) || (this.type == "tel" && this.value != null)) { //OIF THIS INPUT IS CHECKED OR HAS A VALUE
                 console.log(key + " " + this.value);
