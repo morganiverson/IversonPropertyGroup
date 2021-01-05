@@ -109,7 +109,7 @@ function saveAll(){
 
 
 function save(){
-    var link = getEncodedLink();
+    var link = getEncodedLink(true);
     console.log(link);
     return link;
 }
@@ -134,8 +134,9 @@ function encode(elm){
     }
 }
 
-function getEncodedLink(){
-    var link = "";//"index.html";
+function getEncodedLink(dl){
+    var fullPathName = "mwiv.github.io/IversonPropertyGroup/PropertyProfile/index.html";
+    var link = (dl) ? fullPathName : "";//"index.html";
     var all = encode("all");
     var encodings = [encode("contacts"), encode("comps"), encode("calls")];
     if (all != null) {

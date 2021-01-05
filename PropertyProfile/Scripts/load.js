@@ -1,7 +1,7 @@
 
 
 function isEncoded(){
-    //"?dp?"
+    //SET EDIT LINK TO CURRENT HREF
     return window.location.href.indexOf("?DP?") >= 0;
 }
 function loadPropetyDetails(){
@@ -96,6 +96,9 @@ function decodeArray(encoding) {
 }
 
 function load(){
+    document.getElementById("encoded-edit-link").href = window.location.href;
+    
+    
     console.log("Loading Encoded URL Data....")
     var link = window.location.href;
     var details = link.substring(link.indexOf("?DP?") + 4, link.indexOf("?CT?"));

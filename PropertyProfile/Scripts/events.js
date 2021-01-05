@@ -104,6 +104,7 @@ function peopleSearchEvent() {
 
 }
 
+
 function goButtons() {
     document.getElementById("redfin-go").onclick = function(){
         openLink(document.getElementById("redfin-link").value);
@@ -150,27 +151,9 @@ function removeContact(button){
     button.parentNode.parentNode.remove();
 }
 
-function downloadpdf(url) {
-    var d = new jsPDF();
-    d.autoPrint();
-    //    var link = document.createElement('a');
-    //    link.href = url;
-    //    var fileName = getFileName();;
-    //    link.download = fileName + '.pdf';
-    //    link.dispatchEvent(new MouseEvent('click'));
-}
 
-function getFileName(){
-    var address = document.getElementById("address").value;
-    var investor = document.getElementById("investor").value;
-    var state = document.getElementById("state").value;
 
-    var name = strip(address.toUpperCase()) + "_" + strip(investor.toUpperCase()) + "_" + state;
-    return name;    
-}
-function strip(str) {
-    return str.replaceAll(" ", "");
-}
+
 var call_html = "<div class = 'call'><span class = 'call-spacer'></span> <div class = 'detail-input-line'>Date*: <input id = 'call-date' type= 'date'></div> <div class = 'detail-input-line'>Notes: <textarea name = 'call-notes'></textarea></div> <div class = 'detail-input-line'>Offer: <input name = 'call-offer' type= 'tel' ></div> <br> <div class = 'button-cont'> <button class = 'remove-call-button'> Remove Call</button></div> </div>";
 
 var contact_html = "<div class = 'detail-input-line'>Contact: <input  type= 'text' placeholder = 'Phone/Email/etc.'> <span><button class = 'remove-contact-button'>X</button></span> </div>";
