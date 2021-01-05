@@ -135,7 +135,7 @@ function encode(elm){
 }
 
 function getEncodedLink(){
-    var link = "PropertyDetails.html";
+    var link = "";//"index.html";
     var all = encode("all");
     var encodings = [encode("contacts"), encode("comps"), encode("calls")];
     if (all != null) {
@@ -150,7 +150,6 @@ function getEncodedLink(){
         return link;
     }
 }
-
 
 function encodeArray(array) {
     return btoa(JSON.stringify(array));
