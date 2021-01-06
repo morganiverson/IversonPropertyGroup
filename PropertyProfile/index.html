@@ -1,18 +1,18 @@
 <html>
     <head>
         <script src = "Scripts/loadScripts.js"></script>
-
+        <script src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.debug.js"></script>
         <link rel ="stylesheet" type = "text/css" href = "Styles/styles.css">
     </head>
 
 
     <body>
         <div class = "detail-pane">
-            <div class = "title">Property Details: <span id = "property-title"></span></div>
+            <div class = "title">Property Profile: <span id = "property-title"></span></div>
 
             <div class = "button-cont"> <button id = "save-button">Save</button></div>
 
-<!--            <div class = "subtitle"><a id = "encoded-edit-link" href = "#">Edit (link from pdf)</a></div>-->
+            <!--            <div class = "subtitle"><a id = "encoded-edit-link" href = "#">Edit (link from pdf)</a></div>-->
 
             <div class = "view-details">
                 <span class = "spacer"></span>
@@ -27,9 +27,9 @@
                     <option value = "NEGOTIATING">Negotiating</option>
                     <option value = "SOLD">Sold</option>
                     </select></div>
-                
+
                 <span class = "call-spacer"></span>
-                
+
                 <!--ADDRESS DETAILS-->
                 <div>
                     <div class = "detail-input-line">Address: <input class = "detail"  type= "text" id = "address"></div>
@@ -39,7 +39,7 @@
                     <div class = "detail-input-line">Zip Code: <input class = "detail" type= "tel" id = "zip"></div>
                 </div>
                 <span class = "spacer"></span>
-                
+
                 <!--                ONWER DETAILS-->
                 <div>
                     <div class = "subtitle">Owner Information</div>
@@ -59,7 +59,7 @@
                     </div>
                     <div class = "small-button-cont"> <button id = "add-contact-button">Add Contact</button></div>
                 </div>
-                
+
                 <span class = "spacer"></span>
                 <!--                PROPERTY DETAILS-->
                 <div>
@@ -71,7 +71,7 @@
                     <div class = "detail-input-line">Repair Eval Link: <input class = "detail" id = "repair-link" type= "text" ><span><button id = "repair-eval-go" class = "go-button">Go</button></span></div>
                 </div>
                 <span class = "spacer"></span>
-                
+
                 <!--REDFIN DETAILS-->
                 <div>
                     <div class = "subtitle">Redfin</div>
@@ -96,7 +96,7 @@
 
                     <div id = "add-comps-here">
                         <div class = "comp">
-                            <div class = "detail-input-line">Address: <input name = "comp-address" type= "text" value = "123 Main St"></div>
+                            <div class = "detail-input-line">Address: <input name = "comp-address" type= "text"></div>
                             <div class = "detail-input-line">Link: <input name = "comp-link" type= "text"><span><button class = "go-button comp-go">Go</button></span></div>
                             <div class = "detail-input-line">Sale Price: <input name = "comp-price" type= "text" ></div>
                         </div>
@@ -105,7 +105,7 @@
 
                 </div>
                 <span class = "spacer"></span>
-                
+
                 <!--CALLS-->
                 <div>
                     <div class = "subtitle">Calls</div>

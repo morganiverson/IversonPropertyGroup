@@ -8,7 +8,15 @@ function downloadpdf() {
 
     //TXT FILE TEST - filesaver.js
     var blob = new Blob([getDocumentText()], {type: "text/plain;charset=utf-8"});
-        saveAs(blob, getFileName() + ".txt");
+//        saveAs(blob, getFileName() + ".txt");
+    
+    //JSPDF
+    var pdf = new jsPDF();
+                            pdf.setFontSize(10);
+
+    pdf.text(getDocumentText(), 15, 20);
+    pdf.textWithLink("[Click Here to Edit]", 15, 10, {url: sessionStorage.getItem("edit-link")});
+    pdf.save(getFileName());
     //    console.log("Downloading...");
 }
 function getFileName(){
@@ -27,14 +35,14 @@ function strip(str) {
 var defaultTextString = "";
 
 const detailString = "Property Details: [address]\n\n" + 
-      "Link to Edit (Copy/Paste): [edit-link]\n\n" + 
       "Investor: [investor]\nState: [progress]\n\nAddress: [address]\nCity: [city]\nState:[state]\nZip Code: [zip]\n" +
       "\n\nOwner Information\nName: [owner-name]\n[contacts]\n" + 
       "\nProperty Evaulation\nDescription: [property-description]\nRepair Cost: [repair-cost]\nReapir Eval Link: [repair-link]\n" + 
       "\nRedfin\nRedfin Link: [redfin-link]\nBed(s): [redfin-bed]\nBath(s): [redfin-bath]\nSquare Feet: [redfin-size]\nYear Built: [redfin-year]\n" + 
       "\nStats\nList Price: [redfin-price]\nRedfin Estimate: [redfin-est]\n" + 
       "\n[comps]\n" + 
-      "\n[calls]\n";
+      "\n[calls]\n" + 
+      "\n\n\nLink to Edit (Copy/Paste):";
 
 
 function addDetails(ret, array){
@@ -54,6 +62,7 @@ var ret = title + "\n";
             case "calls": content+=addCalls(item, index); break;
             case "comps": content+=addComps(item); break;
         }
+        content+= "\n";
     });
 
     return (content == "undefined" || content == "") ? title + ": "+ "None" : (title == "Contacts") ? content : ret + content ;
@@ -71,7 +80,6 @@ function addCalls(item, index){
     call_string.replaceAll("[date-here]", item.date);
     call_string.replaceAll("[notes-here]", item.notes);
     call_string.replaceAll("[offer-here]", item.offer);
-
 }
 
 const comp_string = "Address: [address-here]\nLink: [link-here]\nSale Price: [price-here]"
@@ -87,8 +95,8 @@ function getDocumentText() {
     var text = detailString;
     console.log(sessionStorage);
     
-    var edit_link = sessionStorage.getItem("edit-link");
-    text = text.replaceAll("[edit-link]", edit_link);
+//    var edit_link = sessionStorage.getItem("edit-link");
+//    text = text.replaceAll("[edit-link]", edit_link);
     //CALLS
     var calls = JSON.parse(sessionStorage.getItem("calls"));
     text = text.replaceAll("[calls]", addMultiple("Calls", calls));

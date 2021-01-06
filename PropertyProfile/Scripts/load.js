@@ -96,7 +96,7 @@ function decodeArray(encoding) {
 }
 
 function load(){
-    document.getElementById("encoded-edit-link").href = window.location.href;
+//    document.getElementById("encoded-edit-link").href = window.location.href;
     
     
     console.log("Loading Encoded URL Data....")
