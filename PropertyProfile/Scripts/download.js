@@ -51,7 +51,7 @@ var ret = title + "\n";
     array.forEach(function(item, index) {
         switch(title.toLowerCase()){
             case "contacts": content+=addContacts(item); break;
-            case "calls": content+=addCalls(item); break;
+            case "calls": content+=addCalls(item, index); break;
             case "comps": content+=addComps(item); break;
         }
     });
@@ -65,8 +65,9 @@ function addContacts(item){
     return contact_string.replaceAll("[value]", item.value);
 }
 
-const call_string = "Date: [date-here]\nNotes:\n [notes-here]\nOffer: [offer-here]";
-function addCalls(item){
+const call_string = "\nCall [index]\nDate: [date-here]\nNotes:\n [notes-here]\nOffer: [offer-here]";
+function addCalls(item, index){
+    call_string.replaceAll("[index]", index + 1);
     call_string.replaceAll("[date-here]", item.date);
     call_string.replaceAll("[notes-here]", item.notes);
     call_string.replaceAll("[offer-here]", item.offer);

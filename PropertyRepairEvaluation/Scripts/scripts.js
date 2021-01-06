@@ -9,8 +9,6 @@ const child_html_string = "<!-- ELEMENTS--> <div class = 'divTableRow'> <div cla
 
 var header_row_string = "<div class = 'divTableHeadingRow'> <div class = 'divTableHeadCell-DSC'>Repair</div> <div class = 'divTableHeadCell-DEG'>None</div> <div class = 'divTableHeadCell-DEG'>Partial</div> <div class = 'divTableHeadCell-DEG'>Full</div> <div class = 'divTableHeadCell-DEG'>Total</div> </div>";
 
-
-
 var keys = [];
 var default_keys = [new Repair("land", "Landscape", 5000, null), 
                     new Repair("roof", "Roof", 10000, null),
@@ -101,42 +99,10 @@ function clearEval(){
     document.getElementById("add-repair-here").innerHTML = header_row_string;
 
 }
-//TELL IF EVALUATION IS COMPLETE
-function evalComplete(){
-    var totalCells = document.getElementsByClassName("repair-cost");
-    for(var i = 0; i < totalCells.length; i++) {
-        if(totalCells[i].innerHTML == "$") return false;
-    }
 
-    var propertyDetails = document.getElementsByClassName("property-details");
-
-    for(var i = 0; i < propertyDetails.length; i++) {
-        if(propertyDetails[i].value == "") return false;
-    }
-
-    return true;
-}
 
 //TELL IF WEBPAGE IS IPEN IN MOBILE DEVICE
 function onMobile(){
     return screen.width <= 480;
 }
 
-
-
-//function convertDate(input){
-//    var d = new Date(input);
-//    return "".concat((d.getMonth() + 1),d.getDate(),d.getFullYear());
-//    
-//}
-
-//function getFileName(){
-//    var date = convertDate(document.getElementById("view-date").value);
-//    console.log(date);
-//    var viewer = document.getElementById("viewer").value.replace(/\s/g, "");
-//    var address = document.getElementById("address").value.replace(/\s/g, "");
-//    console.log(date + "-" + viewer + "-" + address);
-//    
-//    
-//}
-//KEY OBJECT TO TRACK REAPIR AND PARENTAGE

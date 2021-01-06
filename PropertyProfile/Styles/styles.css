@@ -31,7 +31,6 @@ a{
     color:inherit;
     font-weight: inherit;
     text-decoration: none;
-
 }
 a:hover{
     font-weight: bolder;
@@ -182,6 +181,10 @@ button:hover{
         width:90%;
         margin:auto;
         padding:5% auto;
+        font-size: 25px;
+    }
+    a{
+        font-size: 10px;
     }
     .detail-pane input{
         width:60%;

@@ -23,11 +23,11 @@ function loadEval(array) {
     }
 
     //ADD CHECK LISTSNERS
-//    console.log(keys);
+    //    console.log(keys);
     keys.forEach(function(item, index) {
         checkListeners(item.Repair.key);
     });
-    
+
 }
 
 //REPLACE PLACEHOLDERS WITH ACTUAL REPAIR KEY
@@ -43,13 +43,26 @@ function replaceAllHTML(key, repair, html_string, parent_key){
 }
 
 function checkDetailedEval() {
-    console.log(encodedEval());
+    var link = window.location.href;
     if(encodedEval()) {
-        var encodedEvalURL = window.location.href.substring(window.location.href.indexOf("?de?") + "?de?".length);
+        //CHECK IF DEFAULT EVAL
+        if(link.indexOf("?f?") >= 0) {
+            var eval = link.substring(link.indexOf("?de?") + "?de?".length, link.indexOf("?f?"));
+            sessionStorage.setItem("generated-evaluation", eval);
+            var encodedEntries = link.substring(link.indexOf("?f?") + "?f?".length);
+            loadEval(decodeArray(eval));
+            loadEntries(encodedEntries);
+        }
+        else {
+            var eval = window.location.href.substring(window.location.href.indexOf("?de?") + "?de?".length);
+            sessionStorage.setItem("generated-evaluation", eval);
+
+            loadEval(decodeArray(encodedEvalURL));
+
+        }
         //        console.log(encodedEvalURL);
         //        console.log(decodeArray(encodedEvalURL));
         //        
-        loadEval(decodeArray(encodedEvalURL));
     }
 }
 
@@ -80,4 +93,42 @@ function addRepair(key, repair, full_cost, parent_key){
         //    checkListeners(key);//ADD LISTENERS FOR CHECK BOXES
         //    console.log(keys);
     }
+}
+
+//LOAD A FILLED OUT EVAL
+function loadEntries(encoding) {
+    console.log("Loading...");
+    console.log(encoding);
+    var array = decodeArray(encoding);
+    //DETAILS
+    var details = array[0].array;
+    fillDetails(details);
+
+    var degrees = array[1].array;
+    console.log(degrees);
+    fillDegrees(degrees);
+}
+
+function fillDetails(array){
+    array.forEach(function(item) {
+        document.getElementById(item.id).value = item.value;
+    })
+}
+
+function fillDegrees(array) {
+    var inputs = document.getElementsByClassName("divTableCell-DEG");
+    var degreeIndex = 0;
+    var arrayIndex = 0;
+    Array.prototype.forEach.call(inputs, function(item) {
+        Array.prototype.forEach.call(item.childNodes, function(input) {
+            if(input.tagName == "INPUT"){
+                degreeIndex++;
+                if(degreeIndex == array[arrayIndex].index){
+                    console.log("match");
+                    input.click();
+                    arrayIndex++;
+                }
+            }
+        });
+    });
 }

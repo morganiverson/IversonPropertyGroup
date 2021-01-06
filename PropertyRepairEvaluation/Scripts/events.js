@@ -10,7 +10,7 @@ function checkListeners(key){
 
         input.onchange = function(e) {
             //            console.log(this.value);
-//            console.log(this.type);
+            //            console.log(this.type);
             //HORIZANTAL
             if((this.type == "checkbox" && this.checked) || (this.type == "tel" && this.value != null)) { //OIF THIS INPUT IS CHECKED OR HAS A VALUE
                 console.log(key + " " + this.value);
@@ -77,7 +77,19 @@ function checkListeners(key){
 
     }}
 
-
+//TELL IF EVALUATION IS COMPLETE
+function evalComplete(){
+    var totalCells = document.getElementsByClassName("repair-cost");
+    for(var i = 0; i < totalCells.length; i++) {
+        if(totalCells[i].innerHTML == "$") return false;
+    }
+    var propertyDetails = document.getElementsByClassName("property-details");
+    for(var i = 0; i < propertyDetails.length; i++) {
+        if(propertyDetails[i].id == "investor" && propertyDetails[i].value == "") return false;
+        else if(propertyDetails[i].id == "address" && propertyDetails[i].value == "") return false;
+    }
+    return true;
+}
 function printEvents(){
     var printButton = document.getElementById("print-button");
     var tooltipID = "print-tooltip";
@@ -95,12 +107,10 @@ function printEvents(){
         }
     }
 
-
     printButton.onclick = function(e) {
         console.log("click");
         if(evalComplete()){
-            getFileName();
-            console.log(document.title);
+            saveEntries();
             window.print();
         }
         else {
@@ -111,6 +121,34 @@ function printEvents(){
 
 }
 
+function saveEvents(){
+    var button = document.getElementById("save-button");
+    var tooltipID = "save-tooltip";
+
+    if(!onMobile()){
+        button.onmouseover = function(e) {
+            if(!evalComplete()){
+                showToolTip(e, tooltipID, true);
+            }
+        }
+        button.onmouseout = function(e) {
+            if(!evalComplete()){
+                showToolTip(e, tooltipID, false);
+            }
+        }
+    }
+    button.onclick = function(e) {
+        console.log("click");
+        if(evalComplete()){
+            saveEntries(false);
+            alert("Sucess! A link to revisit and edit this form has been added to your clipboard. Paste it somewhere safe!")
+        }
+        else {
+            showToolTip(e, tooltipID, true);
+        }
+
+    }
+}
 function showToolTip(e, tipID, show) {
     var tooltip = document.getElementById(tipID);
 

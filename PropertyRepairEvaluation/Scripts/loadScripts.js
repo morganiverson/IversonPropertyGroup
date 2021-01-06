@@ -6,11 +6,16 @@ var scripts = [new Script("../CommonScripts/Repair.js", null),
                new Script("Scripts/loadRepairs.js", null),
                new Script("Scripts/events.js", function() {
                    printEvents();
+                   saveEvents();
                }),
                new Script("Scripts/scripts.js", function() {
-                   baseEval();
-                   checkDetailedEval();}), 
-               new Script("Scripts/save.js", function(){saveEntries();})
+//                   baseEval();
+                   checkDetailedEval();
+               }), 
+               new Script("Scripts/save.js", function(){}), 
+               new Script("Scripts/download.js", function() {
+                   download();
+               })
               ];
 //ADD ALL SCRIPTS FROM ARRAY
 function addScripts() {

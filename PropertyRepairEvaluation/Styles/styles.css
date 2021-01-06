@@ -1,6 +1,7 @@
 :root{
     --eval-width:60%;
     --eval-margins: auto;
+    --print-width:80%;
 
 }
 
@@ -229,7 +230,7 @@ input:focus{
 }
 
 /*PRINT BUTTON TOOLTIP*/
-#print-tooltip{
+.tooltip{
     visibility: hidden;
     width:auto;
     font-size: 10px;
@@ -300,5 +301,14 @@ input:focus{
     }
     @page{
         margin:20px;
+    }
+    .divTable{
+        width: var(--print-width);
+    }
+    .detail-pane{
+        width: var(--print-width);
+    }
+    .total-pane{
+        width: var(--print-width);
     }
 }
