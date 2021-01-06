@@ -5,9 +5,11 @@ function download(){
 //    addTotals();
     
     var pdf = new jsPDF();
+    pdf.setFont("sans-serif");
     pdf.setFontSize(10);
     pdf.text(getDocumentText(), 15, 20);
-//    pdf.textWithLink("[Click Here to Edit]", 15, 10, {url: sessionStorage.getItem("edit-link")});
+    pdf.setTextColor(0, 255, 0);
+    pdf.textWithLink("[Click Here to Edit]", 15, 10, {url: sessionStorage.getItem("edit-link")});
 //    pdf.save(getFileName());
 //        console.log("Downloading...");
 }
