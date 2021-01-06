@@ -9,7 +9,7 @@ var scripts = [new Script("../CommonScripts/Repair.js", null),
                    saveEvents();
                }),
                new Script("Scripts/scripts.js", function() {
-//                   baseEval();
+                   baseEval();
                    checkDetailedEval();
                }), 
                new Script("Scripts/save.js", function(){}), 
