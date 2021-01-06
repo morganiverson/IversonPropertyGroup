@@ -1,5 +1,4 @@
 //set all input values to the values entered
-let profileSaved = false;
 function inputEvents() {
     var inputs = document.getElementsByTagName("INPUT");
     Array.prototype.forEach.call(inputs, function(item) {
@@ -177,8 +176,6 @@ function removeContact(button){
     button.parentNode.parentNode.remove();
 }
 
-
-
 function getCallElement() {
     var elm = document.createElement("div");
     elm.setAttribute("class", "call");
@@ -336,12 +333,11 @@ function newProfile() {
 }
 
 function saved(){
-    console.log(profileSaved);
     return profileSaved;
 }
 function complete(){
-    console.log(document.getElementById("investor").value != "");
-        console.log(document.getElementById("address").value != "");
+//    console.log(document.getElementById("investor").value != "");
+//        console.log(document.getElementById("address").value != "");
 
     return (document.getElementById("investor").value != "" && document.getElementById("address").value != "");
 }

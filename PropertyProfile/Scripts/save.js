@@ -1,3 +1,5 @@
+let profileSaved = false;
+
 function Call(date, notes, offer) {
     this.date = date;
     this.notes = notes;
@@ -110,6 +112,7 @@ function saveAll(){
 
 function save(){
     var link = getEncodedLink();
+    profileSaved = true;
     //CREATE TEXT FROM ARRAYS
     console.log(link);
     sessionStorage.setItem("edit-link", link);

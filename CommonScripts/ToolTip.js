@@ -16,7 +16,8 @@ function tooltipEvents(buttonID, tooltipID, functionCaseShow, functionCaseHide, 
     }
     button.onclick = function(e) {
 //        console.log("click");
-        if(functionCaseHide){
+        if(functionCaseHide.call()){
+            console.log(functionClick);
             functionClick.call();
         }
         else {

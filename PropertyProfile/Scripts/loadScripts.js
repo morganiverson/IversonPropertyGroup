@@ -15,11 +15,18 @@ var scripts = [new Script("../../CommonScripts/Tooltip.js",
     tooltipEvents("save-button", "save-tooltip", 
                   function() {return !complete()}, 
                   function() {return complete()}, 
-                  function() {downloadpdf();});
+                  function() {save();});
     tooltipEvents("new-button", "new-tooltip", 
                   function() {return !saved();}, 
                   function() {return saved();},
-                  function() {newProfile()});}),
+                  function() {newProfile()});
+    tooltipEvents("dl-button", "dl-tooltip", 
+                  function() {return !saved()}, 
+                  function() {return saved()}, 
+                  function() {downloadpdf();});
+
+
+}),
 
                new Script("events.js", function() {allEvents();}), 
                new Script("load.js", function(){ if(isEncoded()) load();}), 

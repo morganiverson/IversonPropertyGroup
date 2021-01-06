@@ -5,7 +5,8 @@
 
 //DOWNLOAD HTML VERSION OF PAGE
 function downloadpdf() {
-
+    addLink(redfin_string, "redfin-link", ["redfin-bed", "redfin-bath", "redfin-size", "redfin-year"]);
+    
     //TXT FILE TEST - filesaver.js
     var blob = new Blob([getDocumentText()], {type: "text/plain;charset=utf-8"});
     //        saveAs(blob, getFileName() + ".txt");
@@ -13,11 +14,14 @@ function downloadpdf() {
     //JSPDF
     var pdf = new jsPDF();
     pdf.setFontSize(10);
-    pdf.text(getDocumentText(), 15, 20);
+    pdf.setTextColor(0, 255, 0);
     pdf.textWithLink("[Click Here to Edit]", 15, 10, {url: sessionStorage.getItem("edit-link")});
-    pdf.save(getFileName());
-    profileSaved = true;
-        console.log("Downloading...");
+
+    pdf.setTextColor(0, 0, 0);
+    pdf.text(getDocumentText(), 15, 20);
+
+    //    pdf.save(getFileName());
+    console.log("Downloading...");
 }
 function getFileName(){
     var address = document.getElementById("address").value;
@@ -38,7 +42,7 @@ const detailString = "Property Details: [address]\n\n" +
       "Investor: [investor]\nState: [progress]\n\nAddress: [address]\nCity: [city]\nState:[state]\nZip Code: [zip]\n" +
       "\n\nOwner Information\nName: [owner-name]\n[contacts]\n" + 
       "\nProperty Evaulation\nDescription: [property-description]\nRepair Cost: [repair-cost]\nReapir Eval Link: [repair-link]\n" + 
-      "\nRedfin\nRedfin Link: [redfin-link]\nBed(s): [redfin-bed]\nBath(s): [redfin-bath]\nSquare Feet: [redfin-size]\nYear Built: [redfin-year]\n" + 
+      "\n[Redfin]\n"+ 
       "\nStats\nList Price: [redfin-price]\nRedfin Estimate: [redfin-est]\n" + 
       "\n[comps]\n" + 
       "\n[calls]\n" + 
@@ -90,18 +94,50 @@ function addComps(item){
 
 }
 
+//redfin, property eval, comps
+const redfin_string = ["\nRedfin\nRedfin Link: ", "[redfin-link]", "\nBed(s): [redfin-bed]", "\nBath(s): [redfin-bath]", "\nSquare Feet: [redfin-size]", "\nYear Built: [redfin-year]\n"
+                      ];
+
+//addLink(redfin_string, "redfin-link", ["redfin-bed", "redfin-bath", "redfin-size", "redfin-year]);
+function addLink(replaceString, linkID, otherText){
+    var array = [];
+
+    replaceString.find(function(item) {return item = linkID});
+    var link = getSessionDetail(linkID);
+    array.push(new Text(link, "link"));
+
+    replaceString.forEach(function (item, index) {
+        if(item != linkID) {
+            console.log(otherText[index]);
+            array.push(new Text(item.replaceAll("[" + otherText[index] + "]", getSessionDetail(otherText[index]))));
+        }
+
+    });
+    console.log(array);
+
+}
+
+function getSessionDetail(id) {
+    return JSON.parse(sessionStorage.getItem("all")).find(o => o.id === id).value;
+}
 function getDocumentText() {
+
+    //TEXT OBJECT WITH URL - comps, redfin
+
     var text = detailString;
     console.log(sessionStorage);
 
     //    var edit_link = sessionStorage.getItem("edit-link");
     //    text = text.replaceAll("[edit-link]", edit_link);
+
+    //REDFIN
+
+
     //CALLS
     var calls = JSON.parse(sessionStorage.getItem("calls"));
     text = text.replaceAll("[calls]", addMultiple("Calls", calls));
 
-
-    //CALLS
+    //COMPS
     var comps = JSON.parse(sessionStorage.getItem("comps"));
     text = text.replaceAll("[comps]", addMultiple("Comps", comps));
 
@@ -118,7 +154,10 @@ function getDocumentText() {
 
 
 
-
+function Text(string, type){
+    this.string = string;
+    this.type = type;
+}
 
 
 
