@@ -3,11 +3,23 @@ window.onload = function(){
 }
 
 var scripts = [new Script("../CommonScripts/Repair.js", null),
-               new Script("Scripts/loadRepairs.js", null),
-               new Script("Scripts/events.js", function() {
-                   printEvents();
-                   saveEvents();
+               new Script("../CommonScripts/Tooltip.js", 
+                          function() {
+                   addTooltipStyles(); 
+                   tooltipEvents("print-button", "print-tooltip",       
+                                 function() {return !evalComplete()}, 
+                                 function() {return evalComplete()}, 
+                                function() {saveEntries(); window.print();});
+
+                   tooltipEvents("save-button", "save-tooltip",
+                                 function() {return !evalComplete()},
+                                 function() {return evalComplete();}, 
+                                    function() {saveEntries();
+                                                alert("Sucess! A link to revisit and edit this form has been added to your clipboard. Paste it somewhere safe!");}
+                                );
                }),
+               new Script("Scripts/loadRepairs.js", null),
+               new Script("Scripts/events.js", null),
                new Script("Scripts/scripts.js", function() {
                    baseEval();
                    checkDetailedEval();
@@ -24,7 +36,7 @@ function addScripts() {
         script.src = scripts[i].URL;
         script.onload = scripts[i].onload;
         document.head.appendChild(script);
-//        console.log(script);
+        //        console.log(script);
     }
 }
 

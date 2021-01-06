@@ -1,3 +1,6 @@
+//LOAD SCRIPS: PROFILE
+
+
 window.onload = function(){
     addScripts();
 }
@@ -6,7 +9,18 @@ window.onload = function(){
 
 
 var path = "Scripts/";//"https://mwiv.github.io/IversonPropertyGroup/PropertyProfile/Scripts/";
-var scripts = [
+var scripts = [new Script("../../CommonScripts/Tooltip.js", 
+                          function() {
+    addTooltipStyles(); 
+    tooltipEvents("save-button", "save-tooltip", 
+                  function() {return !complete()}, 
+                  function() {return complete()}, 
+                  function() {downloadpdf();});
+    tooltipEvents("new-button", "new-tooltip", 
+                  function() {return !saved();}, 
+                  function() {return saved();},
+                  function() {newProfile()});}),
+
                new Script("events.js", function() {allEvents();}), 
                new Script("load.js", function(){ if(isEncoded()) load();}), 
                new Script("save.js", function() {}),

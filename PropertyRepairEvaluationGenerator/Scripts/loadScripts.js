@@ -1,8 +1,16 @@
 //*********************************************************LOAD SCRIPTS********************************************************************************
-var scripts = [new Script("../CommonScripts/Repair.js", null), 
-               new Script("Scripts/events.js", function() {interiorSpecs(); areaBoxEvents(); otherBoxEvent(); textAreaEvent(); exteriorEvents();}), 
-               new Script("Scripts/scripts.js", function() {tooltipEvents();window.onmessage = function(e) {switch(e.data) {case "hide": hideVerificationPopup();}}
-               })];
+var scripts = [new Script("../CommonScripts/Repair.js", null),
+               new Script("../CommonScripts/Tooltip.js", 
+                          function() {
+                   addTooltipStyles(); 
+                   tooltipEvents("submit-but", "submit-tooltip", 
+                                 function() {return getRepairArray().length <= 0}, 
+                                 function() {return getRepairArray().length > 0},
+                                 function() {showVerificationPopup();});}),
+
+               new Script("Scripts/events.js", function() {allEvents();}), 
+               new Script("Scripts/scripts.js", function() {window.onmessage = function(e) {switch(e.data) {case "hide": hideVerificationPopup();}}
+                                                           })];
 
 window.onload = function(){
     addScripts();

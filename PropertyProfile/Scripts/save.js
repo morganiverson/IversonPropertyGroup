@@ -26,7 +26,7 @@ function saveContacts(){
 
                     if(div_item.value != "") {
                         object.value = div_item.value;
-                        console.log(div_index);
+//                        console.log(div_index);
                         array.push(object);
                     }
                 }
@@ -138,7 +138,7 @@ function encode(elm){
     }
 }
 
-function getEncodedLink(dl){
+function getEncodedLink(){
     var link = "mwiv.github.io/IversonPropertyGroup/PropertyProfile/index.html";
 //    var link = "";//"index.html";
     var all = encode("all");

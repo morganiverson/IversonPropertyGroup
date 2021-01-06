@@ -10,7 +10,10 @@
         <div class = "detail-pane">
             <div class = "title">Property Profile: <span id = "property-title"></span></div>
 
-            <div class = "button-cont"> <button id = "save-button">Save</button></div>
+            <div class = "button-cont"> <button id = "new-button">New<span class = "tooltip" id = "new-tooltip">Please Save the Current Profile</span></button></div>
+            
+            <div class = "button-cont"> <button id = "save-button">Save<span class = "tooltip" id = "save-tooltip">Please fill in Investor Name and Propety Address</span></button></div>
+            
 
             <!--            <div class = "subtitle"><a id = "encoded-edit-link" href = "#">Edit (link from pdf)</a></div>-->
 
@@ -53,11 +56,8 @@
                         <div class = "detail-input-line">Contact: <input type= "text" placeholder = "Phone/Email/etc.">
                         </div>
 
-                        <div class = "detail-input-line">Contact: <input  type= "text" placeholder = "Phone/Email/etc."> <span><button class = "remove-contact-button">X</button></span>
-                        </div>
-
                     </div>
-                    <div class = "small-button-cont"> <button id = "add-contact-button">Add Contact</button></div>
+                    <div class = "button-cont"> <button id = "add-contact-button">Add Contact</button></div>
                 </div>
 
                 <span class = "spacer"></span>
@@ -96,7 +96,7 @@
 
                     <div id = "add-comps-here">
                         <div class = "comp">
-                            <div class = "detail-input-line">Address: <input name = "comp-address" type= "text"></div>
+                            <div class = "detail-input-line">Address*: <input name = "comp-address" type= "text"></div>
                             <div class = "detail-input-line">Link: <input name = "comp-link" type= "text"><span><button class = "go-button comp-go">Go</button></span></div>
                             <div class = "detail-input-line">Sale Price: <input name = "comp-price" type= "text" ></div>
                         </div>

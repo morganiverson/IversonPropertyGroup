@@ -57,7 +57,7 @@ function checkDetailedEval() {
             var eval = window.location.href.substring(window.location.href.indexOf("?de?") + "?de?".length);
             sessionStorage.setItem("generated-evaluation", eval);
 
-            loadEval(decodeArray(encodedEvalURL));
+            loadEval(decodeArray(eval));
 
         }
         //        console.log(encodedEvalURL);

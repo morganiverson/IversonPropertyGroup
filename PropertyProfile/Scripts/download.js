@@ -8,21 +8,21 @@ function downloadpdf() {
 
     //TXT FILE TEST - filesaver.js
     var blob = new Blob([getDocumentText()], {type: "text/plain;charset=utf-8"});
-//        saveAs(blob, getFileName() + ".txt");
-    
+    //        saveAs(blob, getFileName() + ".txt");
+
     //JSPDF
     var pdf = new jsPDF();
-                            pdf.setFontSize(10);
-
+    pdf.setFontSize(10);
     pdf.text(getDocumentText(), 15, 20);
     pdf.textWithLink("[Click Here to Edit]", 15, 10, {url: sessionStorage.getItem("edit-link")});
     pdf.save(getFileName());
-    //    console.log("Downloading...");
+    profileSaved = true;
+        console.log("Downloading...");
 }
 function getFileName(){
     var address = document.getElementById("address").value;
     var investor = document.getElementById("investor").value;
-    var state = document.getElementById("state").value;
+    var state = document.getElementById("progress").value;
 
     var name = strip(address.toUpperCase()) + "_" + strip(investor.toUpperCase()) + "_" + state;
     return name;    
@@ -53,9 +53,9 @@ function addDetails(ret, array){
 }
 
 function addMultiple(title, array){
-var ret = title + "\n";
+    var ret = title + "\n";
     var content = "";
-    
+
     array.forEach(function(item, index) {
         switch(title.toLowerCase()){
             case "contacts": content+=addContacts(item); break;
@@ -90,29 +90,28 @@ function addComps(item){
 
 }
 
-
 function getDocumentText() {
     var text = detailString;
     console.log(sessionStorage);
-    
-//    var edit_link = sessionStorage.getItem("edit-link");
-//    text = text.replaceAll("[edit-link]", edit_link);
+
+    //    var edit_link = sessionStorage.getItem("edit-link");
+    //    text = text.replaceAll("[edit-link]", edit_link);
     //CALLS
     var calls = JSON.parse(sessionStorage.getItem("calls"));
     text = text.replaceAll("[calls]", addMultiple("Calls", calls));
-    
-    
-     //CALLS
+
+
+    //CALLS
     var comps = JSON.parse(sessionStorage.getItem("comps"));
     text = text.replaceAll("[comps]", addMultiple("Comps", comps));
-    
-     //CALLS
+
+    //CALLS
     var contacts = JSON.parse(sessionStorage.getItem("contacts"));
     text = text.replaceAll("[contacts]", addMultiple("Contacts", contacts));
-    
+
     var details = JSON.parse(sessionStorage.getItem("all"));
     text = addDetails(text, details);
-    
+
     return text;
 }
 

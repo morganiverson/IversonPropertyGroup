@@ -99,10 +99,3 @@ function clearEval(){
     document.getElementById("add-repair-here").innerHTML = header_row_string;
 
 }
-
-
-//TELL IF WEBPAGE IS IPEN IN MOBILE DEVICE
-function onMobile(){
-    return screen.width <= 480;
-}
-

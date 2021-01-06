@@ -71,3 +71,4 @@ function generateChecklist(){
     parent.window.location.href = checklistURL; 
     //GO TO LINK
 }
+

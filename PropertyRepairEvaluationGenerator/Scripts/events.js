@@ -5,7 +5,13 @@
 //    textAreaEvent();
 //    exteriorEvents();
 //}
-
+function allEvents() {
+    interiorSpecs(); 
+    areaBoxEvents(); 
+    otherBoxEvent(); 
+    textAreaEvent(); 
+    exteriorEvents();
+}
 function exteriorEvents() {
     var extBox = document.getElementById("all-ext-box");
     extBox.onchange = function() {
@@ -135,3 +141,5 @@ function areaToSpec(areaID) {
 function areaToSpecRow(areaID) {
     return areaID.substring(0, areaID.indexOf("-")) + "-spec-row";
 }
+
+

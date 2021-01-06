@@ -132,8 +132,8 @@ function getSpecificRepairs(key, repair){
     var specificRepairList = [];
 
     var specifics;
-
-    switch(key) {
+console.log(key.substring(0, 4));
+    switch(key.substring(0, 4)) {
         case "kitc": specifics = [new SpecificRepair("cab", "Cabinets", 5000), 
                                   new SpecificRepair("app", "Appliances", 2000), 
                                  paintRoomRepair, flooringRepair]; break;
@@ -167,8 +167,9 @@ function getMultipleRoomRepairs(room, numberOfRooms, specific) {
 
     //SET COST AND REPAIR NAME
     switch(room) {
-        case "bathroom": cost = 10000; break;
-        case "bedroom": cost = 10000;break;
+        case "bathroom": cost = 4000; break;
+        case "bedroom":
+        case "room": cost = 6000;break;
     }
 
     for(var i = 0; i < numberOfRooms; i++){
@@ -236,34 +237,6 @@ function strip(str) {
     return str.replace(/\s/g, '');
 }
 
-function tooltipEvents(){
-    var button = document.getElementById("submit-but");
-    var tooltipID = "submit-tooltip";
-
-    if(!onMobile()){
-        button.onmouseover = function(e) {
-            if(getRepairArray().length <= 0){
-                showToolTip(e, tooltipID, true);
-            }
-        }
-        button.onmouseout = function(e) {
-            if(getRepairArray().length <= 0){
-                showToolTip(e, tooltipID, false);
-            }
-        }
-    }
-
-
-    button.onclick = function(e) {
-        console.log("click");
-        if(getRepairArray().length > 0){
-            showVerificationPopup();
-        }
-        else {
-            showToolTip(e, tooltipID, true);
-        }
-    }
-}
 
 function cap(str) {
     var ret = "";
