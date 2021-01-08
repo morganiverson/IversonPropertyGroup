@@ -1,7 +1,10 @@
 <html>
     <head>
         <link rel= stylesheet type = text/css href = "Styles/styles.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha512-cLuyDTDg9CSseBSFWNd4wkEaZ0TBEpclX0zD3D6HjI19pO39M58AgJ1SjHp6c7ZOp0/OCRcC2BCvvySU9KJaGw==" crossorigin="anonymous"></script>        
+
         <script src = "Scripts/loadScripts.js"></script>
+        
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
@@ -33,7 +36,7 @@
             <div class = "price-details">
                 <!--                <span class = "detail-input-line">List Price: <input type= "text" value = ""></span>-->
 
-                <span class = "detail-input-line">Repair Cost: <input type= "text" id = "detail-pane-repair-cost" ></span>
+                <span class = "detail-input-line">Repair Cost: <input class = "property-details" type= "text" id = "detail-pane-repair-cost" ></span>
             </div>
         </div>
         <div id = "checklist-cont">
@@ -54,7 +57,7 @@
         </div>
         <div class = "total-pane"> 
             <div class = 'total-label-cell'>Total Repair Cost: 
-                <span class = 'total-value-cell'>$<span id= "total-here">0</span> </span></div>
+                <span class = 'total-value-cell '>$<span id= "total-here">0</span> </span></div>
 
         </div> 
         <div class = "button-pane">
@@ -65,13 +68,16 @@
             <div> <button class = "button" onclick = "window.location.href = '../PropertyRepairEvaluationGenerator/index.html'">Detailed Eval (IP)</button></div>
 
             <div>
-                <button class = "button" onclick = "baseEval();">Clear Eval</button>
+                <button class = "button" onclick = "baseEval(true);">Clear Eval</button>
             </div>
 
-            <div><button class = "button" id = "print-button" >Print Eval<span class = "tooltip" id = "print-tooltip">Please Complete Evaluation</span></button>
-            </div>
+            
 
             <div><button class = "button" id = "save-button" >Save Eval<span class = "tooltip" id = "save-tooltip">Please Complete Evaluation</span></button>
+            </div>
+            <div><button class = "button" id = "dl-button" >Download Eval<span class = "tooltip" id = "dl-tooltip">Please Save Evaluation</span></button>
+            </div>
+            <div><button class = "button" id = "print-button" >Print Eval<span class = "tooltip" id = "print-tooltip">Please Complete Evaluation</span></button>
             </div>
 
         </div>

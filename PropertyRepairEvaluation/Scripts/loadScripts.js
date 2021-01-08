@@ -3,21 +3,6 @@ window.onload = function(){
 }
 
 var scripts = [new Script("../CommonScripts/Repair.js", null),
-               new Script("../CommonScripts/Tooltip.js", 
-                          function() {
-                   addTooltipStyles(); 
-                   tooltipEvents("print-button", "print-tooltip",       
-                                 function() {return !evalComplete()}, 
-                                 function() {return evalComplete()}, 
-                                function() {saveEntries(); window.print();});
-
-                   tooltipEvents("save-button", "save-tooltip",
-                                 function() {return !evalComplete()},
-                                 function() {return evalComplete();}, 
-                                    function() {saveEntries();
-                                                alert("Sucess! A link to revisit and edit this form has been added to your clipboard. Paste it somewhere safe!");}
-                                );
-               }),
                new Script("Scripts/loadRepairs.js", null),
                new Script("Scripts/events.js", null),
                new Script("Scripts/scripts.js", function() {
@@ -26,7 +11,27 @@ var scripts = [new Script("../CommonScripts/Repair.js", null),
                }), 
                new Script("Scripts/save.js", function(){}), 
                new Script("Scripts/download.js", function() {
-                   download();
+               }), 
+               new Script("../CommonScripts/Tooltip.js", 
+                          function() {
+                   addTooltipStyles(); 
+                   tooltipEvents("print-button", "print-tooltip",       
+                                 function() {return !evalComplete()}, 
+                                 function() {return evalComplete()}, 
+                                 function() {saveEntries(); window.print();});
+
+                   tooltipEvents("save-button", "save-tooltip",
+                                 function() {return !evalComplete()},
+                                 function() {return evalComplete();}, 
+                                 function() {saveEntries(false);
+                                             alert("Sucess! A link to revisit and edit this form has been added to your clipboard. Paste it somewhere safe!");}
+                                );
+                   tooltipEvents("dl-button", "dl-tooltip",
+                                 function() {return !evalComplete()},
+                                 function() {return evalComplete();}, 
+                                 function() {downloadpdf();
+                                             }
+                                );
                })
               ];
 //ADD ALL SCRIPTS FROM ARRAY

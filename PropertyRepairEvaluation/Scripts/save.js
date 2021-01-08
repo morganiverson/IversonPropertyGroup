@@ -1,5 +1,6 @@
 //CREATE LINK TO FILLED EVAL
-// CREATE PDF WITH LINK TO FILLED EVAL
+// CREATE PDF WITH LINK TO FILLED EVAL\
+
 function saveEntries(dl) {
     var filledEvalArray = [];
     //SAVE DETAILS
@@ -9,18 +10,22 @@ function saveEntries(dl) {
     var degreeArray = getDegrees();
     filledEvalArray.push({"name": "degrees", "array": degreeArray});
 
+    
     //ENCODE
     //CHECK IF THE ADD A DEFAULT EVALUATION
     
-    var link = "mwiv.github.io/IversonPropertyGroup/PropertyRepairEvalutaion/index.html" + sessionStorage.getItem("generated-evaluation") + "?f?" +  btoa(JSON.stringify(filledEvalArray));
-//    window.location.href = link;
+//    var link = "https://mwiv.github.io/IversonPropertyGroup/PropertyRepairEvalutaion/index.html" + sessionStorage.getItem("generated-evaluation") + "?f?" +  btoa(JSON.stringify(filledEvalArray));
+    var link = "index.html?de?" + sessionStorage.getItem("generated-evaluation") + "?f?" +  btoa(JSON.stringify(filledEvalArray));
+
+    window.open(link, "");
+    //    window.location.href = link;
     
     //ADD TO HREF
-    if(!dl) copy(link);
-    else {
-        sessionStorage.setItem("link", link);
-        sessionStorage.setItem("details",detailArray);
-    }
+//    if(!dl) //copy(link);
+//    else {
+//        sessionStorage.setItem("link", link);
+//        sessionStorage.setItem("details", detailArray);
+//    }
 }
 
 function copy(text){
@@ -48,8 +53,8 @@ function getDegrees() {
                 degreeIndex++;
                 if(input.type == "checkbox") {
                     if(input.checked) {
-                        console.log(degreeIndex);
-                        console.log(input)
+//                        console.log(degreeIndex);
+//                        console.log(input)
                         array.push({"index": degreeIndex, "type": "checkbox", "value": null}); //COUNT UP TO DEGREE INDEX THEN ELM.CLICK()
                     }
                 }

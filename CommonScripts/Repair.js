@@ -1,8 +1,9 @@
 //REPAIR OBJECT
-function Repair(key, repair, cost){
+function Repair(key, repair, cost, notes){
     this.key = key;
     this.repair = repair;
     this.cost = cost;
+    this.notes = notes;
 }
 //SCRIPT OBJECT
 function Script(URL, onload){

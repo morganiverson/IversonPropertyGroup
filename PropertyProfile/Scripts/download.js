@@ -155,7 +155,7 @@ function text2PDF(pdf){
     var base_left = 15;
     var base_top = 20;
     var line_height = 5;
-    var y = base_left;
+    var y = base_top;
     var x = base_left;
 
 
@@ -169,12 +169,12 @@ function text2PDF(pdf){
                  pdf.setTextColor(47, 182, 78).setFont("Helvetica", "bold");
 //                console.log(pdf.getTextColor());
                 
-                pdf.textWithLink(item.string, y, x, {url: item.url});
+                pdf.textWithLink(item.string, x, y, {url: item.url});
             }
             else {
                  pdf.setTextColor(47, 182, 78).setFont("Helvetica", "bold");
 //                console.log(pdf.getTextColor());
-                pdf.textWithLink(item.string, y, x, {url: item.url});
+                pdf.textWithLink(item.string, x, y, {url: item.url});
             }
         }
         else{
@@ -183,21 +183,21 @@ function text2PDF(pdf){
             pdf.setFontSize( (index == 0 || index == 1) ? 15 : 10);
             pdf.setFontStyle( (index == 1) ? "italic" : "normal");
             
-            pdf.text(item.string, y, x);
+            pdf.text(item.string, x, y);
 
             //LINK PLACEMENT SETTINGS
             if(item.string.indexOf(":") >= 0){
-                y = base_left + pdf.getTextWidth((item.string));
+                x = base_left + pdf.getTextWidth((item.string));
                 //TOP NO CHNAGE
             }
             else {
-                y = base_left;
-                x = x + line_height;
+                x = base_left;
+                y = y + line_height;
             }
         }
 
-        if(y >= pdf.internal.pageSize.height - 20){
-            x = base_top;
+        if(x >= pdf.internal.pageSize.height - 20){
+            y = base_top;
             pdf.addPage();
         }
     });

@@ -5,10 +5,7 @@ window.onload = function(){
     addScripts();
 }
 
-//    <script src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.debug.js"></script>
-
-
-var path = "Scripts/";//"https://mwiv.github.io/IversonPropertyGroup/PropertyProfile/Scripts/";
+var path = "Scripts/";
 var scripts = [new Script("../../CommonScripts/Tooltip.js", 
                           function() {
     addTooltipStyles(); 
@@ -31,7 +28,6 @@ var scripts = [new Script("../../CommonScripts/Tooltip.js",
                new Script("events.js", function() {allEvents();}), 
                new Script("load.js", function(){ if(isEncoded()) load();}), 
                new Script("save.js", function() {}),
-               new Script("FileSaver.js", null),
                new Script("download.js", function() {})];
 //ADD ALL SCRIPTS FROM ARRAY
 function addScripts() {

@@ -1,4 +1,3 @@
-var keys = [];
 
 function removeEncoding() {
     window.location.href = window.location.href.substring(0, window.location.href.indexOf("?"));
@@ -44,7 +43,7 @@ function replaceAllHTML(key, repair, html_string, parent_key){
 
 function checkDetailedEval() {
     var link = window.location.href;
-    if(encodedEval()) {
+    if(encodedEval()) { //COMPLETED EVAL
         //CHECK IF DEFAULT EVAL
         if(link.indexOf("?f?") >= 0) {
             var eval = link.substring(link.indexOf("?de?") + "?de?".length, link.indexOf("?f?"));
@@ -53,12 +52,17 @@ function checkDetailedEval() {
             loadEval(decodeArray(eval));
             loadEntries(encodedEntries);
         }
-        else {
+        else if (link.indexOf("?de?") >=0){ //GENERATED EVAL
             var eval = window.location.href.substring(window.location.href.indexOf("?de?") + "?de?".length);
             sessionStorage.setItem("generated-evaluation", eval);
 
             loadEval(decodeArray(eval));
-
+        }
+        else { //DEFAULT EVAL
+            //CREATE ARRAY 
+            //ENCODE
+            //SET
+            
         }
         //        console.log(encodedEvalURL);
         //        console.log(decodeArray(encodedEvalURL));
@@ -79,20 +83,6 @@ function decodeArray(URL) {
 function Key(Repair, parent_key) {
     this.Repair = Repair;
     this.parent_key = parent_key;
-}
-
-function addRepair(key, repair, full_cost, parent_key){
-    var obj = {"key": key, "repair": repair, "cost": full_cost};
-    keys.push(new Key(obj, parent_key)); //ADD TO KEY ARRAY
-
-    if(parent_key != null) {
-        document.getElementById("add-repair-here").innerHTML+=replaceAllHTML(key, repair, child_html_string, parent_key); //ADD ROW TO CHECK LIST TABLE
-    }
-    else {
-        document.getElementById("add-repair-here").innerHTML+=replaceAllHTML(key, repair, default_html_string, null); //ADD ROW TO CHECK LIST TABLE
-        //    checkListeners(key);//ADD LISTENERS FOR CHECK BOXES
-        //    console.log(keys);
-    }
 }
 
 //LOAD A FILLED OUT EVAL

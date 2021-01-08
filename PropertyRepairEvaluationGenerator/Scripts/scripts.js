@@ -19,10 +19,10 @@ function showVerificationPopup(){
 
 }
 function hideVerificationPopup(){
-    
+
     sessionStorage.setItem("allAreaRepairs", "");
     console.log(sessionStorage);
-    
+
     document.getElementsByTagName("iframe")[0].style.display = "none";
     document.getElementById("submit-but").disabled = false;
     document.body.overflow = "scroll";
@@ -110,7 +110,7 @@ function getOtherAreas() {
 function getRepair(key){
     var repairCost;
     var repair = cap(key);
-//    console.log(repair);
+    //    console.log(repair);
     var repairKey = (key.length < 5) ? key : key.substring(0, 4);
 
     //set repair cost
@@ -132,16 +132,16 @@ function getSpecificRepairs(key, repair){
     var specificRepairList = [];
 
     var specifics;
-console.log(key.substring(0, 4));
+    console.log(key.substring(0, 4));
     switch(key.substring(0, 4)) {
         case "kitc": specifics = [new SpecificRepair("cab", "Cabinets", 5000), 
                                   new SpecificRepair("app", "Appliances", 2000), 
-                                 paintRoomRepair, flooringRepair]; break;
+                                  paintRoomRepair, flooringRepair]; break;
         case "bath": specifics = [new Repair("fixt", "Fixtures", 2000),
                                   new Repair("floor", "Flooring (Tile)", 1000),
                                   paintRoomRepair]; break;
         case "atti": specifics = [new Repair("floor", "Flooring", 2500),
-                                   paintRoomRepair]; break;
+                                  paintRoomRepair]; break;
         default: specifics = [paintRoomRepair, flooringRepair];
     }
 
