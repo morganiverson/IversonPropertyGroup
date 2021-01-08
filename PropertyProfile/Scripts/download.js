@@ -5,30 +5,20 @@
 
 //DOWNLOAD HTML VERSION OF PAGE
 function downloadpdf() {
-    addLink(redfin_string, "redfin-link", ["redfin-bed", "redfin-bath", "redfin-size", "redfin-year"]);
-    
-    //TXT FILE TEST - filesaver.js
-    var blob = new Blob([getDocumentText()], {type: "text/plain;charset=utf-8"});
-    //        saveAs(blob, getFileName() + ".txt");
 
-    //JSPDF
+    //    //JSPDF
     var pdf = new jsPDF();
-    pdf.setFontSize(10);
-    pdf.setTextColor(0, 255, 0);
-    pdf.textWithLink("[Click Here to Edit]", 15, 10, {url: sessionStorage.getItem("edit-link")});
-
-    pdf.setTextColor(0, 0, 0);
-    pdf.text(getDocumentText(), 15, 20);
-
-    //    pdf.save(getFileName());
-    console.log("Downloading...");
+    //    pdf.setFont
+    text2PDF(pdf);
+    pdf.save(getFileName());
+    //    console.log("Downloading...");
 }
 function getFileName(){
     var address = document.getElementById("address").value;
     var investor = document.getElementById("investor").value;
     var state = document.getElementById("progress").value;
 
-    var name = strip(address.toUpperCase()) + "_" + strip(investor.toUpperCase()) + "_" + state;
+    var name = strip(address.toLowerCase()) + "_" + strip(investor.toLowerCase()) + "_" + state;
     return name;    
 }
 function strip(str) {
@@ -36,130 +26,191 @@ function strip(str) {
 }
 
 //CREATE TEXT STRING TO OUTPUR ONTO DOCUMENT DOWLOAD
-var defaultTextString = "";
-
-const detailString = "Property Details: [address]\n\n" + 
-      "Investor: [investor]\nState: [progress]\n\nAddress: [address]\nCity: [city]\nState:[state]\nZip Code: [zip]\n" +
-      "\n\nOwner Information\nName: [owner-name]\n[contacts]\n" + 
-      "\nProperty Evaulation\nDescription: [property-description]\nRepair Cost: [repair-cost]\nReapir Eval Link: [repair-link]\n" + 
-      "\n[Redfin]\n"+ 
-      "\nStats\nList Price: [redfin-price]\nRedfin Estimate: [redfin-est]\n" + 
-      "\n[comps]\n" + 
-      "\n[calls]\n" + 
-      "\n\n\nLink to Edit (Copy/Paste):";
-
-
-function addDetails(ret, array){
-    array.forEach(function(item) {
-        ret = ret.replaceAll("[" + item.id + "]", item.value);
-    });
-    return ret;
-}
-
-function addMultiple(title, array){
-    var ret = title + "\n";
-    var content = "";
-
-    array.forEach(function(item, index) {
-        switch(title.toLowerCase()){
-            case "contacts": content+=addContacts(item); break;
-            case "calls": content+=addCalls(item, index); break;
-            case "comps": content+=addComps(item); break;
-        }
-        content+= "\n";
-    });
-
-    return (content == "undefined" || content == "") ? title + ": "+ "None" : (title == "Contacts") ? content : ret + content ;
-}
-
-const contact_string = "Contact: [value]";
-function addContacts(item){
-    console.log(item);
-    return contact_string.replaceAll("[value]", item.value);
-}
-
-const call_string = "\nCall [index]\nDate: [date-here]\nNotes:\n [notes-here]\nOffer: [offer-here]";
-function addCalls(item, index){
-    call_string.replaceAll("[index]", index + 1);
-    call_string.replaceAll("[date-here]", item.date);
-    call_string.replaceAll("[notes-here]", item.notes);
-    call_string.replaceAll("[offer-here]", item.offer);
-}
-
-const comp_string = "Address: [address-here]\nLink: [link-here]\nSale Price: [price-here]"
-function addComps(item){
-    comp_string.replaceAll("[address-here]", item.address);
-    comp_string.replaceAll("[link-here]", item.link);
-    comp_string.replaceAll("[price-here]", item.price);
-
-}
-
-//redfin, property eval, comps
-const redfin_string = ["\nRedfin\nRedfin Link: ", "[redfin-link]", "\nBed(s): [redfin-bed]", "\nBath(s): [redfin-bath]", "\nSquare Feet: [redfin-size]", "\nYear Built: [redfin-year]\n"
+var detailTextArray = ["Property Details: ", "[address]","\n\n",
+                       "Investor: ", "[investor]", 
+                       "State: ", "[progress]", 
+                       "Address: ", "[address]", 
+                       "City: ", "[city]", 
+                       "County: ", "[county]", 
+                       "State: ", "[state]", 
+                       "Zip Code: ", "[zip]", "\n\n",
+                       "Owner Information", 
+                       "Name: ", "[owner-name]\n", 
+                       "[Contacts]\n", "\n", "\n", 
+                       "Property Evaluation", 
+                       "Description: ", "[property-description]", 
+                       "Repair Cost: ", "[repair-cost]", 
+                       "Repair Eval Link: ", "[repair-link]", "\n", "\n",
+                       "Redfin", 
+                       "Redfin Link: ", "[redfin-link]",
+                       "Bed(s): ", "[redfin-bed]", 
+                       "Bath(s): ", "[redfin-bath]", 
+                       "Square Feet: ", "[redfin-size]", 
+                       "Year Built: ", "[redfin-year]", "\n", "\n", 
+                       "Stats", 
+                       "Redfin Estimate: ", "[redfin-est]", 
+                       "[Comps]", "\n", 
+                       "[Calls]",  "\n", 
+                       "[Edit]"
                       ];
+var compTextArray = ["Address: ", "[address]\n", 
+                     "Link: ", "[link]\n", 
+                     "Sale Price: ", "[price]"];
+var callTextArray = ["Date: ", "[date]", 
+                     "Notes: ", "[notes]", 
+                     "Offer: ", "[offer]"];
+var contactTextArray = ["Contact: ", "[value]"];
 
-//addLink(redfin_string, "redfin-link", ["redfin-bed", "redfin-bath", "redfin-size", "redfin-year]);
-function addLink(replaceString, linkID, otherText){
-    var array = [];
+function fillText() {
+    var textArray = [];
+    detailTextArray.forEach(function(item) {
+        if(item.indexOf("]") >= 0 && item.indexOf("[") >= 0){
+            //            console.log("DATA ENTRY: " + item);
+            //DATA ENTRY
+            if(item.indexOf("link") >= 0) {
+                //                console.log("LINK: " + item);
+                var url = getSessionDetail(stripBrackets(item), "all");
+                //IS LINK
+                textArray.push(new Text(url + "\n", true, url));
+            }
+            else{
+                //                console.log("NOT LINK: " + item);
+                switch(stripBrackets(item)) {
+                    case "Comps": textArray.push.apply(textArray, getMultiple("comps", compTextArray, "Comps\n")); break;
+                    case "Contacts":     textArray.push.apply(textArray, getMultiple("contacts", contactTextArray, "Contacts"));
+                        break;
+                    case "Calls": textArray.push.apply(textArray, getMultiple("calls", callTextArray, "Calls\n")); 
+                        break;
 
-    replaceString.find(function(item) {return item = linkID});
-    var link = getSessionDetail(linkID);
-    array.push(new Text(link, "link"));
-
-    replaceString.forEach(function (item, index) {
-        if(item != linkID) {
-            console.log(otherText[index]);
-            array.push(new Text(item.replaceAll("[" + otherText[index] + "]", getSessionDetail(otherText[index]))));
+                    case "Edit": textArray.push(new Text("Click Here To Edit", true, sessionStorage.getItem("edit-link")));
+                        break;
+                    default: textArray.push(new Text(getSessionDetail(stripBrackets(item), "all") + "\n", false, null));
+                }
+            }
         }
+        else{
+            textArray.push(new Text(item, false, null));
+        }
+    });
+    console.log(textArray);
+    return textArray;
+}
+
+//FILL DATA ENTRIES OF ITEMS WITH REPITITTION
+function getMultiple(sessionID, emptyTextArray, Title){
+    var textArray = [new Text(Title, false)];
+
+    //    console.log(JSON.parse(sessionStorage.getItem(sessionID)));
+    JSON.parse(sessionStorage.getItem(sessionID)).forEach(function(item) {
+        //                console.log(/**/item);
+        emptyTextArray.forEach(function(text_item) {
+            if(text_item.indexOf("[") >= 0 && text_item.indexOf("]") >= 0 ){
+                if(text_item.indexOf("link") >= 0){
+                    //                                        console.log(text_item);
+                    var url = item[stripBrackets(text_item)];
+                    textArray.push(new Text(url + "\n", true, url));
+                }
+                else {
+                    textArray.push(new Text(item[stripBrackets(text_item)] + "\n", false, null))
+                }
+            }
+            else {
+                textArray.push(new Text(text_item, false, null))
+            }
+
+        });
+
 
     });
-    console.log(array);
-
+    //    console.log(textArray);
+    return textArray;
 }
 
-function getSessionDetail(id) {
-    return JSON.parse(sessionStorage.getItem("all")).find(o => o.id === id).value;
-}
-function getDocumentText() {
+//REMOVE BRACKETS AND NEW LINE CHAR
+function stripBrackets(str){
+    return str.replace(/[\[\]\n]/g, "");
+}             
 
-    //TEXT OBJECT WITH URL - comps, redfin
-
-    var text = detailString;
-    console.log(sessionStorage);
-
-    //    var edit_link = sessionStorage.getItem("edit-link");
-    //    text = text.replaceAll("[edit-link]", edit_link);
-
-    //REDFIN
-
-
-    //CALLS
-    var calls = JSON.parse(sessionStorage.getItem("calls"));
-    text = text.replaceAll("[calls]", addMultiple("Calls", calls));
-
-    //COMPS
-    var comps = JSON.parse(sessionStorage.getItem("comps"));
-    text = text.replaceAll("[comps]", addMultiple("Comps", comps));
-
-    //CALLS
-    var contacts = JSON.parse(sessionStorage.getItem("contacts"));
-    text = text.replaceAll("[contacts]", addMultiple("Contacts", contacts));
-
-    var details = JSON.parse(sessionStorage.getItem("all"));
-    text = addDetails(text, details);
-
-    return text;
+//RETURN THE VALUE OF A SESSION ARRAY DETAILS
+function getSessionDetail(findID, array) {
+    //        console.log("\"" + findID + "\"" );
+    return JSON.parse(sessionStorage.getItem(array)).find(o => o.id === findID).value;
 }
 
-
-
-
-function Text(string, type){
+//TEXT OBJECT
+function Text(string, isLink, url){
     this.string = string;
-    this.type = type;
+    this.isLink = isLink;
+    this.url = url;
+}
+
+function text2PDF(pdf){
+    var length = 0;
+    pdf.setFontSize(10);
+    pdf.setFont("Helvetica");
+    //    pdf.setTextColor(0, 255, 0);
+
+
+    var textArray = fillText();
+    var base_left = 15;
+    var base_top = 20;
+    var line_height = 5;
+    var y = base_left;
+    var x = base_left;
+
+
+    textArray.forEach(function(item, index) {
+        if(item.isLink) {
+
+            if(item.string == "Click Here To Edit"){
+                //RECTANGLE CONTAINER
+
+                //LINK STYLES
+                 pdf.setTextColor(47, 182, 78).setFont("Helvetica", "bold");
+//                console.log(pdf.getTextColor());
+                
+                pdf.textWithLink(item.string, y, x, {url: item.url});
+            }
+            else {
+                 pdf.setTextColor(47, 182, 78).setFont("Helvetica", "bold");
+//                console.log(pdf.getTextColor());
+                pdf.textWithLink(item.string, y, x, {url: item.url});
+            }
+        }
+        else{
+            pdf.setTextColor(0, 0, 0);
+            pdf.setFont("Helvetica");
+            pdf.setFontSize( (index == 0 || index == 1) ? 15 : 10);
+            pdf.setFontStyle( (index == 1) ? "italic" : "normal");
+            
+            pdf.text(item.string, y, x);
+
+            //LINK PLACEMENT SETTINGS
+            if(item.string.indexOf(":") >= 0){
+                y = base_left + pdf.getTextWidth((item.string));
+                //TOP NO CHNAGE
+            }
+            else {
+                y = base_left;
+                x = x + line_height;
+            }
+        }
+
+        if(y >= pdf.internal.pageSize.height - 20){
+            x = base_top;
+            pdf.addPage();
+        }
+    });
+
+    //    console.log(pdf.output());
 }
 
 
+function getValue(str) {
+    return (str == "\n") ? "---" : str;
+}
 
-
-
+//underline 
+//const textWidth = doc.getTextWidth(text);
+//doc.line(x, y, x + textWidth, y)
+//doc.setFontType("bold");
