@@ -8,10 +8,17 @@ function downloadpdf() {
 
     //    //JSPDF
     var pdf = new jsPDF();
+    pdf.setProperties({
+        title: getFileName()
+    });
     //    pdf.setFont
-    text2PDF(pdf);
-    pdf.save(getFileName());
-    //    console.log("Downloading...");
+//    text2PDF(pdf);
+    
+    //BOTH ???
+//    pdf.save(getFileName());
+//    window.open(pdf.output('dataurlnewwindow')); //THIS WORKS BUT THE DOWNLOAD BUTTON DOES NOT WORK 
+//    openInNewWindow(pdf); //ALSO WORKS DL BUTTON DOESNT WORK 
+    
 }
 function getFileName(){
     var address = document.getElementById("address").value;
@@ -214,3 +221,12 @@ function getValue(str) {
 //const textWidth = doc.getTextWidth(text);
 //doc.line(x, y, x + textWidth, y)
 //doc.setFontType("bold");
+
+function openInNewWindow(doc) {
+    var string = doc.output('dataurlnewwindow');
+    var embed = "<embed width='100%' height='100%' src='" + string + "'/>";
+    var x = window.open();
+    x.document.open();
+    x.document.write(embed);
+    x.document.close();
+}

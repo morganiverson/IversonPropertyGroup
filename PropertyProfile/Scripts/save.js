@@ -28,7 +28,7 @@ function saveContacts(){
 
                     if(div_item.value != "") {
                         object.value = div_item.value;
-//                        console.log(div_index);
+                        //                        console.log(div_index);
                         array.push(object);
                     }
                 }
@@ -56,23 +56,26 @@ function saveThis(key, musthaveID){
                 //                console.log(child_item);
                 //GET SECOND CHILD OF EACH DIV OF ELEMENTS WITH CLASS NAME CALL
                 var input = child_item.childNodes[1];
-                if(input.name == musthaveID && input.value == ""){
-                    console.log(input.id);
-                    empty = true;
-                }
-                else {
-                    if(key == "comp") {
-                        switch(input.name){
-                            case "comp-address": obj.address = input.value; break;
-                            case "comp-link": obj.link = input.value; break;
-                            case "comp-price": obj.price = input.value; break;
-                        }
+                console.log(input);
+                if(input != null) {
+                    if(input.name == musthaveID && input.value == ""){
+                        console.log(input.id);
+                        empty = true;
                     }
-                    else { //CONTACT
-                        switch(input.name){
-                            case "call-date": obj.date = input.value; break;
-                            case "call-notes": obj.notes = input.value; break;
-                            case "call-offer": obj.offer = input.value; break;
+                    else {
+                        if(key == "comp") {
+                            switch(input.name){
+                                case "comp-address": obj.address = input.value; break;
+                                case "comp-link": obj.link = input.value; break;
+                                case "comp-price": obj.price = input.value; break;
+                            }
+                        }
+                        else { //CONTACT
+                            switch(input.name){
+                                case "call-date": obj.date = input.value; break;
+                                case "call-notes": obj.notes = input.value; break;
+                                case "call-offer": obj.offer = input.value; break;
+                            }
                         }
                     }
                 }
@@ -105,18 +108,38 @@ function saveAll(){
             array.push({"id": item.id, "value": item.value});
         }
     });
-//    console.log(array);
+    //    console.log(array);
     return (!empty) ? array: null;
 }
 
 
 function save(){
     var link = getEncodedLink();
+
     profileSaved = true;
+
     //CREATE TEXT FROM ARRAYS
     console.log(link);
     sessionStorage.setItem("edit-link", link);
+//    window.open(link, "_blank");
+
+        copy(link);
+        alert("A link to edit this profile has been compied to your clipboard. Paste it somewhere safe!");
+
     return link;
+}
+
+function copy(text){
+    var t = document.createElement("textarea");
+    t.value = text;
+    document.body.appendChild(t);
+
+    t.select();
+    t.setSelectionRange(0, 99999)
+
+    document.execCommand("copy");
+    document.body.removeChild(t);
+
 }
 
 function encode(elm){
@@ -130,31 +153,27 @@ function encode(elm){
         default: key = "?DP?"; arr = saveAll();
     }
     sessionStorage.setItem(elm, JSON.stringify(arr));
-//    console.log(arr);
+    //    console.log(arr);
 
     if(key == "?DP?" && arr == null) {return null;}
     else {
         var encodedArr = encodeArray(arr);
-//        console.log(arr);
+
+        console.log(elm);
+        console.log(encodedArr);
 
         return key + encodedArr;
     }
 }
 
 function getEncodedLink(){
-    var link = "https://mwiv.github.io/IversonPropertyGroup/PropertyProfile/index.html";
-//    var link = "";//"index.html";
+    var link = "index.html";// "https://mwiv.github.io/IversonPropertyGroup/PropertyProfile/index.html";
+    //    var link = "";//"index.html";
     var all = encode("all");
     var encodings = [encode("contacts"), encode("comps"), encode("calls")];
     if (all != null) {
         link+= all;
-//        encodings.forEach(function(item) {link+= item});
-//        document.getElementById("encoded-edit-link").style.textDecoration = "underline";
-//        document.getElementById("encoded-edit-link").style.fontWeight = "bold";
-//
-//        document.getElementById("encoded-edit-link").href = link;   
-//        document.getElementById("encoded-edit-link").target = "_blank";
-
+        encodings.forEach(function(item) {link+= item});
         return link;
     }
     else return null;

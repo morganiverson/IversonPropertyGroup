@@ -21,7 +21,7 @@ function inputEvents() {
 }
 
 function allEvents(){
-//    saveButton();
+    //    saveButton();
     contactEvents();
     compEvents();
     callEvents();
@@ -111,7 +111,7 @@ function addressEvent(){
     address_label.innerHTML = address_input.value;
 
     address_input.onchange = function() {
-//        console.log(address_label.value);
+        //        console.log(address_label.value);
         address_label.innerHTML = address_input.value;
     }
 }
@@ -163,12 +163,21 @@ function openLink(link) {
 }
 
 function addContact() {
-    document.getElementById("add-contact-here").innerHTML+= contact_html;
+    //        console.log("contact added.")
+
+    document.getElementById("add-contact-here").appendChild(getContactElement());
 }
 function addCall() {
+    //    console.log("call added.")
     //ADD DIV CONTAINING DATE AND DETAILS OF CONVERSATION
     document.getElementById("add-calls-here").appendChild(getCallElement());
 }
+function addComp() {
+    //        console.log("comp added.")
+
+    document.getElementById("add-comps-here").appendChild(getCompElement());
+}
+
 function remove(elm) {
     elm.parentNode.parentNode.remove();
 }
@@ -336,8 +345,8 @@ function saved(){
     return profileSaved;
 }
 function complete(){
-//    console.log(document.getElementById("investor").value != "");
-//        console.log(document.getElementById("address").value != "");
+    //    console.log(document.getElementById("investor").value != "");
+    //        console.log(document.getElementById("address").value != "");
 
     return (document.getElementById("investor").value != "" && document.getElementById("address").value != "");
 }

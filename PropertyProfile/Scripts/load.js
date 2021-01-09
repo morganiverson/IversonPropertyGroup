@@ -9,38 +9,45 @@ function loadPropetyDetails(){
 
 }
 function addN(n, elm){
+    console.log(elm + " " + n);
 
-    if(n == 0) return;
+    if(n <= 1) return;
     else {
         switch(elm){
             case "call": addCall(); break;
             case "contact": addContact(); break;
             case "comp": addComp(); break;
         }
-        addN(n - 1, elm);
+        return addN(n - 1, elm);
     }
 }
 
 function loadThis(key, encoding) {
     console.log(key);
-    console.log(encoding);
+    //    console.log(encoding);
     var array = decodeArray(encoding);
-    
+
 
     switch(key){
-        case "call": addN(array.length, "calls"); break;
+        case "call": addN(array.length, "call"); break;
         case "comp": addN(array.length, "comp"); break;
     }
+    if(array.length == 0) return;
     console.log(key);
     console.log(array);
-
+    var index = 0;
     var containers = document.getElementsByClassName(key);
-    Array.prototype.forEach.call(containers, function(item,index){
+    //    console.log(containers);
+    Array.prototype.forEach.call(containers, function(item){
+        if(index >= array.length) return;
+console.log(index);
         Array.prototype.forEach.call(item.childNodes, function(child_item, child_index) {
-            if(child_item.tagName == "DIV"){
-//                console.log(child_item);
+
+            if(child_item.tagName == "DIV" && child_item.classList.contains("detail-input-line")){
                 var input = child_item.childNodes[1];
+                console.log(input);
                 if(key == "call") {
+                    console.log(array[index]);
                     switch(input.name){
                         case "call-notes": input.value = array[index].notes; break;
                         case "call-date": input.value = array[index].date; break;
@@ -48,6 +55,8 @@ function loadThis(key, encoding) {
                     }
                 }
                 else {
+                    //                    console.log(array[index]);
+
                     switch(input.name) {
                         case "comp-link": input.value = array[index].link; break;
                         case "comp-address": input.value = array[index].address; break;
@@ -56,26 +65,28 @@ function loadThis(key, encoding) {
                 }
             }
         });
+        index++;
+
     });
 }
 function loadContacts(encoding) {
 
     var array = decodeArray(encoding);
     addN(array.length, "contact");
-    
-    console.log("contact")
+
+    //    console.log("contact")
     console.log(array);
-    Array.prototype.forEach.call(document.getElementById("add-contact-here").childNodes, function(item, index) {
-        //        console.log(item);
+    if(array.length == 0) return;
+    var index = 0;
+
+    Array.prototype.forEach.call(document.getElementById("add-contact-here").childNodes, function(item) {
         if(item.tagName == "DIV") {
             var object = {};
-            Array.prototype.forEach.call(item.childNodes, function(div_item, div_index) {
-
+            Array.prototype.forEach.call(item.childNodes, function(div_item) {
                 if(div_item.tagName == "INPUT") {
-                    if(div_item.value != "") {
-                        object.value = div_item.value;
-                        array.push(object);
-                    }
+                    //                       console.log(index);
+                    div_item.value = array[index].value;
+                    index++;
                 }
             });
         }
@@ -84,10 +95,10 @@ function loadAll(encoding){
     var array = decodeArray(encoding);
     console.log("all");
     console.log(array)
-    
+
     array.forEach(function (item, index) {
         var elm = document.getElementById(item.id);
-        console.log(elm);
+        //        console.log(elm);
         elm.value = item.value});
 }
 
@@ -96,18 +107,31 @@ function decodeArray(encoding) {
 }
 
 function load(){
-//    document.getElementById("encoded-edit-link").href = window.location.href;
-    
-    
+    //    document.getElementById("encoded-edit-link").href = window.location.href;
+
+
     console.log("Loading Encoded URL Data....")
     var link = window.location.href;
+
+    var hasContacts = link.indexOf("?CT?") >= 0;
+    var hasComps = link.indexOf("?CP?") >= 0;
+    var hasCalls = link.indexOf("?CL?") >= 0;
+
+
+    console.log(link);
+    console.log(link.indexOf("?DP?"));
+    console.log(link.indexOf("?CT?"));
     var details = link.substring(link.indexOf("?DP?") + 4, link.indexOf("?CT?"));
+
     var contacts = link.substring(link.indexOf("?CT?") + 4, link.indexOf("?CP?"));
     var comps = link.substring(link.indexOf("?CP?") + 4, link.indexOf("?CL?"));
     var calls = link.substring(link.indexOf("?CL?") + 4);
 
+
+    //    console.lo
+
     loadAll(details);
-//    console.log(contacts);
+    //    console.log(contacts);
     loadThis("call", calls);
     loadThis("comp", comps);
     loadContacts(contacts);
