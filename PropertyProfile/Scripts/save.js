@@ -167,8 +167,9 @@ function encode(elm){
 }
 
 function getEncodedLink(){
-    var link = "index.html";// "https://mwiv.github.io/IversonPropertyGroup/PropertyProfile/index.html";
-    //    var link = "";//"index.html";
+//    var link = "index.html";
+    var link = "https://mwiv.github.io/IversonPropertyGroup/PropertyProfile/index.html";
+    
     var all = encode("all");
     var encodings = [encode("contacts"), encode("comps"), encode("calls")];
     if (all != null) {
