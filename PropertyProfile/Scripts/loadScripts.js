@@ -4,9 +4,8 @@
 window.onload = function(){
     addScripts();
 }
-
 var path = "Scripts/";
-var scripts = [new Script("../../CommonScripts/Tooltip.js", 
+var scripts = [new Script("../../CommonScripts/ToolTip.js", 
                           function() {
     addTooltipStyles(); 
     tooltipEvents("save-button", "save-tooltip", 
