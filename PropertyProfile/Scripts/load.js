@@ -98,7 +98,7 @@ function loadAll(encoding){
 
     array.forEach(function (item, index) {
         var elm = document.getElementById(item.id);
-        //        console.log(elm);
+                console.log(elm);
         elm.value = item.value});
 }
 

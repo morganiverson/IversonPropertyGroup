@@ -43,7 +43,7 @@ a:hover{
 .detail-pane{
     width: 60%;;
     margin: 0 auto;
-    padding:10px;
+    padding:5px;
     box-sizing: border-box;
 
     overflow:auto;
@@ -58,14 +58,14 @@ a:hover{
     font-size: 15px;
 }
 .view-details{
-    width:80%;
-    margin:0 10%;
+    width:90%;
+    margin:0 5%;
     border: none;
     float:left;
 }
 .detail-input-line{
     display:block;
-    padding:5px 10%;
+    padding:5px 5%;
 }
  input{
     width: 70%;

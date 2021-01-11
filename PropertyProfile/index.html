@@ -2,12 +2,12 @@
     <head>
         <script src = "Scripts/loadScripts.js"></script>
 
-        
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha512-cLuyDTDg9CSseBSFWNd4wkEaZ0TBEpclX0zD3D6HjI19pO39M58AgJ1SjHp6c7ZOp0/OCRcC2BCvvySU9KJaGw==" crossorigin="anonymous"></script>        
-        
-        
-        
-        
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha512-cLuyDTDg9CSseBSFWNd4wkEaZ0TBEpclX0zD3D6HjI19pO39M58AgJ1SjHp6c7ZOp0/OCRcC2BCvvySU9KJaGw==" crossorigin="anonymous"></script>        
+
+
+
+
         <link rel ="stylesheet" type = "text/css" href = "Styles/styles.css">
     </head>
 
@@ -17,11 +17,11 @@
             <div class = "title">Property Profile: <span id = "property-title"></span></div>
 
             <div class = "button-cont"> <button id = "new-button">New<span class = "tooltip" id = "new-tooltip">Please Save the Current Profile</span></button></div>
-            
+
             <div class = "button-cont"> <button id = "save-button">Save<span class = "tooltip" id = "save-tooltip">Please fill in Investor Name and Propety Address</span></button></div>
-            
+
             <div class = "button-cont"> <button id = "dl-button">Download<span class = "tooltip" id = "dl-tooltip">Please Save the Current Profile</span></button></div>
-            
+
 
             <!--            <div class = "subtitle"><a id = "encoded-edit-link" href = "#">Edit (link from pdf)</a></div>-->
 
@@ -30,6 +30,8 @@
                 <!--INVESTOR NAME-->
                 <div class = "detail-input-line">Investor: <input class = "detail" type= "text" id = "investor" placeholder = "Your Name(s)" >
                 </div>
+                <div class = "detail-input-line">Desired Profit: <input class = "detail" id = "dp" type= "text"></div>
+
                 <!--PROPERTY STATE-->
                 <div class = "detail-input-line">State:<select id = "progress" class = "detail">
                     <option value = "PRECONTACT">Pre-Contact</option>
@@ -38,6 +40,7 @@
                     <option value = "FOLLOW">Follow-Up</option>
                     <option value = "SOLD">Sold</option>
                     </select></div>
+
 
                 <span class = "call-spacer"></span>
 
@@ -77,6 +80,11 @@
 
                     <div class = "detail-input-line">Repair Cost: <input class = "detail" id = "repair-cost"type= "text" ></div>
                     <div class = "detail-input-line">Repair Eval Link: <input class = "detail" id = "repair-link" type= "text" ><span><button id = "repair-eval-go" class = "go-button">Go</button></span></div>
+                    <div class = "detail-input-line">Description: <textarea class = "detail" id = "property-description"></textarea></div>
+                    <br>
+                    <div class = "detail-input-line">Est. After Repair Value: <input class = "detail" id = "arv" type= "tel" ></div>
+                    <div class = "detail-input-line">Maximum Allowable Offer: <input class = "detail" id = "mao" type= "text"></div>
+
                 </div>
                 <span class = "spacer"></span>
 

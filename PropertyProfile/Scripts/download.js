@@ -31,9 +31,11 @@ function strip(str) {
 }
 
 //CREATE TEXT STRING TO OUTPUR ONTO DOCUMENT DOWLOAD
-var detailTextArray = ["Property Details: ", "[address]","\n\n",
+var detailTextArray = ["Property Details: ", "[address]","\n", "\n",
+                       "[Edit]", "\n", "\n" ,
                        "Investor: ", "[investor]", 
-                       "State: ", "[progress]", 
+                       "Desired Profit: ", "[dp]", 
+                       "State: ", "[progress]", "\n", "\n",
                        "Address: ", "[address]", 
                        "City: ", "[city]", 
                        "County: ", "[county]", 
@@ -45,7 +47,9 @@ var detailTextArray = ["Property Details: ", "[address]","\n\n",
                        "Property Evaluation", 
                        "Description: ", "[property-description]", 
                        "Repair Cost: ", "[repair-cost]", 
-                       "Repair Eval Link: ", "[repair-link]", "\n", "\n",
+                       "Repair Eval Link: ", "[repair-link]", "\n",
+                       "Est. After Repair Value: ", "[arv]", 
+                       "Maximum Allowable Offer: " , "[mao]", "\n", "\n",
                        "Redfin", 
                        "Redfin Link: ", "[redfin-link]",
                        "Bed(s): ", "[redfin-bed]", 
@@ -138,7 +142,7 @@ function stripBrackets(str){
 
 //RETURN THE VALUE OF A SESSION ARRAY DETAILS
 function getSessionDetail(findID, array) {
-    //        console.log("\"" + findID + "\"" );
+            console.log("\"" + findID + "\"" );
     return JSON.parse(sessionStorage.getItem(array)).find(o => o.id === findID).value;
 }
 
@@ -168,7 +172,6 @@ function text2PDF(pdf){
         if(item.isLink) {
 
             if(item.string == "Click Here To Edit"){
-                //RECTANGLE CONTAINER
 
                 //LINK STYLES
                  pdf.setTextColor(47, 182, 78).setFont("Helvetica", "bold");
