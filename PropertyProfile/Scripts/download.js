@@ -15,8 +15,8 @@ function downloadpdf() {
 //    text2PDF(pdf);
     
     //BOTH ???
-//    pdf.save(getFileName());
-//    window.open(pdf.output('dataurlnewwindow')); //THIS WORKS BUT THE DOWNLOAD BUTTON DOES NOT WORK 
+    pdf.save(getFileName());
+    window.open(pdf.output('dataurlnewwindow')); //THIS WORKS BUT THE DOWNLOAD BUTTON DOES NOT WORK 
 //    openInNewWindow(pdf); //ALSO WORKS DL BUTTON DOESNT WORK 
     
 }
