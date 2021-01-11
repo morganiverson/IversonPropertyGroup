@@ -11,13 +11,11 @@ function downloadpdf() {
     pdf.setProperties({
         title: getFileName()
     });
-    //    pdf.setFont
-//    text2PDF(pdf);
+    text2PDF(pdf);
     
     //BOTH ???
     pdf.save(getFileName());
     window.open(pdf.output('dataurlnewwindow')); //THIS WORKS BUT THE DOWNLOAD BUTTON DOES NOT WORK 
-//    openInNewWindow(pdf); //ALSO WORKS DL BUTTON DOESNT WORK 
     
 }
 function getFileName(){
