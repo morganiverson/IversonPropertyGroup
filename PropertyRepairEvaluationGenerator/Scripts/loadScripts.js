@@ -1,6 +1,6 @@
 //*********************************************************LOAD SCRIPTS********************************************************************************
-var scripts = [new Script("../CommonScripts/Repair.js", null),
-               new Script("../CommonScripts/Tooltip.js", 
+var scripts = [new Script("../../CommonScripts/Repair.js", null),
+               new Script("../../CommonScripts/Tooltip.js", 
                           function() {
                    addTooltipStyles(); 
                    tooltipEvents("submit-but", "submit-tooltip", 

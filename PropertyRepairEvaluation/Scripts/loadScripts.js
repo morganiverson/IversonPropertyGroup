@@ -2,7 +2,7 @@ window.onload = function(){
     addScripts();
 }
 
-var scripts = [new Script("../CommonScripts/Repair.js", null),
+var scripts = [new Script("../../CommonScripts/Repair.js", null),
                new Script("Scripts/loadRepairs.js", null),
                new Script("Scripts/events.js", null),
                new Script("Scripts/scripts.js", function() {
@@ -12,7 +12,7 @@ var scripts = [new Script("../CommonScripts/Repair.js", null),
                new Script("Scripts/save.js", function(){}), 
                new Script("Scripts/download.js", function() {
                }), 
-               new Script("../CommonScripts/Tooltip.js", 
+               new Script("../../CommonScripts/Tooltip.js", 
                           function() {
                    addTooltipStyles(); 
                    tooltipEvents("print-button", "print-tooltip",       
