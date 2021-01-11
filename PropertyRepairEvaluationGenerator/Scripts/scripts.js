@@ -200,22 +200,6 @@ function SpecificRepair(key, repair, cost) {
     this.cost = cost;
 }
 
-//HELPERS
-//CAPIOTALIZE STRING
-//function cap(str) {
-//    console.log("Before:" + str);
-//    var ret = str.replace(/(^\w|\s\w)(\S*)/g, (_,m1, m2) => m1.toUpperCase() + m2);
-//    
-//    
-//        
-//    // "^\w" - first char in string
-//    // "|" - or 
-//    // "\s\w" - first char after space
-//    // g - global all occurrences
-//    console.log("After:" + ret);
-//    return ret;
-//}
-
 //CREATE KEY FROM STRING
 function createKey(area) {
     var areaName = area.split(" ");

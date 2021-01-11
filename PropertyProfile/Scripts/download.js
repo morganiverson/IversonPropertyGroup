@@ -14,8 +14,8 @@ function downloadpdf() {
     text2PDF(pdf);
     
     //BOTH ???
-    pdf.save(getFileName());
-    window.open(pdf.output('dataurlnewwindow')); //THIS WORKS BUT THE DOWNLOAD BUTTON DOES NOT WORK 
+   if(!onMobile()) pdf.save(getFileName()); //NOT IF MOBILE
+    window.open(pdf.output('dataurlnewwindow')); 
     
 }
 function getFileName(){

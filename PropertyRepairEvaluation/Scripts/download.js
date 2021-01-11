@@ -11,12 +11,13 @@ function downloadpdf(){
     pdf.setFontSize(15);
     pdf.text("Repair Cost Evaluation: " + document.getElementById("address").value, 15, 20);
     pdf.setFontSize(10);
+     pdf.textWithLink("[Click Here to Edit]", 15, 30, {url: sessionStorage.getItem("edit-link")});
     getDocumentText(pdf);
 
     //    pdf.text(getDocumentText(), 10, 30);
 
     //TITLE
-    //    pdf.textWithLink("[Click Here to Edit]", 15, 10, {url: sessionStorage.getItem("edit-link")});
+       
     //    pdf.save(getFileName());
 //    openInNewWindow(pdf);
 }
@@ -36,7 +37,7 @@ function getDocumentText(pdf){
     var line_index = 0;
     var line_height = 5;
     var x = 15;
-    var y = 30;
+    var y = 40;
     var ypos = y;
 
     var details = document.getElementsByClassName("property-details");
