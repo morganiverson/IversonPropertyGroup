@@ -3,7 +3,6 @@ body{
 }
 .button-cont{
     text-align: center;
-
 }
 .button-cont button{
     width:100px;
@@ -66,6 +65,7 @@ a:hover{
 .detail-input-line{
     display:block;
     padding:5px 5%;
+    text-align: center;
 }
  input{
     width: 70%;
@@ -177,23 +177,22 @@ button:hover{
 
 
 @media screen and (max-device-width: 480px) {
-
+    
     /*    DETAIL PANE */
     .detail-pane{
         width:90%;
         margin:auto;
         padding:5% auto;
-        font-size: 25px;
+        font-size:10px;
     }
-    a{
-        font-size: 10px;
-    }
-    .detail-pane input{
+    input, select{
         width:60%;
     }
-    .detail-input-line{
-        padding-left:0;
+    button-cont button{
+        margin:0;
+/*        margin-top: 3px;*/
     }
+  
 }
 
 @media print{
