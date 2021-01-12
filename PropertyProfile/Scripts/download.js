@@ -80,7 +80,8 @@ function fillText() {
                 //                console.log("LINK: " + item);
                 var url = getSessionDetail(stripBrackets(item), "all");
                 //IS LINK
-                textArray.push(new Text(url + "\n", true, url));
+//                textArray.push(new Text(url + "\n", true, url));
+                textArray.push(new Text("[Click Here]\n", true, url));
             }
             else{
                 //                console.log("NOT LINK: " + item);
@@ -172,16 +173,12 @@ function text2PDF(pdf){
 
                 //LINK STYLES
                 pdf.setTextColor(47, 182, 78).setFont("Helvetica", "bold");
-                //                console.log(pdf.getTextColor());
-
                 pdf.textWithLink(item.string, x, y, {url: item.url});
             }
             else {
                 pdf.setTextColor(47, 182, 78).setFont("Helvetica", "bold");
-                //                console.log(pdf.getTextColor());
                 pdf.textWithLink(item.string, x, y, {url: item.url});
             }
-            //            console.log("\"" + item.string + "\"");
             
             //RESET XPOS AND SET YPOS TO BELOW LINK TEXT
             var splitText = pdf.splitTextToSize(item.string);
