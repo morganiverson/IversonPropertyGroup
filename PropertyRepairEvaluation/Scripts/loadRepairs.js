@@ -62,7 +62,7 @@ function checkDetailedEval() {
             //CREATE ARRAY 
             //ENCODE
             //SET
-            
+
         }
         //        console.log(encodedEvalURL);
         //        console.log(decodeArray(encodedEvalURL));
@@ -106,13 +106,17 @@ function fillDetails(array){
 }
 
 function fillDegrees(array) {
-    var inputs = document.getElementsByClassName("divTableCell-DEG");
+    var input_cells = document.getElementsByClassName("divTableCell-DEG");
     var degreeIndex = 0;
     var arrayIndex = 0;
-    Array.prototype.forEach.call(inputs, function(item) {
+
+    Array.prototype.forEach.call(input_cells, function(item) {
         Array.prototype.forEach.call(item.childNodes, function(input) {
             if(input.tagName == "INPUT"){
                 degreeIndex++;
+                if(arrayIndex >= array.length) return;
+                console.log(degreeIndex + " " + arrayIndex);
+
                 if(degreeIndex == array[arrayIndex].index){
                     console.log("match");
                     input.click();

@@ -14,18 +14,18 @@ function saveEntries(dl) {
     //ENCODE
     //CHECK IF THE ADD A DEFAULT EVALUATION
     
-//    var link = "https://mwiv.github.io/IversonPropertyGroup/PropertyRepairEvalutaion/index.html" + sessionStorage.getItem("generated-evaluation") + "?f?" +  btoa(JSON.stringify(filledEvalArray));
-    var link = "index.html?de?" + sessionStorage.getItem("generated-evaluation") + "?f?" +  btoa(JSON.stringify(filledEvalArray));
+    var link = "https://mwiv.github.io/IversonPropertyGroup/PropertyRepairEvalutaion/index.html" + sessionStorage.getItem("generated-evaluation") + "?f?" +  btoa(JSON.stringify(filledEvalArray));
+//    var link = "index.html?de?" + sessionStorage.getItem("generated-evaluation") + "?f?" +  btoa(JSON.stringify(filledEvalArray));
 
     window.open(link, "");
     //    window.location.href = link;
     
     //ADD TO HREF
-//    if(!dl) //copy(link);
-//    else {
-//        sessionStorage.setItem("link", link);
-//        sessionStorage.setItem("details", detailArray);
-//    }
+    if(!dl) copy(link);
+    else {
+        sessionStorage.setItem("link", link);
+        sessionStorage.setItem("details", detailArray);
+    }
 }
 
 function copy(text){
