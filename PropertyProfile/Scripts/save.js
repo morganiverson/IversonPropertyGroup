@@ -15,7 +15,9 @@ function Comp(address, link, price){
 
 
 function saveComps() { return saveThis("comp", "comp", "comp-address");}
+
 function saveCalls() { return saveThis("call", "call", "call-date");}
+
 function saveContacts(){
     var array = [];
 
@@ -123,8 +125,8 @@ function save(){
     sessionStorage.setItem("edit-link", link);
 //    window.open(link, "_blank");
 
-        copy(link);
-        alert("A link to edit this profile has been compied to your clipboard. Paste it somewhere safe!");
+//        copy(link);
+//        alert("A link to edit this profile has been compied to your clipboard. Paste it somewhere safe!");
 
     return link;
 }

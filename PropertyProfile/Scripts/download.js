@@ -12,11 +12,11 @@ function downloadpdf() {
         title: getFileName()
     });
     text2PDF(pdf);
-    
+
     //BOTH ???
-   if(!onMobile()) pdf.save(getFileName()); //NOT IF MOBILE
+    if(!onMobile()) pdf.save(getFileName()); //NOT IF MOBILE
     window.open(pdf.output('dataurlnewwindow')); 
-    
+
 }
 function getFileName(){
     var address = document.getElementById("address").value;
@@ -62,8 +62,8 @@ var detailTextArray = ["Property Details: ", "[address]","\n", "\n",
                        "[Calls]",  "\n", 
                        "[Edit]"
                       ];
-var compTextArray = ["Address: ", "[address]\n", 
-                     "Link: ", "[link]\n", 
+var compTextArray = ["Address: ", "[address]", 
+                     "Link: ", "[link]", 
                      "Sale Price: ", "[price]"];
 var callTextArray = ["Date: ", "[date]", 
                      "Notes: ", "[notes]", 
@@ -142,7 +142,7 @@ function stripBrackets(str){
 
 //RETURN THE VALUE OF A SESSION ARRAY DETAILS
 function getSessionDetail(findID, array) {
-            console.log("\"" + findID + "\"" );
+    //            console.log("\"" + findID + "\"" );
     return JSON.parse(sessionStorage.getItem(array)).find(o => o.id === findID).value;
 }
 
@@ -157,8 +157,6 @@ function text2PDF(pdf){
     var length = 0;
     pdf.setFontSize(10);
     pdf.setFont("Helvetica");
-    //    pdf.setTextColor(0, 255, 0);
-
 
     var textArray = fillText();
     var base_left = 15;
@@ -170,49 +168,61 @@ function text2PDF(pdf){
 
     textArray.forEach(function(item, index) {
         if(item.isLink) {
-
             if(item.string == "Click Here To Edit"){
 
                 //LINK STYLES
-                 pdf.setTextColor(47, 182, 78).setFont("Helvetica", "bold");
-//                console.log(pdf.getTextColor());
-                
+                pdf.setTextColor(47, 182, 78).setFont("Helvetica", "bold");
+                //                console.log(pdf.getTextColor());
+
                 pdf.textWithLink(item.string, x, y, {url: item.url});
             }
             else {
-                 pdf.setTextColor(47, 182, 78).setFont("Helvetica", "bold");
-//                console.log(pdf.getTextColor());
+                pdf.setTextColor(47, 182, 78).setFont("Helvetica", "bold");
+                //                console.log(pdf.getTextColor());
                 pdf.textWithLink(item.string, x, y, {url: item.url});
             }
+            //            console.log("\"" + item.string + "\"");
+            
+            //RESET XPOS AND SET YPOS TO BELOW LINK TEXT
+            var splitText = pdf.splitTextToSize(item.string);
+            y = y + line_height + ((splitText.length > 2) ? pdf.getTextDimensions(splitText).h : 0);
+            x = base_left;
         }
         else{
             pdf.setTextColor(0, 0, 0);
             pdf.setFont("Helvetica");
             pdf.setFontSize( (index == 0 || index == 1) ? 15 : 10);
             pdf.setFontStyle( (index == 1) ? "italic" : "normal");
-            
+
             pdf.text(item.string, x, y);
+            console.log(x + " " + y);
+            console.log("\"" + item.string + "\"");
 
             //LINK PLACEMENT SETTINGS
+            //IF DATA BEING ADDED AFTER COLON - KEEP Y POS SET X POS NEXT TO TEXT
             if(item.string.indexOf(":") >= 0){
                 x = base_left + pdf.getTextWidth((item.string));
-                //TOP NO CHNAGE
+                //TOP (y) NO CHNAGE
             }
             else {
+                //OTHERWISE - RESET X POS AND SET Y TO BELOW ADDED TEXT
                 x = base_left;
-                y = y + line_height;
-            }
+                //HANDLE MULTILINE TEXT
+                var splitText = pdf.splitTextToSize(item.string);
+                y = y + line_height + ((splitText.length > 2) ? pdf.getTextDimensions(splitText).h : 0);
+
+                console.log(splitText.length);
+            }   
+
         }
 
-        if(x >= pdf.internal.pageSize.height - 20){
+        if(y >= pdf.internal.pageSize.height - 20){
             y = base_top;
             pdf.addPage();
         }
+
     });
-
-    //    console.log(pdf.output());
 }
-
 
 function getValue(str) {
     return (str == "\n") ? "---" : str;
