@@ -125,8 +125,8 @@ function save(){
     sessionStorage.setItem("edit-link", link);
 //    window.open(link, "_blank");
 
-//        copy(link);
-//        alert("A link to edit this profile has been compied to your clipboard. Paste it somewhere safe!");
+        copy(link);
+        alert("A link to edit this profile has been compied to your clipboard. Paste it somewhere safe!");
 
     return link;
 }
