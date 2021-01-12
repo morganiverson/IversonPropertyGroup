@@ -81,7 +81,7 @@ function fillText() {
                 var url = getSessionDetail(stripBrackets(item), "all");
                 //IS LINK
 //                textArray.push(new Text(url + "\n", true, url));
-                textArray.push(new Text("[Click Here]\n", true, url));
+                textArray.push(new Text((url == "") ? "\n" : "[Click Here]\n", true, url));
             }
             else{
                 //                console.log("NOT LINK: " + item);
