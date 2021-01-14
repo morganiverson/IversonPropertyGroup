@@ -49,6 +49,7 @@ function contactEvents(){
     //RMEOVE CONTACT
     var remove_buttons = document.getElementsByClassName("remove-contact-button");
     Array.prototype.forEach.call(remove_buttons, function(item, index) {
+        console.log("event added");
         item.onclick = function() {
             remove(item);
             console.log("removed Contact");

@@ -135,5 +135,7 @@ function load(){
     loadThis("call", calls);
     loadThis("comp", comps);
     loadContacts(contacts);
+    
+    allEvents();
 
 }

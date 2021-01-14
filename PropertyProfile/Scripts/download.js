@@ -65,7 +65,8 @@ var detailTextArray = ["Property Details: ", "[address]","\n", "\n",
 var compTextArray = ["Address: ", "[address]", 
                      "Link: ", "[link]", 
                      "Sale Price: ", "[price]"];
-var callTextArray = ["Date: ", "[date]", 
+var callTextArray = ["\n", 
+                     "Call: ", "[date]", 
                      "Notes: ", "[notes]", 
                      "Offer: ", "[offer]"];
 var contactTextArray = ["Contact: ", "[value]"];
@@ -80,7 +81,7 @@ function fillText() {
                 //                console.log("LINK: " + item);
                 var url = getSessionDetail(stripBrackets(item), "all");
                 //IS LINK
-//                textArray.push(new Text(url + "\n", true, url));
+                //                textArray.push(new Text(url + "\n", true, url));
                 textArray.push(new Text((url == "") ? "\n" : "[Click Here]\n", true, url));
             }
             else{
@@ -179,10 +180,19 @@ function text2PDF(pdf){
                 pdf.setTextColor(47, 182, 78).setFont("Helvetica", "bold");
                 pdf.textWithLink(item.string, x, y, {url: item.url});
             }
-            
+
             //RESET XPOS AND SET YPOS TO BELOW LINK TEXT
             var splitText = pdf.splitTextToSize(item.string);
-            y = y + line_height + ((splitText.length > 2) ? pdf.getTextDimensions(splitText).h : 0);
+            
+            //IF THIS DOESNT WORK LEACE Y = NEW_Y
+            var new_y = y + line_height + ((splitText.length > 2) ? pdf.getTextDimensions(splitText).h : 0);
+            if(new_y >= pdf.internal.pageSize.height - 20){
+                y = base_top;
+                pdf.addPage();
+            }
+            else {
+                y = new_y;
+            }
             x = base_left;
         }
         else{
@@ -206,7 +216,17 @@ function text2PDF(pdf){
                 x = base_left;
                 //HANDLE MULTILINE TEXT
                 var splitText = pdf.splitTextToSize(item.string);
-                y = y + line_height + ((splitText.length > 2) ? pdf.getTextDimensions(splitText).h : 0);
+
+                var new_y = y + line_height + ((splitText.length > 2) ? pdf.getTextDimensions(splitText).h : 0);
+
+                if(new_y >= pdf.internal.pageSize.height - 20){
+                    y = base_top;
+                    pdf.addPage();
+                }
+                else {
+                    y = y + line_height + ((splitText.length > 2) ? pdf.getTextDimensions(splitText).h : 0);
+                }
+
 
                 console.log(splitText.length);
             }   
