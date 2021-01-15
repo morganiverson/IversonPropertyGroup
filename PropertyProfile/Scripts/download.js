@@ -40,7 +40,7 @@ var detailTextArray = ["Property Details: ", "[address]","\n", "\n",
                        "City: ", "[city]", 
                        "County: ", "[county]", 
                        "State: ", "[state]", 
-                       "Zip Code: ", "[zip]", "\n\n",
+                       "Zip Code: ", "[zip]", "\n",
                        "Owner Information", 
                        "Name: ", "[owner-name]\n", 
                        "[Contacts]\n", "\n", "\n", 
@@ -119,7 +119,13 @@ function getMultiple(sessionID, emptyTextArray, Title){
                 if(text_item.indexOf("link") >= 0){
                     //                                        console.log(text_item);
                     var url = item[stripBrackets(text_item)];
-                    textArray.push(new Text(url + "\n", true, url));
+                    textArray.push(new Text("[Click Here]\n", true, url));
+                }
+                else if (text_item.indexOf("date") >= 0) {
+                     var date = item[stripBrackets(text_item)].split("-");
+                    date = (date == null) ? "" : date[1] + "-" + date[2] + "-" + date[0];
+                    console.log(date);
+                    textArray.push(new Text(date + "\n", false, null));
                 }
                 else {
                     textArray.push(new Text(item[stripBrackets(text_item)] + "\n", false, null))
@@ -180,19 +186,8 @@ function text2PDF(pdf){
                 pdf.setTextColor(47, 182, 78).setFont("Helvetica", "bold");
                 pdf.textWithLink(item.string, x, y, {url: item.url});
             }
-
-            //RESET XPOS AND SET YPOS TO BELOW LINK TEXT
-            var splitText = pdf.splitTextToSize(item.string);
             
-            //IF THIS DOESNT WORK LEACE Y = NEW_Y
-            var new_y = y + line_height + ((splitText.length > 2) ? pdf.getTextDimensions(splitText).h : 0);
-            if(new_y >= pdf.internal.pageSize.height - 20){
-                y = base_top;
-                pdf.addPage();
-            }
-            else {
-                y = new_y;
-            }
+            y = (y + line_height > pdf.internal.pageSize.height) ? base_top : y + line_height;
             x = base_left;
         }
         else{
@@ -201,9 +196,16 @@ function text2PDF(pdf){
             pdf.setFontSize( (index == 0 || index == 1) ? 15 : 10);
             pdf.setFontStyle( (index == 1) ? "italic" : "normal");
 
-            pdf.text(item.string, x, y);
-            console.log(x + " " + y);
-            console.log("\"" + item.string + "\"");
+            var splitText = pdf.splitTextToSize(item.string);
+            if(splitText.length > 2) {
+                var settings = addMultiLineText(pdf, x, y, line_height, base_left, base_top, splitText);
+                x = settings.x;
+                y = settings.y;
+                
+            }
+            else {
+                pdf.text(item.string, x, y);
+            }
 
             //LINK PLACEMENT SETTINGS
             //IF DATA BEING ADDED AFTER COLON - KEEP Y POS SET X POS NEXT TO TEXT
@@ -212,23 +214,8 @@ function text2PDF(pdf){
                 //TOP (y) NO CHNAGE
             }
             else {
-                //OTHERWISE - RESET X POS AND SET Y TO BELOW ADDED TEXT
                 x = base_left;
-                //HANDLE MULTILINE TEXT
-                var splitText = pdf.splitTextToSize(item.string);
-
-                var new_y = y + line_height + ((splitText.length > 2) ? pdf.getTextDimensions(splitText).h : 0);
-
-                if(new_y >= pdf.internal.pageSize.height - 20){
-                    y = base_top;
-                    pdf.addPage();
-                }
-                else {
                     y = y + line_height + ((splitText.length > 2) ? pdf.getTextDimensions(splitText).h : 0);
-                }
-
-
-                console.log(splitText.length);
             }   
 
         }
@@ -241,6 +228,19 @@ function text2PDF(pdf){
     });
 }
 
+function addMultiLineText(pdf, x, y, lineHeight, baseX, baseY, textArray) {
+    textArray.forEach(function(item) {
+        pdf.text(item, x, y);
+        y+=lineHeight;
+        if(y >= pdf.internal.pageSize.height - 20){
+            pdf.addPage();
+            y = baseY;
+        }
+        console.log(item + " " + x + " " + y);
+    });
+    return {"x": baseX, "y": y};
+    
+}
 function getValue(str) {
     return (str == "\n") ? "---" : str;
 }

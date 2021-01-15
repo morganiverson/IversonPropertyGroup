@@ -58,10 +58,10 @@ function saveThis(key, musthaveID){
                 //                console.log(child_item);
                 //GET SECOND CHILD OF EACH DIV OF ELEMENTS WITH CLASS NAME CALL
                 var input = child_item.childNodes[1];
-                console.log(input);
+                //                console.log(input);
                 if(input != null) {
                     if(input.name == musthaveID && input.value == ""){
-                        console.log(input.id);
+//                        console.log(input.id);
                         empty = true;
                     }
                     else {
@@ -106,6 +106,7 @@ function saveAll(){
             empty = true;
             return;
         }
+
         else {
             array.push({"id": item.id, "value": item.value});
         }
@@ -123,10 +124,10 @@ function save(){
     //CREATE TEXT FROM ARRAYS
     console.log(link);
     sessionStorage.setItem("edit-link", link);
-//    window.open(link, "_blank");
+    //    window.open(link, "_blank");
 
-        copy(link);
-        alert("A link to edit this profile has been compied to your clipboard. Paste it somewhere safe!");
+    copy(link);
+    alert("A link to edit this profile has been compied to your clipboard. Paste it somewhere safe!");
 
     return link;
 }
@@ -169,9 +170,9 @@ function encode(elm){
 }
 
 function getEncodedLink(){
-//    var link = "index.html";
+    //    var link = "index.html";
     var link = "https://mwiv.github.io/IversonPropertyGroup/PropertyProfile/index.html";
-    
+
     var all = encode("all");
     var encodings = [encode("contacts"), encode("comps"), encode("calls")];
     if (all != null) {
