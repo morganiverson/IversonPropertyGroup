@@ -119,7 +119,8 @@ function getMultiple(sessionID, emptyTextArray, Title){
                 if(text_item.indexOf("link") >= 0){
                     //                                        console.log(text_item);
                     var url = item[stripBrackets(text_item)];
-                    textArray.push(new Text("[Click Here]\n", true, url));
+                    var txt = (url == "") ? "" : "[Click Here]";
+                    textArray.push(new Text(txt + "\n", true, url));
                 }
                 else if (text_item.indexOf("date") >= 0) {
                      var date = item[stripBrackets(text_item)].split("-");
