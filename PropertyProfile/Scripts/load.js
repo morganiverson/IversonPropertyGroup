@@ -137,5 +137,6 @@ function load(){
     loadContacts(contacts);
     
     allEvents();
+    textAreaContentFit();
 
 }
