@@ -95,7 +95,7 @@ function callEvents() {
     });    
 }
 function textAreaEvent() {
-    textAreaContentFit();
+
 }
 function addressEvent(){
     var address_input =  document.getElementById("address");
@@ -345,13 +345,14 @@ function complete(){
 }
 
 function textAreaContentFit(){
-    //ONLOAD FIX TO CONTENT
     var textAreas = document.getElementsByTagName("TEXTAREA");
     //    console.log(textAreas);
     Array.prototype.forEach.call(textAreas, function(item, index) {
-        item.style.height = "1px";
-        item.style.height = (25 + item.scrollHeight) + "px";
-    });
-}
 
-                                 
+        item.onkeyup = function() {
+            item.style.height = "1px";
+            item.style.height = (25 + item.scrollHeight) + "px";
+        }
+    });
+
+}
